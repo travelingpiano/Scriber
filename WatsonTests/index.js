@@ -8,23 +8,24 @@ var speech_to_text = new SpeechToTextV1 ({
 
 var params = {
   model: 'en-US_BroadbandModel',
-  content_type: 'audio/flac',
+  content_type: 'audio/mp3',
   'interim_results': true,
   'max_alternatives': 3,
   'word_confidence': false,
-  timestamps: false,
-  keywords: ['colorado', 'tornado', 'tornadoes'],
-  'keywords_threshold': 0.5
+  'speaker_labels': true,
+  timestamps: true,
+  // keywords: ['tennyson', 'lincolnshire'],
+  // 'keywords_threshold': 0.5
 };
 
 // Create the stream.
 var recognizeStream = speech_to_text.createRecognizeStream(params);
 
 // Pipe in the audio.
-fs.createReadStream('audio-file.flac').pipe(recognizeStream);
+fs.createReadStream('./pizza.mp3').pipe(recognizeStream);
 
 // Pipe out the transcription to a file.
-recognizeStream.pipe(fs.createWriteStream('transcription2.txt'));
+recognizeStream.pipe(fs.createWriteStream('pizza1.txt'));
 
 // Get strings instead of buffers from 'data' events.
 recognizeStream.setEncoding('utf8');
