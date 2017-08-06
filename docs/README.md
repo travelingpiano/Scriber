@@ -35,6 +35,18 @@ Some of the challenges we may face are:
 - Implementing the Watson API
 - Differentiating between speakers in audio files
 
+## Workflow/Wireframes
+
+![flowchart](./images/flow-chart.png)
+
+![login](./images/login.png)
+
+![newaudio](./images/new-audio.png)
+
+![transcriptionshow](./images/transcription-show.png)
+
+![transcriptions](./images/transcriptions.png)
+
 ## Accomplished Over the Weekend
 
 This weekend, we created a basic React Native interactive app for iOS. The app send fetch requests, display information and handle authentication. We have a Django server with functioning OAuth, connected to a MongoDB database. We have also successfully transcribed some sample conversations using the Watson API, with speaker diarization and timestamps.
@@ -43,7 +55,7 @@ This weekend, we created a basic React Native interactive app for iOS. The app s
 
 The team members are Ade Farquhar, Li Hsuan Lu, Spencer Chan, and Virginia Chen.
 
-#### Day 1
+### Day 1
 
 **Ade**
 - Create basic React Native App
@@ -61,7 +73,7 @@ The team members are Ade Farquhar, Li Hsuan Lu, Spencer Chan, and Virginia Chen.
 - Interface IBM Watson API
 - Test audio formats, return format
 
-#### Day 2
+### Day 2
 
 **Ade**
 - React native audio implementation
@@ -78,7 +90,7 @@ The team members are Ade Farquhar, Li Hsuan Lu, Spencer Chan, and Virginia Chen.
 **Spencer**
 - Process return data for storing in database
 
-#### Day 3
+### Day 3
 
 Work distribution TBD:
 
@@ -87,17 +99,23 @@ Work distribution TBD:
 - App design
 - Data processing for organization
 
-#### Day 4
+### Day 4
 
 - Automating audio transcription process
+- Users can view their transcriptions
 - Audio playback at timestamps
 - API requests displaying on App
 
-#### Day 5
+### Day 5
 
+- Audio playback at timestamps
 - Potential improvements on transcription quality
 - App structure, user personalization
 
-#### Day 6
+### Day 6
 
-- 
+- UX cleanup
+- Styling
+- Seeding
+- Production README
+- Apple Developer enrollment
