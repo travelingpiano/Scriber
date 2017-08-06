@@ -17,8 +17,8 @@ import { AsyncStorage,
          View } from 'react-native';
 
 
-import config from './app/lib/config.js';
-import Header from './app/components/header';
+import config from './src/lib/config.js';
+import Header from './src/components/header';
 
 export default class App extends React.Component {
   constructor() {
