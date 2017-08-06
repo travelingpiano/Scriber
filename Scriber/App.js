@@ -16,6 +16,10 @@ import { AsyncStorage,
          TouchableHighlight,
          View } from 'react-native';
 
+
+import config from './app/lib/config.js';
+import Header from './app/components/header';
+
 export default class App extends React.Component {
   constructor() {
     super();
@@ -46,7 +50,7 @@ export default class App extends React.Component {
         this.getData(this.state.token);
       } else {
         this.setState({
-          'error': 'ERROR'
+          'error': 'Login Error'
         })
       }
     } catch (error) {
@@ -115,6 +119,7 @@ export default class App extends React.Component {
   render() {
     const { containerStyle,
             errorStyle,
+            formStyle,
             textStyle,
             textInputStyle,
             buttonStyle,
@@ -130,25 +135,31 @@ export default class App extends React.Component {
     } else {
       return (
         <View style={ containerStyle }>
-          <Text style={ welcomeStyle }>
+          <Header logo={ 'Scriber' } style={ welcomeStyle }>
             Scriber!!!
-          </Text>
-          <TextInput style={ textInputStyle }
-                     onChangeText={ username =>
-                       this.setState({
-                         'username': username
-                       })
-                     }
-                     value={ this.state.username } />
+          </Header>
 
-          <TextInput secureTextEntry={ true }
-                     style={ textInputStyle }
-                     onChangeText={ password =>
-                       this.setState({
-                         'password': password
-                       })
-                     }
-                     value={ this.state.password } />
+          <View style={ formStyle }>
+            <TextInput style={ textInputStyle }
+              onChangeText={ username =>
+                this.setState({
+                  'username': username
+                })
+              }
+              value={ this.state.username }
+              placeholder="username"/>
+
+            <TextInput secureTextEntry={ true }
+              style={ textInputStyle }
+              onChangeText={ password =>
+                this.setState({
+                  'password': password
+                })
+              }
+              value={ this.state.password }
+              placeholder="password"/>
+          </View>
+
           <TouchableHighlight onPress={ () =>
             this.getToken(config.client_id,
                            config.client_key,
@@ -159,6 +170,7 @@ export default class App extends React.Component {
               LogIn
             </Text>
           </TouchableHighlight>
+
           <Text style={ errorStyle }>
             { this.state.error }
           </Text>
@@ -166,14 +178,24 @@ export default class App extends React.Component {
       );
     }
   }
+
+  renderUser(user) {
+    return(
+      <View style={styles.list}>
+        <Text>{user.name}</Text>
+      </View>
+
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#C6F1E4',
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
 
   textStyle: {
@@ -181,15 +203,31 @@ const styles = StyleSheet.create({
   },
 
   textInputStyle: {
-
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    width: 100,
   },
 
   buttonStyle: {
+    backgroundColor: '#eeeeee',
+    padding: 10,
+    marginRight: 5,
+    marginLeft: 5,
+  },
 
+  formStyle: {
+    flexDirection: 'column',
+    height: 50,
+    width: null,
+    marginTop: 10,
+    marginBottom: 10
   },
 
   listViewStyle: {
     fontSize: 25,
+    paddingTop: 20,
+    backgroundColor: '#F5FCFF',
   },
 
   welcomeStyle: {
@@ -197,6 +235,8 @@ const styles = StyleSheet.create({
   },
 
   errorStyle: {
-
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: 5,
   },
 });
