@@ -26,9 +26,18 @@ The app is broken down into a few parts:
 
 ## Technologies and Technical Challenges
 
-We are implementing MongoDB as our database to store users, transcriptions and audio files. Python Django will handle the communication between our app and MongoDB. Django will also handle using the Watson API to perform the speech-to-text. The app will be designed in React Native, 
+We are implementing MongoDB as our database to store users, transcriptions and audio files. Python Django will handle the communication between our app and MongoDB. Django will also handle using the Watson API to perform the speech-to-text. The app will be designed in React Native, and will record audio and display past transcriptions called up from the backend.
+
+Some of the challenges we may face are:
+- Learning the new technologies
+- OAuth with React Native and Django
+- Getting Django up and running
+- Implementing the Watson API
+- Differentiating between speakers in audio files
 
 ## Accomplished Over the Weekend
+
+This weekend, we created a basic React Native interactive app for iOS. 
 
 ## Team Members and Work Breakdown
 
