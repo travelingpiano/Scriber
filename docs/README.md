@@ -37,7 +37,7 @@ Some of the challenges we may face are:
 
 ## Accomplished Over the Weekend
 
-This weekend, we created a basic React Native interactive app for iOS. 
+This weekend, we created a basic React Native interactive app for iOS. The app send fetch requests, display information and handle authentication. We have a Django server with functioning OAuth, connected to a MongoDB database. We have also successfully transcribed some sample conversations using the Watson API, with speaker diarization and timestamps.
 
 ## Team Members and Work Breakdown
 
@@ -45,14 +45,59 @@ The team members are Ade Farquhar, Li Hsuan Lu, Spencer Chan, and Virginia Chen.
 
 #### Day 1
 
+**Ade**
+- Create basic React Native App
+- Core functionality and setup
+
+**Virginia**
+- React Native features, authentication
+- App design
+
+**Li Hsuan**
+- Implement Django framework
+- Connect Django with MongoDB
+
+**Spencer**
+- Interface IBM Watson API
+- Test audio formats, return format
+
 #### Day 2
+
+**Ade**
+- React native audio implementation
+- Auth (if necessary)
+
+**Virginia**
+- App structure, forms
+- Auth (if necessary)
+
+**Li Hsuan**
+- Django templates
+- Routes, API endpoint setup
+
+**Spencer**
+- Process return data for storing in database
 
 #### Day 3
 
+Work distribution TBD:
+
+- Sending audio files from React Native to Django
+- Implementing Watson API through Django
+- App design
+- Data processing for organization
+
 #### Day 4
+
+- Automating audio transcription process
+- Audio playback at timestamps
+- API requests displaying on App
 
 #### Day 5
 
+- Potential improvements on transcription quality
+- App structure, user personalization
+
 #### Day 6
 
-#### Day 7
+- 
