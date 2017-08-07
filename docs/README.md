@@ -16,7 +16,7 @@ The app is broken down into a few parts:
 - [ ] React Native OAuth
 - [ ] React Native App to display transcriptions
 - [ ] Speech to text using IBM Watson API
-- [ ] Django/MongoDB backend to store transcriptions and audio files
+- [ ] Django/Postgresql backend to store transcriptions and audio files
 - [ ] App replays audio based on transcription timestamps
 
 ### Bonus
@@ -26,7 +26,7 @@ The app is broken down into a few parts:
 
 ## Technologies and Technical Challenges
 
-We are implementing MongoDB as our database to store users, transcriptions and audio files. Python Django will handle the communication between our app and MongoDB. Django will also handle using the Watson API to perform the speech-to-text. The app will be designed in React Native, and will record audio and display past transcriptions called up from the backend.
+We are implementing MongoDB as our database to store users, transcriptions and audio files. Python Django will handle the communication between our app and Postgresql. Django will also handle using the Watson API to perform the speech-to-text. The app will be designed in React Native, and will record audio and display past transcriptions called up from the backend.
 
 Some of the challenges we may face are:
 - Learning the new technologies
@@ -49,7 +49,7 @@ Some of the challenges we may face are:
 
 ## Accomplished Over the Weekend
 
-This weekend, we created a basic React Native interactive app for iOS. The app sends fetch requests, displays information and handles authentication. We have a Django server with the beginnings of OAuth set up, connected to a MongoDB database. We have also successfully transcribed some sample conversations using the Watson API, with speaker diarization and timestamps.
+This weekend, we created a basic React Native interactive app for iOS. The app sends fetch requests, displays information and handles authentication. We have a Django server with the beginnings of OAuth set up, connected to a Postgresql database. We have also successfully transcribed some sample conversations using the Watson API, with speaker diarization and timestamps.
 
 ## Team Members and Work Breakdown
 
@@ -67,7 +67,7 @@ The team members are Ade Farquhar, Li Hsuan Lu, Spencer Chan, and Virginia Chen.
 
 **Li Hsuan**
 - Implement Django framework
-- Connect Django with MongoDB
+- Connect Django with Postgresql
 
 **Spencer**
 - Interface IBM Watson API
