@@ -6,13 +6,13 @@ import { Text,
          Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-const Splash = ({ children }) => {
+const Splash = () => {
   const { textStyle, viewStyle, buttonStyle } = styles;
 
   return (
     <View style={ viewStyle }>
       <Text style={ textStyle }>
-        { children }
+        SPLASH!!
       </Text>
       <View style={ buttonStyle }>
         <Button

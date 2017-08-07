@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 // import {login, logout, signup} from '../../actions/session_actions';
+import LoginForm from './login_form';
 
 import {
   View,
@@ -24,4 +25,5 @@ const mapDispatchToProps = (dispatch, {location}) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+// export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(null,null)(LoginForm);
