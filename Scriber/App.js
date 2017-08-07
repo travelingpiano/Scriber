@@ -16,6 +16,8 @@ import { AsyncStorage,
          TouchableHighlight,
          View } from 'react-native';
 
+import SessionFormContainer from './src/components/session_form/sesssion_form_container';
+
 
 import config from './src/lib/config.js';
 import Header from './src/components/header';
@@ -147,42 +149,7 @@ export default class App extends React.Component {
           <Header logo={ 'Scriber' } style={ welcomeStyle }>
             Scriber!!!
           </Header>
-
-          <View style={ formStyle }>
-            <TextInput style={ textInputStyle }
-              onChangeText={ username =>
-                this.setState({
-                  'username': username
-                })
-              }
-              value={ this.state.username }
-              placeholder="username"/>
-
-            <TextInput secureTextEntry={ true }
-              style={ textInputStyle }
-              onChangeText={ password =>
-                this.setState({
-                  'password': password
-                })
-              }
-              value={ this.state.password }
-              placeholder="password"/>
-          </View>
-
-          <TouchableHighlight onPress={ () =>
-            this.getToken(config.client_id,
-                           config.client_key,
-                           this.state.username,
-                           this.state.password) }
-                              style={ buttonStyle } >
-            <Text>
-              LogIn
-            </Text>
-          </TouchableHighlight>
-
-          <Text style={ errorStyle }>
-            { this.state.error }
-          </Text>
+          <SessionFormContainer />
         </View>
       );
     }
