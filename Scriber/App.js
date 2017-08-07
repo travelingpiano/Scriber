@@ -37,7 +37,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    // AsyncStorage.clear();
+    AsyncStorage.clear();
     this.loadInitialState().done();
   }
 
@@ -107,6 +107,7 @@ export default class App extends React.Component {
     );
 
     let responseJson = await response.json();
+    console.log(responseJson);
     console.log(this.state);
     if (responseJson.hasOwnProperty('detail')) {
       this.setState({

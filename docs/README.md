@@ -49,7 +49,7 @@ Some of the challenges we may face are:
 
 ## Accomplished Over the Weekend
 
-This weekend, we created a basic React Native interactive app for iOS. The app send fetch requests, display information and handle authentication. We have a Django server with functioning OAuth, connected to a MongoDB database. We have also successfully transcribed some sample conversations using the Watson API, with speaker diarization and timestamps.
+This weekend, we created a basic React Native interactive app for iOS. The app sends fetch requests, displays information and handles authentication. We have a Django server with the beginnings of OAuth set up, connected to a MongoDB database. We have also successfully transcribed some sample conversations using the Watson API, with speaker diarization and timestamps.
 
 ## Team Members and Work Breakdown
 
@@ -76,11 +76,11 @@ The team members are Ade Farquhar, Li Hsuan Lu, Spencer Chan, and Virginia Chen.
 ### Day 2
 
 **Ade**
-- React native audio implementation
+- App structure, forms
 - Auth (if necessary)
 
 **Virginia**
-- App structure, forms
+- React native audio implementation
 - Auth (if necessary)
 
 **Li Hsuan**
