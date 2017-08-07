@@ -100,15 +100,16 @@ export default class App extends React.Component {
         method: 'GET',
         headers:{
           'Accept': 'application/json',
-          'Authorization': 'Bearer '+token,
+          'Authorization': 'Token '+token,
           'Host': '127.0.0.1:8000',
         },
       }
     );
 
     let responseJson = await response.json();
-    console.log(responseJson);
-    console.log(this.state);
+    console.log(response);
+    // console.log(responseJson);
+    // console.log(this.state);
     if (responseJson.hasOwnProperty('detail')) {
       this.setState({
         'error': responseJson.detail
