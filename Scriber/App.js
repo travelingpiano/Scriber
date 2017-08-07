@@ -16,11 +16,10 @@ import { AsyncStorage,
          TouchableHighlight,
          View } from 'react-native';
 
-import SessionFormContainer from './src/components/session_form/sesssion_form_container';
-
+import Routes from './src/Routes';
 
 import config from './src/lib/config.js';
-import Header from './src/components/header';
+import Splash from './src/components/splash';
 
 export default class App extends React.Component {
   constructor() {
@@ -145,10 +144,10 @@ export default class App extends React.Component {
     } else {
       return (
         <View style={ containerStyle }>
-          <Header logo={ 'Scriber' } style={ welcomeStyle }>
+          <Splash logo={ 'Scriber' } style={ welcomeStyle }>
             Scriber!!!
-          </Header>
-          <SessionFormContainer />
+          </Splash>
+          <Routes />
         </View>
       );
     }
