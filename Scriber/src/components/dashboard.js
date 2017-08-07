@@ -3,7 +3,7 @@ import { Text,
          StyleSheet,
          View } from 'react-native';
 
-const Header = ({ children }) => {
+const Dashboard = ({ children }) => {
   const { textStyle, viewStyle } = styles;
 
   return (
@@ -15,7 +15,7 @@ const Header = ({ children }) => {
   );
 };
 
-export default Header;
+export default Dashboard;
 
 const styles = StyleSheet.create({
   viewStyle: {
