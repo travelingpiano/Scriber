@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'scriber.apps.ScriberConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_jwt',
     'corsheaders',
     'django_showurls',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
 ]
 
 OAUTH2_PROVIDER = {
