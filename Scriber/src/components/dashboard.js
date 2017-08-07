@@ -3,22 +3,39 @@ import { Text,
          StyleSheet,
          View } from 'react-native';
 
-const Dashboard = ({ children }) => {
-  const { textStyle, viewStyle } = styles;
+class Dashboard extends React.Component {
 
-  return (
-    <View style={ viewStyle }>
-      <Text style={ textStyle }>
-        { children }
-      </Text>
-    </View>
-  );
-};
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+
+    const { textStyle, listViewStyle } = styles;
+    if (this.state.token) {
+      return (
+        <ListView dataSource={ this.state.users }
+                  renderRow={ this.renderUser }
+                  style={ listViewStyle } />
+      );
+    }
+  }
+
+  renderUser(user) {
+    return(
+      <View style={styles.list}>
+        <Text>{user.name}</Text>
+      </View>
+
+    );
+  }
+
+}
 
 export default Dashboard;
 
 const styles = StyleSheet.create({
-  viewStyle: {
+  listViewStyle: {
 
   },
 

@@ -17,8 +17,8 @@ import { AsyncStorage,
          View } from 'react-native';
 
 import Routes from './src/Routes';
+import { Actions } from 'react-native-router-flux';
 
-import config from './src/lib/config.js';
 import Splash from './src/components/splash';
 
 export default class App extends React.Component {
@@ -109,9 +109,6 @@ export default class App extends React.Component {
 
     let responseJson = await response.json();
     console.log(response);
-    console.log(responseJson);
-    console.log(this.state);
-    // console.log(this.state);
     if (responseJson.hasOwnProperty('detail')) {
       this.setState({
         'error': responseJson.detail
@@ -136,13 +133,6 @@ export default class App extends React.Component {
             listViewStyle,
             welcomeStyle } = styles;
 
-    if (this.state.token) {
-      return (
-        <ListView dataSource={ this.state.users }
-                  renderRow={ this.renderUser }
-                  style={ listViewStyle } />
-      );
-    } else {
       return (
         <View style={ containerStyle }>
           <Splash logo={ 'Scriber' } style={ welcomeStyle }>
@@ -151,17 +141,8 @@ export default class App extends React.Component {
           <Routes />
         </View>
       );
-    }
   }
 
-  renderUser(user) {
-    return(
-      <View style={styles.list}>
-        <Text>{user.name}</Text>
-      </View>
-
-    )
-  }
 }
 
 const styles = StyleSheet.create({
