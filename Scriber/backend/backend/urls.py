@@ -19,7 +19,7 @@ from rest_framework import routers
 from scriber import views
 
 router = routers.DefaultRouter()
-router.register(r'auftrag', views.UserViewSet)
+router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

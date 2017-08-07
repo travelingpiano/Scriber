@@ -37,15 +37,18 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    // AsyncStorage.clear();
     this.loadInitialState().done();
   }
 
   async loadInitialState() {
     try {
       let token = await AsyncStorage.getItem('token');
+      let username = await AsyncStorage.getItem('username');
+      console.log(username);
       if (token !== null ) {
         this.setState({
-          token: token
+          token: token, error: null, username: username
         });
         this.getData(this.state.token);
       } else {
@@ -65,24 +68,26 @@ export default class App extends React.Component {
     data.append('client_secret', client_key);
     data.append('username', username);
     data.append('password', password);
-
-    let response = await fetch('https://scriber.us/o/token', { // adjust to actual site url
+    console.log(username);
+    console.log(password);
+    let response = await fetch('http://127.0.0.1:8000/o/token/', { // adjust to actual site url
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Origin': '',
-        'Host': 'scriber.us',
+        'Host': '127.0.0.1:8000',
       },
       body: data
     });
 
-    let responseJson = await repsonse.json();
+    let responseJson = await response.json();
     if (responseJson.hasOwnProperty('error')) {
       this.setState({
         'error': responseJson.error
       });
     } else {
       AsyncStorage.setItem('token', responseJson.access_token);
+      AsyncStorage.setItem('username',username)
       this.setState({
         'token': responseJson.access_token
       });
@@ -91,17 +96,18 @@ export default class App extends React.Component {
   }
 
   async getData(token) {
-    let response = await fetch ('https://scriber.us/mobil/user', { // adjust to actual site url
+    let response = await fetch ('http://127.0.0.1:8000/users', { // adjust to actual site url
         method: 'GET',
         headers:{
           'Accept': 'application/json',
-          'Authorization': 'Bearer'+token,
-          'Host': 'scriber.us',
+          'Authorization': 'Bearer '+token,
+          'Host': '127.0.0.1:8000',
         },
       }
     );
 
     let responseJson = await response.json();
+    console.log(this.state);
     if (responseJson.hasOwnProperty('detail')) {
       this.setState({
         'error': responseJson.detail
@@ -129,8 +135,8 @@ export default class App extends React.Component {
     if (this.state.token) {
       return (
         <ListView dataSource={ this.state.users }
-                  renderRow={ this.renderUsers }
-                  style={ listView } />
+                  renderRow={ this.renderUser }
+                  style={ listViewStyle } />
       );
     } else {
       return (
@@ -225,7 +231,7 @@ const styles = StyleSheet.create({
   },
 
   listViewStyle: {
-    fontSize: 25,
+    // fontSize: 25,
     paddingTop: 20,
     backgroundColor: '#F5FCFF',
   },
