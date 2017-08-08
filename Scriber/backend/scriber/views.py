@@ -39,6 +39,8 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         transcription_result['transcription'] = transcribe(request.data.get('audio_url'),request.data.get('title'))
         serializer = TranscriptionSerializer(data=transcription_result)
         print(serializer)
+        serializer = TranscriptionSerializer(data=request.data)
+        transcribe(request.data.get('audio_url'))
         if serializer.is_valid():
             # print(serializer)
             # print(self)
