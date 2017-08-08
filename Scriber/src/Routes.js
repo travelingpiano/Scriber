@@ -10,7 +10,7 @@ const Routes = () => (
   <Router>
     <Scene
       key="Root"
-      title="Root"
+      title="Welcome"
     >
       <Scene
         key="LoginForm"

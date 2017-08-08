@@ -12,7 +12,7 @@ import { AsyncStorage,
 import config from '../../lib/config.js';
 
 
-class SessionForm extends React.Component {
+class LoginForm extends React.Component {
 
   constructor(props) {
     super(props);
@@ -114,8 +114,7 @@ class SessionForm extends React.Component {
 
   render() {
 
-    const { containerStyle,
-            errorStyle,
+    const { errorStyle,
             formStyle,
             textStyle,
             textInputStyle,
@@ -167,13 +166,13 @@ class SessionForm extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  containerStyle: {
-    flex: 1,
-    backgroundColor: '#C6F1E4',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
+  // viewStyle: {
+  //   flex: 1,
+  //   backgroundColor: '#C6F1E4',
+  //   flexDirection: 'column',
+  //   alignItems: 'center',
+  //   justifyContent: 'space-around',
+  // },
 
   textStyle: {
     fontSize: 40,
@@ -191,6 +190,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 5,
     marginLeft: 5,
+    minWidth: 100,
   },
 
   formStyle: {
@@ -198,7 +198,8 @@ const styles = StyleSheet.create({
     height: 50,
     width: null,
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    flex: 1
   },
 
   listViewStyle: {
@@ -217,3 +218,5 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+export default LoginForm;

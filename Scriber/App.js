@@ -6,20 +6,13 @@ import { createStore,
          compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
-import { AsyncStorage,
-         Component,
-         Linking,
-         ListView,
+import {
          StyleSheet,
          Text,
-         TextInput,
-         TouchableHighlight,
          View } from 'react-native';
 
 import Routes from './src/Routes';
 import { Actions } from 'react-native-router-flux';
-
-import Splash from './src/components/splash';
 
 export default class App extends React.Component {
   constructor() {
@@ -55,8 +48,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#C6F1E4',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
   },
 
   textStyle: {
