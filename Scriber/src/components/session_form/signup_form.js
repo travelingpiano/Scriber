@@ -10,6 +10,7 @@ import { AsyncStorage,
          View } from 'react-native';
 
 import config from '../../lib/config.js';
+import { Actions } from 'react-native-router-flux';
 
 class SignupForm extends React.Component {
 
@@ -136,6 +137,7 @@ class SignupForm extends React.Component {
       this.setState({
         'user': this.state.users.cloneWithRows(responseJson)
       });
+      Actions.Dashboard();
     }
   }
 

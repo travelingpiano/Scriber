@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text,
          StyleSheet,
+         ListView,
          View } from 'react-native';
 
 class Dashboard extends React.Component {
@@ -12,13 +13,14 @@ class Dashboard extends React.Component {
   render() {
 
     const { textStyle, listViewStyle } = styles;
-    if (this.state.token) {
+    // if (this.state.token) {
       return (
-        <ListView dataSource={ this.state.users }
-                  renderRow={ this.renderUser }
-                  style={ listViewStyle } />
-      );
-    }
+        // <ListView dataSource={ this.state.users }
+        //           renderRow={ this.renderUser }
+        //           style={ listViewStyle } />
+        <Text>Welcome</Text>
+              );
+    // }
   }
 
   renderUser(user) {
