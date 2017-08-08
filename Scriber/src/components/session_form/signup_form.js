@@ -155,13 +155,15 @@ class SignupForm extends React.Component {
     return (
       <View style={ loginViewStyle}>
         <View style={ formStyle }>
-          <TextInput style={ textInputStyle }
+          <TextInput
+            style={ textInputStyle }
             onChangeText={ username =>
               this.setState({
                 'username': username
               })
             }
             value={ this.state.username }
+            autoCapitalize = 'none'
             placeholder="username"/>
 
           <TextInput secureTextEntry={ true }
