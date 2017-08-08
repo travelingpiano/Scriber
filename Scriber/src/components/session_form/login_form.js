@@ -126,7 +126,9 @@ class LoginForm extends React.Component {
     return (
       <View style={ loginViewStyle}>
         <View style={ formStyle }>
-          <TextInput style={ textInputStyle }
+          <TextInput
+            style={ textInputStyle }
+            autoCapitalize = 'none'
             onChangeText={ username =>
               this.setState({
                 'username': username
@@ -135,7 +137,8 @@ class LoginForm extends React.Component {
             value={ this.state.username }
             placeholder="username"/>
 
-          <TextInput secureTextEntry={ true }
+          <TextInput
+            secureTextEntry={ true }
             style={ textInputStyle }
             onChangeText={ password =>
               this.setState({
@@ -146,12 +149,13 @@ class LoginForm extends React.Component {
             placeholder="password"/>
         </View>
 
-        <TouchableHighlight onPress={ () =>
+        <TouchableHighlight
+          onPress={ () =>
           this.getToken(config.client_id,
                          config.client_key,
                          this.state.username,
                          this.state.password) }
-                            style={ buttonStyle } >
+          style={ buttonStyle } >
           <Text>
             LogIn
           </Text>
