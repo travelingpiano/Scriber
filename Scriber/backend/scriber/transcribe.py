@@ -20,7 +20,7 @@ def transcribe(url):
         new_json['timestamps'][0] = key['alternatives'][0]['timestamps'][0][1]
         word_length = len(key['alternatives'][0]['timestamps'])
         new_json['timestamps'][1] = key['alternatives'][0]['timestamps'][word_length-1][2]
-        formatted_json.append(new_json)
         new_json['speaker'] = output_json['speaker_labels'][counter]['speaker']
         counter += word_length
+        formatted_json.append(json.dumps(new_json))
     return formatted_json
