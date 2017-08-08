@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_showurls',
     'rest_framework.authtoken',
+    'watson_developer_cloud',
 ]
 
 OAUTH2_PROVIDER = {
