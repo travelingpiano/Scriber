@@ -15,6 +15,17 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    def create(self, request):
+        user, created = User.objects.get_or_create(username=request.data.get('username'))
+        user.set_password(request.data.get('password'))
+        user.save()
+        serializer = UserSerializer(data=request.data)
+        # print(serializer.is_valid())
+        # if serializer.is_valid():
+        #     print(serializer.data)
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(request.data, status=status.HTTP_201_CREATED)
+
 class TranscriptionViewSet(viewsets.ModelViewSet):
     queryset = Transcription.objects.all()
     serializer_class = TranscriptionSerializer

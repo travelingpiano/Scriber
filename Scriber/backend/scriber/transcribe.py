@@ -1,4 +1,5 @@
 from watson_developer_cloud import SpeechToTextV1
+import urllib2
 import json
 
 # https://aacapps.com/lamp/sound/emma.mp3

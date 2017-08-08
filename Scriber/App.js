@@ -108,7 +108,8 @@ export default class App extends React.Component {
 
     let responseJson = await response.json();
     console.log(response);
-    // console.log(responseJson);
+    console.log(responseJson);
+    console.log(this.state);
     // console.log(this.state);
     if (responseJson.hasOwnProperty('detail')) {
       this.setState({

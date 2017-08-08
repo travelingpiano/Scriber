@@ -43,14 +43,13 @@ INSTALLED_APPS = [
     'rest_framework_jwt',
     'corsheaders',
     'django_showurls',
-    'rest_framework.authtoken',
-    'watson_developer_cloud',
+    'rest_framework.authtoken'
 ]
 
 OAUTH2_PROVIDER = {
     #this is the list of available scopes
     'SCOPES' : {'read': 'Read scope', 'write': 'Write Scope', 'groups': 'Access to your groups'},
-    'ACCESS_TOKEN_EXPIRE_SECONDS': 30 # 86400, # 24h
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 100 # 86400, # 24h
 }
 
 REST_FRAMEWORK = {
@@ -108,10 +107,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'scriber',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
+        'USER': 'lihsuan',
+        'PASSWORD': '',
         'HOST': 'localhost',
-        # 'PORT': '',
+        'PORT': '',
     }
 }
 
