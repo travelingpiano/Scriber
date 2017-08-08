@@ -13,6 +13,7 @@ import {
 
 import Routes from './src/Routes';
 import { Actions } from 'react-native-router-flux';
+import configureStore from './src/store/store';
 
 export default class App extends React.Component {
   constructor() {
@@ -33,11 +34,12 @@ export default class App extends React.Component {
             listViewStyle,
             welcomeStyle } = styles;
 
-      return (
+    let store = configureStore();
 
-        <View style={ containerStyle }>
+      return (
+        <Provider store={store}>
           <Routes />
-        </View>
+        </Provider>
       );
   }
 
