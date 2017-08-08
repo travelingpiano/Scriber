@@ -45,7 +45,9 @@ def transcribe(url, title):
         counter += word_length
         formatted_json.append(json.dumps(new_json))
     return formatted_json
-def transcribe(url):
+
+# https://aacapps.com/lamp/sound/emma.mp3
+def transcribe(url, title):
     url = 'http://www.freeinfosociety.com/media/sounds/2518.mp3'
     stt = SpeechToTextV1(username='88d9cb01-7ecb-4089-9d2c-a13828e3494e', password='1Wxsmr4kdBhp')
     audio_file = urllib.request.urlopen(url)
@@ -54,6 +56,7 @@ def transcribe(url):
     output_json = json.loads(json.dumps(stt.recognize(audio2, content_type="audio/mp3", timestamps=True,speaker_labels=True),indent=2))
     formatted_json = []
     counter = 0
+    sound = AudioSegment.from_mp3('./scriber/2518.mp3')
     # print(output_json)
     for key in output_json['results']:
         new_json = {}
@@ -63,6 +66,10 @@ def transcribe(url):
         word_length = len(key['alternatives'][0]['timestamps'])
         new_json['timestamps'][1] = key['alternatives'][0]['timestamps'][word_length-1][2]
         new_json['speaker'] = output_json['speaker_labels'][counter]['speaker']
+        #sound slicing done below
+        partial_sound = sound[new_json['timestamps'][0]*1000-200:new_json['timestamps'][1]*1000+200]
+        filename = f"./scriber/{title}{counter}.mp3"
+        partial_sound.export(filename, format="mp3")
         counter += word_length
         formatted_json.append(json.dumps(new_json))
     return formatted_json
