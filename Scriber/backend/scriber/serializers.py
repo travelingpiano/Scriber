@@ -10,4 +10,4 @@ class UserSerializer(serializers.ModelSerializer):
 class TranscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transcription
-        fields = ('audio_url', 'transcription')
+        fields = ('audio_url', 'transcription', 'title')
