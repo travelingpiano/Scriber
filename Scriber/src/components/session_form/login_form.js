@@ -120,10 +120,11 @@ class LoginForm extends React.Component {
             textInputStyle,
             buttonStyle,
             listViewStyle,
+            loginViewStyle,
             welcomeStyle } = styles;
 
     return (
-      <View>
+      <View style={ loginViewStyle}>
         <View style={ formStyle }>
           <TextInput style={ textInputStyle }
             onChangeText={ username =>
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
-    width: 100,
+    width: 200,
   },
 
   buttonStyle: {
@@ -190,7 +191,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 5,
     marginLeft: 5,
-    minWidth: 100,
+    minWidth: 50,
+    flex: 0.2,
   },
 
   formStyle: {
@@ -199,13 +201,20 @@ const styles = StyleSheet.create({
     width: null,
     marginTop: 10,
     marginBottom: 10,
-    flex: 1
+    flex: 0.5
   },
 
   listViewStyle: {
     // fontSize: 25,
     paddingTop: 20,
     backgroundColor: '#F5FCFF',
+  },
+
+  loginViewStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 
   welcomeStyle: {
@@ -216,6 +225,7 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     marginBottom: 5,
+    flex: 0.2
   },
 });
 
