@@ -88,7 +88,7 @@ class SignupForm extends React.Component {
   }
 
   async getData(token) {
-    let response = await fetch ('http://127.0.0.1:8000/users', { // adjust to actual site url
+    let response = await fetch ('http://127.0.0.1:8000/users', {
         method: 'GET',
         headers:{
           'Accept': 'application/json',
