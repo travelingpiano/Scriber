@@ -9,4 +9,18 @@ def transcribe(url):
     audio_file = urllib.request.urlopen(url)
     # print(json.dumps(stt.recognize(audio_file, content_type="audio/mp3")))
     audio2 = open('./scriber/2518.mp3','rb')
-    print(json.dumps(stt.recognize(audio2, content_type="audio/mp3", timestamps=True,speaker_labels=True),indent=2))
+    output_json = json.loads(json.dumps(stt.recognize(audio2, content_type="audio/mp3", timestamps=True,speaker_labels=True),indent=2))
+    formatted_json = []
+    counter = 0
+    # print(output_json)
+    for key in output_json['results']:
+        new_json = {}
+        new_json['text'] = key['alternatives'][0]['transcript']
+        new_json['timestamps']  = [0,0]
+        new_json['timestamps'][0] = key['alternatives'][0]['timestamps'][0][1]
+        word_length = len(key['alternatives'][0]['timestamps'])
+        new_json['timestamps'][1] = key['alternatives'][0]['timestamps'][word_length-1][2]
+        formatted_json.append(new_json)
+        new_json['speaker'] = output_json['speaker_labels'][counter]['speaker']
+        counter += word_length
+    return formatted_json

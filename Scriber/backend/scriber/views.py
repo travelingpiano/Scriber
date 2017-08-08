@@ -33,8 +33,12 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         # print(request.data.get('audio_url'))
-        serializer = TranscriptionSerializer(data=request.data)
-        transcribe(request.data.get('audio_url'))
+        transcription_result = {}
+        transcription_result['audio_url'] = request.data.get('audio_url')
+        transcription_result['title'] = request.data.get('title')
+        transcription_result['transcription'] = transcribe(request.data.get('audio_url'))
+        serializer = TranscriptionSerializer(data=transcription_result)
+        print(serializer)
         if serializer.is_valid():
             # print(serializer)
             # print(self)
@@ -42,5 +46,5 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
             # print(obj)
             # obj.save()
             # return self
-            # serializer.save()
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

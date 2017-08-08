@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 class Transcription(models.Model):
     audio_url = models.TextField()
     title = models.CharField(max_length = 50)
-    transcription = models.TextField(blank = True)
+    transcription = models.ArrayField()
 
 class TranscriptionUsers(models.Model):
     transcription_key = models.ForeignKey(Transcription)
