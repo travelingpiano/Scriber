@@ -38,7 +38,6 @@ class LoginForm extends React.Component {
     try {
       let token = await AsyncStorage.getItem('token');
       let username = await AsyncStorage.getItem('username');
-      console.log(username);
       if (token !== null ) {
         this.setState({
           token: token, error: null, username: username
@@ -81,6 +80,7 @@ class LoginForm extends React.Component {
     } else {
       AsyncStorage.setItem('token', responseJson.access_token);
       AsyncStorage.setItem('username',username)
+      console.log(responseJson.access_token);
       this.setState({
         'token': responseJson.access_token
       });

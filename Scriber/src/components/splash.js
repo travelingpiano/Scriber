@@ -7,13 +7,11 @@ import { Text,
 import { Actions } from 'react-native-router-flux';
 
 const Splash = () => {
-  const { textStyle, viewStyle, buttonStyle, allButtons } = styles;
+  const { textStyle, viewStyle, buttonStyle, allButtons, imageStyle } = styles;
 
   return (
     <View style={ viewStyle }>
-      <Text style={ textStyle }>
-        SPLASH!!
-      </Text>
+      <Image style={ imageStyle } resizeMode="contain" source={require('../../assets/Scriber-Logo-full.png')} />
       <View style={ allButtons }>
         <View style={ buttonStyle }>
           <Button
@@ -37,6 +35,12 @@ export default Splash;
 const styles = StyleSheet.create({
   allButtons: {
     flex: .3
+  },
+
+  imageStyle: {
+    width: 350,
+    // alignItems: 'center',
+    justifyContent: 'center',
   },
 
   buttonStyle: {
