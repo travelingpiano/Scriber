@@ -8,7 +8,7 @@ import { AsyncStorage,
          TextInput,
          TouchableHighlight,
          View } from 'react-native';
-
+import { Actions } from 'react-native-router-flux';
 import config from '../../lib/config.js';
 
 
@@ -60,8 +60,6 @@ class LoginForm extends React.Component {
     data.append('client_secret', client_key);
     data.append('username', username);
     data.append('password', password);
-    console.log(username);
-    console.log(password);
     let response = await fetch('http://127.0.0.1:8000/o/token/', { // adjust to actual site url
       method: 'POST',
       headers: {
@@ -80,7 +78,6 @@ class LoginForm extends React.Component {
     } else {
       AsyncStorage.setItem('token', responseJson.access_token);
       AsyncStorage.setItem('username',username)
-      console.log(responseJson.access_token);
       this.setState({
         'token': responseJson.access_token
       });
@@ -100,15 +97,17 @@ class LoginForm extends React.Component {
     );
 
     let responseJson = await response.json();
-    console.log(response);
+    console.log(responseJson);
     if (responseJson.hasOwnProperty('detail')) {
       this.setState({
         'error': responseJson.detail
       });
     } else {
       this.setState({
-        'user': this.state.users.cloneWithRows(responseJson)
+        'users': this.state.users.cloneWithRows(responseJson)
       });
+      console.log(this.state.users);
+      Actions.Dashboard();
     }
   }
 
