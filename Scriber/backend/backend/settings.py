@@ -103,27 +103,28 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'scriber',
-#         'USER': 'lihsuan',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'scriber',
-        'USER': 'virginia',
+        # 'USER': 'virginia',
+        'USER': 'lihsuan',
         'PASSWORD': '',
         'HOST': 'localhost',
-        # 'PORT': '',
+        'PORT': '',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'scriber',
+#         'USER': 'virginiachen',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         # 'PORT': '',
+#     }
+# }
 
 
 # Password validation

@@ -6,6 +6,7 @@ from scriber.serializers import UserSerializer
 from scriber.models import Transcription
 from scriber.serializers import TranscriptionSerializer
 from rest_framework.response import Response
+from scriber.transcribe import transcribe
 # Create your views here.
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -31,10 +32,11 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
     serializer_class = TranscriptionSerializer
 
     def create(self, request):
-        print(request.data.get('audio_url'))
+        # print(request.data.get('audio_url'))
         serializer = TranscriptionSerializer(data=request.data)
+        transcribe(request.data.get('audio_url'))
         if serializer.is_valid():
-            print(serializer)
+            # print(serializer)
             # print(self)
             # obj = Transcription.objects.create(**request)
             # print(obj)
