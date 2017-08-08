@@ -26,30 +26,58 @@ class SignupForm extends React.Component {
         }
       ),
     };
+    this.createUser = this.createUser.bind(this);
   }
 
   componentDidMount() {
     AsyncStorage.clear();
-    this.loadInitialState().done();
+    // this.loadInitialState().done();
   }
 
-  async loadInitialState() {
-    try {
-      let token = await AsyncStorage.getItem('token');
-      let username = await AsyncStorage.getItem('username');
-      console.log(username);
-      if (token !== null ) {
-        this.setState({
-          token: token, error: null, username: username
-        });
-        this.getData(this.state.token);
-      } else {
-        this.setState({
-          'error': 'Login Error'
-        })
-      }
-    } catch (error) {
+  // async loadInitialState() {
+  //   try {
+  //     let token = await AsyncStorage.getItem('token');
+  //     let username = await AsyncStorage.getItem('username');
+  //     console.log(username);
+  //     if (token !== null ) {
+  //       this.setState({
+  //         token: token, error: null, username: username
+  //       });
+  //       this.getData(this.state.token);
+  //     } else {
+  //       this.setState({
+  //         'error': 'Login Error'
+  //       })
+  //     }
+  //   } catch (error) {
+  //
+  //   }
+  // }
 
+  async createUser(client_id, client_key, username, password) {
+    let data = new FormData();
+    // data.append('grant_type', 'password');
+    data.append('client_id', client_id);
+    data.append('client_secret', client_key);
+    data.append('username', username);
+    data.append('password', password);
+    let response = await fetch('http://127.0.0.1:8000/users/', { // adjust to actual site url
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Origin': '',
+        'Host': '127.0.0.1:8000',
+      },
+      body: data
+    });
+
+    let responseJson = await response.json();
+    if (responseJson.hasOwnProperty('error')) {
+      this.setState({
+        'error': responseJson.error
+      });
+    } else {
+      this.getToken(client_id, client_key, username, password);
     }
   }
 
@@ -146,7 +174,7 @@ class SignupForm extends React.Component {
         </View>
 
         <TouchableHighlight onPress={ () =>
-          this.getToken(config.client_id,
+          this.createUser(config.client_id,
                          config.client_key,
                          this.state.username,
                          this.state.password) }
