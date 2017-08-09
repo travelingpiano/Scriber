@@ -7,6 +7,7 @@ from scriber.models import Transcription
 from scriber.serializers import TranscriptionSerializer
 from rest_framework.response import Response
 from scriber.transcribe import transcribe
+from django.utils import timezone
 # Create your views here.
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -37,6 +38,8 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         transcription_result['audio_url'] = request.data.get('audio_url')
         transcription_result['title'] = request.data.get('title')
         transcription_result['transcription'] = transcribe(request.data.get('audio_url'),request.data.get('title'))
+        transcription_result['created_time'] = timezone.now().time()
+        transcription_result['created_date'] = timezone.now().date()
         serializer = TranscriptionSerializer(data=transcription_result)
         if serializer.is_valid():
             serializer.save()
