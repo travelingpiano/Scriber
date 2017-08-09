@@ -29,7 +29,7 @@ def transcribe(url, title):
 
     stt = SpeechToTextV1(username='88d9cb01-7ecb-4089-9d2c-a13828e3494e', password='1Wxsmr4kdBhp')
     # r = requests.get(url)
-    with open('./scriber/test.mp3','wb') as f:
+    with open('./scriber/test.mp3','w+') as f:
         for l in bucket_list:
             if l.key == url:
                 l.get_contents_to_filename('./scriber/test.mp3')
