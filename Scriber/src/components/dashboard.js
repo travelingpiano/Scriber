@@ -27,7 +27,6 @@ class Dashboard extends React.Component {
       return (
 
         <View style={ dashboardStyle }>
-          <Text style={ textStyle }>User Settings</Text>
           <TouchableOpacity
             style={ buttonStyle }
             onPress={() => {
