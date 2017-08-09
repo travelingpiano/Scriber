@@ -10,6 +10,7 @@ class TranscriptionIndexItem extends Component {
 
   render() {
     const { title } = this.props.transcription;
+    console.log(this.props);
 
     return (
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>

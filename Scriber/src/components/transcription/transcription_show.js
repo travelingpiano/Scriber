@@ -8,7 +8,7 @@ class TranscriptionShow extends Component {
     super(props);
     console.log(this.props);
   }
-
+  
   componentWillMount() {
     this.props.fetchTranscription();
   }
