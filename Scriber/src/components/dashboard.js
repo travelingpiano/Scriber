@@ -26,6 +26,7 @@ class Dashboard extends React.Component {
             buttonStyle } = styles;
     // if (this.state.token) {
       return (
+
         <View style={ dashboardStyle }>
           <Text style={ textStyle }>Welcome</Text>
           <TouchableOpacity
@@ -42,7 +43,6 @@ class Dashboard extends React.Component {
 
         </View>
       );
-
     // }
   }
 
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 5,
     marginRight: 5,
+
   },
 
   dashboardStyle: {
