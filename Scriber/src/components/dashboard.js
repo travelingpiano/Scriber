@@ -26,16 +26,13 @@ class Dashboard extends React.Component {
             buttonStyle } = styles;
     // if (this.state.token) {
       return (
-        // <ListView dataSource={ this.state.users }
-        //           renderRow={ this.renderUser }
-        //           style={ listViewStyle } />
         <View style={ dashboardStyle }>
           <Text style={ textStyle }>Welcome</Text>
           <TouchableOpacity
             style={ buttonStyle }
             onPress={() => {
               this.logoutUser();
-              Actions.Splash();  
+              Actions.Splash();
             }}
             >
             <Text>

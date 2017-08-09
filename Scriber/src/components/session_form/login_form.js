@@ -30,7 +30,6 @@ class LoginForm extends React.Component {
   }
 
   componentDidMount() {
-    AsyncStorage.clear();
     this.loadInitialState().done();
   }
 
