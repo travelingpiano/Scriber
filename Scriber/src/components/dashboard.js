@@ -69,10 +69,14 @@ const styles = StyleSheet.create({
   },
 
   buttonStyle: {
+    alignSelf: 'stretch',
     backgroundColor: '#F26367',
-    height: 15,
-    minWidth: 50,
-    borderRadius: 5
+    height: 30,
+    borderRadius: 5,
+    opacity: 0.8,
+    marginTop: 10,
+    marginLeft: 5,
+    marginRight: 5,
   },
 
   dashboardStyle: {

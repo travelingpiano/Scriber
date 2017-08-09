@@ -30,31 +30,6 @@ class SignupForm extends React.Component {
     this.createUser = this.createUser.bind(this);
   }
 
-  componentDidMount() {
-    AsyncStorage.clear();
-    // this.loadInitialState().done();
-  }
-
-  // async loadInitialState() {
-  //   try {
-  //     let token = await AsyncStorage.getItem('token');
-  //     let username = await AsyncStorage.getItem('username');
-  //     console.log(username);
-  //     if (token !== null ) {
-  //       this.setState({
-  //         token: token, error: null, username: username
-  //       });
-  //       this.getData(this.state.token);
-  //     } else {
-  //       this.setState({
-  //         'error': 'Login Error'
-  //       })
-  //     }
-  //   } catch (error) {
-  //
-  //   }
-  // }
-
   async createUser(client_id, client_key, username, password) {
     let data = new FormData();
     // data.append('grant_type', 'password');
@@ -177,12 +152,13 @@ class SignupForm extends React.Component {
             placeholder="password"/>
         </View>
 
-        <TouchableHighlight onPress={ () =>
-          this.createUser(config.client_id,
+        <TouchableHighlight
+          onPress={ () =>
+            this.createUser(config.client_id,
                          config.client_key,
                          this.state.username,
                          this.state.password) }
-                            style={ buttonStyle } >
+          style={ buttonStyle } >
           <Text>
             SignUp
           </Text>
@@ -198,13 +174,6 @@ class SignupForm extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  // viewStyle: {
-  //   flex: 1,
-  //   backgroundColor: '#C6F1E4',
-  //   flexDirection: 'column',
-  //   alignItems: 'center',
-  //   justifyContent: 'space-around',
-  // },
 
   textStyle: {
     fontSize: 40,
@@ -236,7 +205,6 @@ const styles = StyleSheet.create({
   },
 
   listViewStyle: {
-    // fontSize: 25,
     paddingTop: 20,
     backgroundColor: '#F5FCFF',
   },
