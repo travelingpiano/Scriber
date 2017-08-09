@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 import {selectAllTranscriptions} from '../../reducers/selectors';
 import { fetchTranscriptions } from '../../actions/transcription_actions';
-// import ListItem from './ListItem';
+import TranscriptionIndexItem from './transcription_index_item';
 
 class TranscriptionIndex extends Component {
+
   componentWillMount() {
     this.props.fetchTranscriptions();
-
     this.createDataSource(this.props);
   }
 

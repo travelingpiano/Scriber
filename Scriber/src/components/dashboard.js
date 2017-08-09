@@ -42,6 +42,18 @@ class Dashboard extends React.Component {
             </Text>
           </TouchableOpacity>
 
+          <TouchableOpacity
+            style={ buttonStyle }
+            onPress={() => {
+              Actions.TranscriptionIndex();
+
+            }}
+            >
+            <Text>
+              Transcriptions
+            </Text>
+          </TouchableOpacity>
+
         </View>
       );
     // }
