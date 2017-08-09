@@ -1,4 +1,5 @@
 // import {receiveErrors, clearErrors} from './error_actions';
+import * as TranscriptionAPIUtil from '../lib/transcriptions_api_util';
 
 export const RECEIVE_TRANSCRIPTION = 'RECEIVE_TRANSCRIPTION';
 export const RECEIVE_TRANSCRIPTIONS = 'RECEIVE_TRANSCRIPTIONS';
@@ -21,3 +22,15 @@ export const destroyTranscription = transcription => ({
 });
 
 // async thunk action creators
+export const fetchTranscription = (id) => dispatch => {
+  return TranscriptionAPIUtil.fetchTranscription(id).then(
+    (transcription) => {dispatch(receiveTranscription(transcription));
+      return transcription;
+  });
+};
+
+export const fetchTranscriptions = () => dispatch => {
+  return TranscriptionAPIUtil.fetchTranscriptions().then(
+    transcriptions => dispatch(receiveTranscriptions(transcriptions))
+  );
+};

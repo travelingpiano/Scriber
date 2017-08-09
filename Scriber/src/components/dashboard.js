@@ -39,6 +39,7 @@ class Dashboard extends React.Component {
               Log Out
             </Text>
           </TouchableOpacity>
+
         </View>
       );
 
@@ -51,6 +52,7 @@ class Dashboard extends React.Component {
         <Text>
           {user.name}
         </Text>
+
       </View>
 
     );
