@@ -2,15 +2,15 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.postgres.fields import ArrayField
-import datetime
+
 
 # Create your models here.
 class Transcription(models.Model):
     audio_url = models.TextField()
     title = models.CharField(max_length = 50)
     transcription = ArrayField(models.TextField())
-    created_time = models.TimeField(default=datetime.datetime.now().time())
-    created_date = models.DateField(default=datetime.datetime.now().date())
+    created_time = models.TimeField()
+    created_date = models.DateField()
 
 class TranscriptionUsers(models.Model):
     transcription_key = models.ForeignKey(Transcription)

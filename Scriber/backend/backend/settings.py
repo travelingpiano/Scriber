@@ -108,7 +108,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'scriber',
         # 'USER': 'lihsuan',
-        'USER': 'virginiachen',
+        # 'USER': 'virginiachen',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
@@ -139,13 +139,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Vancouver'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
