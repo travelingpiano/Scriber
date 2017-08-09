@@ -8,7 +8,6 @@ class Transcription(models.Model):
     audio_url = models.TextField()
     title = models.CharField(max_length = 50)
     transcription = ArrayField(models.TextField())
-    transcription = models.ArrayField()
 
 class TranscriptionUsers(models.Model):
     transcription_key = models.ForeignKey(Transcription)
