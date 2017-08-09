@@ -6,6 +6,7 @@ import SignupForm from './components/session_form/signup_form';
 import Dashboard from './components/dashboard';
 import Splash from './components/splash';
 import RecordAudio from './components/transcription/record_audio';
+import TranscriptionIndex from './components/transcription/transcription_index_container';
 
 const Routes = () => (
   <Router>
@@ -35,6 +36,12 @@ const Routes = () => (
         key="RecordAudio"
         component={RecordAudio}
         title="Record Audio"
+      />
+
+      <Scene
+        key="TranscriptionIndex"
+        component={TranscriptionIndex}
+        title="All Transcriptions"
       />
 
       <Scene
