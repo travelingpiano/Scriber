@@ -4,19 +4,22 @@ import { Actions } from 'react-native-router-flux';
 // import { CardSection } from './common';
 
 class TranscriptionIndexItem extends Component {
-  // onRowPress() {
-  //   Actions.employeeEdit({ employee: this.props.employee });
-  // }
+  onRowPress() {
+    Actions.TranscriptionShow({ transcription: this.props.currentTranscription });
+  }
 
   render() {
     const { title } = this.props.transcription;
+    console.log(this.props);
 
     return (
-      <View>
-        <Text style={styles.titleStyle}>
-          { title }
-        </Text>
-      </View>
+      <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
+        <View>
+          <Text style={styles.titleStyle}>
+            { title }
+          </Text>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
