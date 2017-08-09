@@ -14,7 +14,6 @@ class Dashboard extends React.Component {
   }
 
   logoutUser(){
-    console.log("LOGGED OUT");
     AsyncStorage.clear();
   }
 
