@@ -41,6 +41,7 @@ class Dashboard extends React.Component {
           </TouchableOpacity>
         </View>
       );
+
     // }
   }
 
@@ -62,6 +63,12 @@ export default Dashboard;
 const styles = StyleSheet.create({
   listViewStyle: {
 
+  },
+
+  buttonStyle: {
+    minWidth: 200,
+    margin: 5,
+    backgroundColor: '#FF4242',
   },
 
   textStyle: {

@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
 import SessionReducer from './session_reducer';
-import TranscriptionReducer from './transcription_reducer';
+import TranscriptionsReducer from './transcriptions_reducer';
 
 const RootReducer = combineReducers({
   session: SessionReducer,
-  transcription: TranscriptionReducer
+  transcriptions: TranscriptionsReducer
 });
 
 export default RootReducer;
