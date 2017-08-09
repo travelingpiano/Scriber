@@ -9,9 +9,6 @@ import sys
 from boto.s3.key import Key
 import boto.s3.connection
 
-AWS_ACCESS_KEY_ID = 'AKIAJ2FU7FXNCBVFMF3Q'
-AWS_SECRET_ACCESS_KEY = '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'
-
 # https://aacapps.com/lamp/sound/emma.mp3
 def transcribe(url, title):
     #Hank Aaron
