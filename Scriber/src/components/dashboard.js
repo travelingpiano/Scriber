@@ -3,6 +3,7 @@ import { AsyncStorage,
          Text,
          StyleSheet,
          TouchableOpacity,
+         TouchableHighlight,
          ListView,
          View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -39,6 +40,15 @@ class Dashboard extends React.Component {
               Log Out
             </Text>
           </TouchableOpacity>
+
+          <TouchableHighlight
+            onPress={ () =>
+            Actions.RecordAudio() }
+            style={ buttonStyle } >
+            <Text>
+              Record Audio
+            </Text>
+          </TouchableHighlight>
 
         </View>
       );

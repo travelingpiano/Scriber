@@ -9,12 +9,12 @@ class TranscriptionIndexItem extends Component {
   // }
 
   render() {
-    const { title } = this.props.transcription;
+    // const { title } = this.props.transcription;
 
     return (
       <View>
         <Text style={styles.titleStyle}>
-          { title }
+          HELLO
         </Text>
       </View>
     );
