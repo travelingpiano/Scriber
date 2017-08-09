@@ -1,6 +1,6 @@
 import merge from 'lodash';
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 class TranscriptionShow extends Component {
 
@@ -10,16 +10,18 @@ class TranscriptionShow extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchTranscription();
-  }
-
-  componentWillReceiveProps(nextProps) {
-
+    this.props.fetchTranscription(this.props.transcription.pk);
+    console.log(this.props);
   }
 
   render() {
     return (
-      <Text>Transcription!</Text>
+      <View>
+        <Text>{this.props.transcription.title}</Text>
+        <Text>{this.props.transcription.audio_url}</Text>
+        <Text>{this.props.transcription.created_date}</Text>
+        <Text>{this.props.transcription.transcription}</Text>
+      </View>
     );
   }
 }

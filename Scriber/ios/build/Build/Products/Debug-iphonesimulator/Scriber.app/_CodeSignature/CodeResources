@@ -6,7 +6,7 @@
 	<dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		G7eLNaTAvbMBpIAoTvL+4W2ZhXE=
+		vRdlL9WUwFAKhGWPcOqpu5lncts=
 		</data>
 		<key>Frameworks/IDEBundleInjection.framework/IDEBundleInjection</key>
 		<data>
@@ -235,7 +235,7 @@
 		</data>
 		<key>PlugIns/ScriberTests.xctest.dSYM/Contents/Resources/DWARF/ScriberTests</key>
 		<data>
-		c/XrFStOD5lXAcxRgA+xtvJTagY=
+		dI4YMTU7EEuKvI01mKAg14LU2po=
 		</data>
 		<key>PlugIns/ScriberTests.xctest/Info.plist</key>
 		<data>
@@ -243,7 +243,7 @@
 		</data>
 		<key>PlugIns/ScriberTests.xctest/ScriberTests</key>
 		<data>
-		JqggNx5IgSQSEJY6YSRelQEItN8=
+		ODILuz//2WOsz1sAVl0fY9ceYPo=
 		</data>
 		<key>PlugIns/ScriberTests.xctest/_CodeSignature/CodeResources</key>
 		<data>
@@ -256,11 +256,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G7eLNaTAvbMBpIAoTvL+4W2ZhXE=
+			vRdlL9WUwFAKhGWPcOqpu5lncts=
 			</data>
 			<key>hash2</key>
 			<data>
-			w2TiKZdq7xzpS38ZRv3XU4wu+WLXLB38/34R9rwQiu0=
+			P1+tHf7LR1IovIl94ytZTtsZfsBOtY4+m+g1M6g7RGY=
 			</data>
 		</dict>
 		<key>Frameworks/IDEBundleInjection.framework/IDEBundleInjection</key>
@@ -852,11 +852,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			c/XrFStOD5lXAcxRgA+xtvJTagY=
+			dI4YMTU7EEuKvI01mKAg14LU2po=
 			</data>
 			<key>hash2</key>
 			<data>
-			3JKbXgD4iwlraq1jxmWrzQHe8ub4bhOyZ1Xsxn85D14=
+			VmdK9eDpkyKAHlvL3W/uuX7oZ2Xz3BP/6in77C9r2qQ=
 			</data>
 		</dict>
 		<key>PlugIns/ScriberTests.xctest/Info.plist</key>
@@ -874,11 +874,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JqggNx5IgSQSEJY6YSRelQEItN8=
+			ODILuz//2WOsz1sAVl0fY9ceYPo=
 			</data>
 			<key>hash2</key>
 			<data>
-			EwlFbke9JCTllSEvZ+PmRt0Gyn9wPnsDKB2u6dSejj8=
+			cZ8gfJN/jqj9m40voRSZGy4MgXeQQXClOWIgs9cqyGY=
 			</data>
 		</dict>
 		<key>PlugIns/ScriberTests.xctest/_CodeSignature/CodeResources</key>
