@@ -5,6 +5,7 @@ import LoginForm from './components/session_form/login_form';
 import SignupForm from './components/session_form/signup_form';
 import Dashboard from './components/dashboard';
 import Splash from './components/splash';
+import RecordAudio from './components/transcription/record_audio';
 
 const Routes = () => (
   <Router>
@@ -28,6 +29,12 @@ const Routes = () => (
         key="Dashboard"
         component={Dashboard}
         title="Dashboard"
+      />
+
+      <Scene
+        key="RecordAudio"
+        component={RecordAudio}
+        title="Record Audio"
       />
 
       <Scene
