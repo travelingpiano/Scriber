@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
       return (
 
         <View style={ dashboardStyle }>
-          <Text style={ textStyle }>Welcome</Text>
+          <Text style={ textStyle }>User Settings</Text>
           <TouchableOpacity
             style={ buttonStyle }
             onPress={() => {
@@ -38,18 +38,6 @@ class Dashboard extends React.Component {
             >
             <Text>
               Log Out
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={ buttonStyle }
-            onPress={() => {
-              Actions.TranscriptionIndex();
-
-            }}
-            >
-            <Text>
-              Transcriptions
             </Text>
           </TouchableOpacity>
 
