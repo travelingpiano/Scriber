@@ -1,6 +1,9 @@
 import merge from 'lodash';
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { Text } from 'react-native';
+=======
+>>>>>>> Create transcription show
 
 class TranscriptionShow extends Component {
 
@@ -8,7 +11,7 @@ class TranscriptionShow extends Component {
     super(props);
     console.log(this.props);
   }
-  
+
   componentWillMount() {
     this.props.fetchTranscription();
   }
