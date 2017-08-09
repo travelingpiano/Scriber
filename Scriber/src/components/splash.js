@@ -46,12 +46,13 @@ const styles = StyleSheet.create({
   buttonStyle: {
     minWidth: 200,
     margin: 5,
-    backgroundColor: '#FF4242',
+    backgroundColor: '#F26367',
+    borderRadius: 10,
   },
 
   viewStyle: {
     flex: 1,
-    backgroundColor: '#C6F1E4',
+    backgroundColor: '#5BCAD3',
     // flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',

@@ -187,12 +187,13 @@ const styles = StyleSheet.create({
   },
 
   buttonStyle: {
-    backgroundColor: '#eeeeee',
+    backgroundColor: '#F26367',
     padding: 10,
     marginRight: 5,
     marginLeft: 5,
     minWidth: 50,
     flex: 0.2,
+    borderRadius: 3,
   },
 
   formStyle: {
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
 
   listViewStyle: {
     paddingTop: 20,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#5BCAD3',
   },
 
   loginViewStyle: {
