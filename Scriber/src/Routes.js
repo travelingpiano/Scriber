@@ -49,23 +49,21 @@ const Routes = () => (
         tabs={true}
         tabBarStyle={styles.tabBarStyle}
         activeBackgroundColor='#ddd'
+        hideNavBar
       >
         <Scene
           key="TranscriptionIndex"
           component={TranscriptionIndex}
           title="All Transcriptions"
           icon={TabIcon}
-          navigationBarStyle={{backgroundColor: 'green'}}
-          titleStyle={{color: 'white', alignSelf: 'center'}}
         />
-      <Scene key="TranscriptionForm" title="New Transcription" icon={TabIcon} component={TranscriptionIndex} />
+      <Scene key="TranscriptionForm" title="New Transcription"
+        icon={TabIcon} component={TranscriptionIndex} />
         <Scene
           key="Dashboard"
           component={Dashboard}
           title="User Settings"
           icon={TabIcon}
-          navigationBarStyle={{backgroundColor: 'green'}}
-          titleStyle={{color: 'white', alignSelf: 'center'}}
         />
       </Scene>
     </Scene>
