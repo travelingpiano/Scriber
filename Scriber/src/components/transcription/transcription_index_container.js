@@ -10,6 +10,7 @@ class TranscriptionIndex extends Component {
 
   componentWillMount() {
     this.props.fetchTranscriptions();
+    console.log(this.props);
     this.createDataSource(this.props);
   }
 
@@ -22,6 +23,7 @@ class TranscriptionIndex extends Component {
   }
 
   createDataSource({ transcriptions }) {
+    console.log(transcriptions);
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
