@@ -9,9 +9,10 @@ class TranscriptionIndexItem extends Component {
   }
 
   render() {
-    const { title } = this.props.transcription;
+    // const { title } = this.props.transcription;
 
     return (
+<<<<<<< HEAD
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View>
           <Text style={styles.titleStyle}>
@@ -19,6 +20,13 @@ class TranscriptionIndexItem extends Component {
           </Text>
         </View>
       </TouchableWithoutFeedback>
+=======
+      <View>
+        <Text style={styles.titleStyle}>
+          HELLO
+        </Text>
+      </View>
+>>>>>>> master
     );
   }
 }
