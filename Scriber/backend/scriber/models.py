@@ -1,12 +1,14 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 class Transcription(models.Model):
     audio_url = models.TextField()
     title = models.CharField(max_length = 50)
-    transcription = models.TextField(blank = True)
+    transcription = ArrayField(models.TextField())
+    transcription = models.ArrayField()
 
 class TranscriptionUsers(models.Model):
     transcription_key = models.ForeignKey(Transcription)
