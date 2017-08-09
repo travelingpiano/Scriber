@@ -5,6 +5,7 @@ import { AsyncStorage,
          TouchableOpacity,
          ListView,
          View } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 class Dashboard extends React.Component {
 
@@ -32,7 +33,10 @@ class Dashboard extends React.Component {
           <Text style={ textStyle }>Welcome</Text>
           <TouchableOpacity
             style={ buttonStyle }
-            onPress={() => this.logoutUser()}
+            onPress={() => {
+              this.logoutUser();
+              Actions.Splash();  
+            }}
             >
             <Text>
               Log Out
