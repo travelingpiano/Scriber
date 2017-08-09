@@ -10,7 +10,6 @@ class TranscriptionIndex extends Component {
 
   componentWillMount() {
     this.props.fetchTranscriptions();
-    console.log(this.props);
     this.createDataSource(this.props);
   }
 

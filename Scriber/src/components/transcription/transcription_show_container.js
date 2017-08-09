@@ -8,7 +8,8 @@ import TranscriptionShow from './transcription_show';
 
 const mapStateToProps = (state) => {
   return {
-    currentTranscription: state.transcriptions.transcriptions[state.transcription.currentTranscription],
+    transcriptions: state.transcriptions
+    // currentTranscription: state.transcriptions.transcriptions[state.transcription.currentTranscription],
     // currentUser: state.session.currentUser,
     // errors: state.errors.errors
   };

@@ -16,15 +16,15 @@ const TranscriptionsReducer = (state=defaultState(), action) => {
       const transcription = action.transcription;
       return merge({}, state,
         {
-          transcriptions: {[transcription.id]: transcription},
-          currentTranscription: transcription.id
+          transcriptions: {[transcription.pk]: transcription},
+          currentTranscription: transcription.pk
         });
     case RECEIVE_TRANSCRIPTIONS:
       const transcriptions2 = action.transcriptions;
       return Object.assign({}, defaultState(), {transcriptions: transcriptions2});
     case DESTROY_TRANSCRIPTION:
       nextState = Object.assign({},state);
-      delete nextState.transcriptions[action.transcription.id];
+      delete nextState.transcriptions[action.transcription.pk];
       return nextState;
     default:
       return state;
