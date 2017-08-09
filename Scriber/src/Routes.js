@@ -39,6 +39,7 @@ const Routes = () => (
         initial
         key="Splash"
         component={Splash}
+        hideNavBar
       />
 
       <Scene
@@ -61,9 +62,10 @@ const Routes = () => (
         <Scene
           key="Dashboard"
           component={Dashboard}
-          title="Settings"
+          title="User Settings"
           icon={TabIcon}
-
+          navigationBarStyle={{backgroundColor: 'green'}}
+          titleStyle={{color: 'white', alignSelf: 'center'}}
         />
       </Scene>
     </Scene>
