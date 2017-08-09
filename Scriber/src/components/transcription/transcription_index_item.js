@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 
 class TranscriptionIndexItem extends Component {
   onRowPress() {
-    Actions.TranscriptionShow({ transcription: this.props.transcription });
+        Actions.TranscriptionShow({ transcription: this.props.transcription });
   }
 
   render() {
