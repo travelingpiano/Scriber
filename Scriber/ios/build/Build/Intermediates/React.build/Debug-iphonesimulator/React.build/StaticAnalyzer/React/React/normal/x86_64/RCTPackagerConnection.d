@@ -1,0 +1,27 @@
+dependencies: \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/DevSupport/RCTPackagerConnection.m \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/DevSupport/RCTPackagerConnection.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTConvert.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/../Libraries/WebSocket/RCTReconnectingWebSocket.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/../Libraries/WebSocket/RCTSRWebSocket.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/Base/RCTWebSocketObserverProtocol.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/DevSupport/RCTReloadPackagerMethod.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/DevSupport/RCTPackagerClient.h \
+  /Users/virginiachen/AppAcademy/Flex-Project/Scriber/node_modules/react-native/React/DevSupport/RCTSamplingProfilerPackagerMethod.h
