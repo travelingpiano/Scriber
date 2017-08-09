@@ -107,7 +107,7 @@ class LoginForm extends React.Component {
         'users': this.state.users.cloneWithRows(responseJson)
       });
       console.log(this.state.users);
-      Actions.Dashboard();
+      Actions.tabbar();
     }
   }
 

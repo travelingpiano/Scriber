@@ -112,7 +112,7 @@ class SignupForm extends React.Component {
       this.setState({
         'user': this.state.users.cloneWithRows(responseJson)
       });
-      Actions.Dashboard();
+      Actions.tabbar();
     }
   }
 
