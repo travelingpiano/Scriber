@@ -34,6 +34,7 @@ class Dashboard extends React.Component {
             onPress={() => {
               this.logoutUser();
               Actions.Splash();
+
             }}
             >
             <Text>
