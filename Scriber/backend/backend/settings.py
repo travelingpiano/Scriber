@@ -107,8 +107,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'scriber',
-        # 'USER': 'virginia',
-
         'USER': 'lihsuan',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -118,6 +116,8 @@ DATABASES = {
 # <<<<<<< HEAD
 #         'USER': 'ade',
 # =======
+        # 'USER': 'virginia',
+# <<<<<<< HEAD
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
