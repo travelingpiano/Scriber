@@ -11,7 +11,6 @@ import RecordAudio from './components/transcription/record_audio';
 import TranscriptionIndex from './components/transcription/transcription_index_container';
 import TabIcon from './lib/tabIcon';
 
-
 const Routes = () => (
   <Router>
     <Scene
@@ -64,14 +63,11 @@ const Routes = () => (
           component={Dashboard}
           title="Settings"
           icon={TabIcon}
-          navigationBarStyle={{backgroundColor: 'green'}}
-          titleStyle={{color: 'white', alignSelf: 'center'}}
+
         />
       </Scene>
-
     </Scene>
   </Router>
-
 );
 
 const styles = StyleSheet.create({
