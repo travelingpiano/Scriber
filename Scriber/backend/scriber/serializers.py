@@ -5,7 +5,7 @@ from scriber.models import Transcription
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username','email','password','pk','transcription_set')
+        fields = ('username','email','pk','transcription_set')
 
 class TranscriptionSerializer(serializers.ModelSerializer):
     class Meta:
