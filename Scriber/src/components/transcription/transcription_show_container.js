@@ -6,9 +6,11 @@ import TranscriptionShow from './transcription_show';
 
 // import {clearErrors} from '../../actions/error_actions';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state,ownProps) => {
+  console.log(state.transcriptions);
+  console.log(ownProps);
   return {
-    transcriptions: state.transcriptions
+    transcription: state.transcriptions.currentTranscription
     // currentTranscription: state.transcriptions.transcriptions[state.transcription.currentTranscription],
     // currentUser: state.session.currentUser,
     // errors: state.errors.errors

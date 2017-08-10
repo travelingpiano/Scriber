@@ -6,10 +6,12 @@ export const RECEIVE_TRANSCRIPTIONS = 'RECEIVE_TRANSCRIPTIONS';
 export const DESTROY_TRANSCRIPTION = 'DESTROY_TRANSCRIPTION';
 
 // synchronous action creators
-export const receiveTranscription = transcription => ({
+export const receiveTranscription = transcription => {
+  console.log(transcription);
+  return {
   type: RECEIVE_TRANSCRIPTION,
   transcription
-});
+};};
 
 export const receiveTranscriptions = transcriptions => ({
   type: RECEIVE_TRANSCRIPTIONS,

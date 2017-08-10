@@ -10,10 +10,12 @@ class TranscriptionShow extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchTranscription(this.props.transcription.pk);
+    this.props.fetchTranscription(this.props.transcriptionPk);
+    console.log(this.props);
   }
 
   render() {
+    console.log(this.props.transcription);
     return (
       <View style={styles.header}>
         <View style={styles.titleView}>
