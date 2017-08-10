@@ -38,7 +38,7 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
             return TranscriptionSerializer
     def create(self, request):
         # print(request.data.get('audio_url'))
-        users = User.objects.filter(pk__in=[2,3])
+        users = User.objects.filter(pk__in=request.data.get('users'))
         print(users)
         transcription_result = {}
         transcription_result['audio_url'] = request.data.get('audio_url')
