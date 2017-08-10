@@ -1,6 +1,7 @@
 import merge from 'lodash';
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import FullTranscription from './full_transcription';
 
 class TranscriptionShow extends Component {
 
@@ -22,7 +23,7 @@ class TranscriptionShow extends Component {
           <Text>Date:{this.props.transcription.created_date}</Text>
         </View>
         <View style={styles.transcription}>
-          <Text>{this.props.transcription.transcription}</Text>
+          <FullTranscription transcription={this.props.transcription.transcription} />
         </View>
       </View>
     );

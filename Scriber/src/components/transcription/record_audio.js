@@ -15,7 +15,10 @@ import {AudioRecorder, AudioUtils} from 'react-native-audio';
 
 class RecordAudio extends Component {
 
-    state = {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       currentTime: 0.0,
       recording: false,
       stoppedRecording: false,
@@ -23,6 +26,7 @@ class RecordAudio extends Component {
       audioPath: AudioUtils.DocumentDirectoryPath + '/test.aac',
       hasPermission: undefined,
     };
+  }
 
     prepareRecordingPath(audioPath){
       AudioRecorder.prepareRecordingAtPath(audioPath, {
@@ -111,6 +115,7 @@ class RecordAudio extends Component {
       }
 
       this.setState({stoppedRecording: true, recording: false});
+      console.log(this.state.audioPath);
 
       try {
         const filePath = await AudioRecorder.stopRecording();
