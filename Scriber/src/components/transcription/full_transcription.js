@@ -10,15 +10,35 @@ class FullTranscription extends Component {
 
   render() {
     let transcription = this.props.transcription;
-    console.log(transcription);
+    let allSnippets = transcription.map((snippet,idx) => {
+      return (
+        <View key={`snippet-${idx}`}>
+          <Text>Speaker: {JSON.parse(snippet).speaker}</Text>
+          <Text>{JSON.parse(snippet).text}</Text>
+        </View>
+      );
+    });
+
     return (
-      <View style={styles.header}>
-        <Text>Hello</Text>
+      <View>
+        {allSnippets}
+      </View>
+    );
+
+
+
+  }
+
+  renderSnippet(snippet) {
+    return (
+      <View>
+        <Text>{snippet.speaker}</Text>
+        <Text>{snippet.text}</Text>
       </View>
     );
   }
 
-  
+
 }
 
 export default FullTranscription;

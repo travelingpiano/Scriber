@@ -49,6 +49,9 @@ const styles = StyleSheet.create({
   additional: {
     flex: .2,
     padding: 10
+  },
+  transcription: {
+    flex: .5,
   }
 
 });
