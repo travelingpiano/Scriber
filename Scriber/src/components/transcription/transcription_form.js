@@ -21,7 +21,7 @@ export default class TranscriptionForm extends React.Component {
       attendees: {}
     };
 
-    this.createTranscription = this.createTranscription.bind(this);
+    this.createTranscription = this.props.createTranscription.bind(this);
   }
 
   recordAudio() {
@@ -73,14 +73,14 @@ export default class TranscriptionForm extends React.Component {
             Attendees
           </Text>
           <Button
-            onPress={() => console.log('ADD ATTENDEES')}
+            onPress={() => Actions.Attendees()}
             title='+Attendees'
           />
       </View>
 
         <View style={ recordAudioStyle }>
           <Button
-            onPress={() => console.log('RECORD AUDIO')}
+            onPress={() => Actions.RecordAudio({users: this.props.users})}
             title="Record Audio"
           />
         </View>

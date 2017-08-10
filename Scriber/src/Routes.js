@@ -7,6 +7,7 @@ import SignupForm from './components/session_form/signup_form';
 import Dashboard from './components/dashboard';
 import TranscriptionForm from './components/transcription/transcription_form';
 import Splash from './components/splash';
+import Attendees from './components/transcription/attendees';
 import RecordAudio from './components/transcription/record_audio';
 import TranscriptionIndex from './components/transcription/transcription_index_container';
 import TranscriptionShow from './components/transcription/transcription_show_container';
@@ -30,6 +31,12 @@ const Routes = () => (
         back
         component={SignupForm}
         title="Signup"
+      />
+
+      <Scene
+        key="Attendees"
+        component={Attendees}
+        title="Add Attendees"
       />
 
       <Scene

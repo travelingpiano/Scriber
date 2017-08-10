@@ -12,6 +12,7 @@ class Dashboard extends React.Component {
 
   constructor(props) {
     super(props);
+
   }
 
   logoutUser(){
@@ -43,7 +44,7 @@ class Dashboard extends React.Component {
 
           <TouchableHighlight
             onPress={ () =>
-            Actions.RecordAudio() }
+            Actions.RecordAudio()}
             style={ buttonStyle } >
             <Text>
               Record Audio
@@ -76,11 +77,11 @@ const styles = StyleSheet.create({
 
   },
 
-  buttonStyle: {
-    minWidth: 200,
-    margin: 5,
-    backgroundColor: '#FF4242',
-  },
+  // buttonStyle: {
+  //   minWidth: 200,
+  //   margin: 5,
+  //   backgroundColor: '#FF4242',
+  // },
 
   textStyle: {
     fontSize: 50
