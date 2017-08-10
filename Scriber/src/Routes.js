@@ -64,7 +64,7 @@ const Routes = () => (
         <Scene
           key="TranscriptionIndex"
           component={TranscriptionIndex}
-          title="All Transcriptions"
+          title="Your Transcriptions"
           icon={TabIcon}
         />
       <Scene key="TranscriptionForm"
