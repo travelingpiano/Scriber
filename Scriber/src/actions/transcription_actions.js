@@ -23,6 +23,10 @@ export const destroyTranscription = transcription => ({
 });
 
 // async thunk action creators
+export const createTranscription = transcription => dispatch => {
+  // return TranscriptionAPIUtil.createTranscription
+};
+
 export const fetchTranscription = (id) => dispatch => {
   return TranscriptionAPIUtil.fetchTranscription(id)
   .then(resp => resp.json())
