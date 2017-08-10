@@ -67,7 +67,6 @@ class TranscriptionIndex extends Component {
   }
 
   renderItem(item) {
-    console.log(item.transcription);
     return (
       <TouchableWithoutFeedback transcriptionPk={item.transcription.pk} onPress={() => this.onRowPress(item.transcription.pk)}>
         <View style={[styles.item, {height: item.height}]}>

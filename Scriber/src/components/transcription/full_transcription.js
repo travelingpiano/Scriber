@@ -12,7 +12,6 @@ class FullTranscription extends Component {
     let allSnippets = null;
     if (this.props.transcription) {
       let transcription = this.props.transcription;
-      console.log(this.props.transcription);
       allSnippets = transcription.map((snippet,idx) => {
         return (
           <View key={`snippet-${idx}`}>
@@ -32,16 +31,6 @@ class FullTranscription extends Component {
 
 
   }
-
-  renderSnippet(snippet) {
-    return (
-      <View>
-        <Text>{snippet.speaker}</Text>
-        <Text>{snippet.text}</Text>
-      </View>
-    );
-  }
-
 
 }
 

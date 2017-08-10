@@ -11,7 +11,6 @@ const mapStateToProps = (state,ownProps) => {
   console.log(ownProps);
   return {
     currentTranscription: state.transcriptions.currentTranscription
-    // currentTranscription: state.transcriptions.transcriptions[state.transcription.currentTranscription],
     // currentUser: state.session.currentUser,
     // errors: state.errors.errors
   };
