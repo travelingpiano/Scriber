@@ -53,4 +53,6 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
             # print(serializer.data['users'])
             #
             # serializer.data['users'].add(users)
+            transcription = Transcription.objects.get(title=request.data.get('title'))
+            transcription.users.add(*users)
             return Response(serializer.data, status=status.HTTP_201_CREATED)

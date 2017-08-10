@@ -7,7 +7,7 @@ from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 class Transcription(models.Model):
     audio_url = models.TextField()
-    title = models.CharField(max_length = 50)
+    title = models.CharField(max_length = 50, unique=True)
     transcription = ArrayField(models.TextField())
     created_time = models.TimeField()
     created_date = models.DateField()
