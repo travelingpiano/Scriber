@@ -71,7 +71,7 @@ const Routes = () => (
         title="New Transcription"
         back
         icon={TabIcon}
-        component={TranscriptionIndex} />
+        component={TranscriptionForm} />
       <Scene
         key="Dashboard"
         back

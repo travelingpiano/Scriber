@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "32551791ACD4E293A52E06DE9D22C073BB203884",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "7A6B4CEFCE5D34BBF59E7DD9E6AE6D5775AEC9D9" : 9223372036854775807,
+    "32551791ACD4E293A52E06DE9D22C073BB203884" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C6C058CF-DC19-4992-B691-9E98C02F8144",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7A6B4CEFCE5D34BBF59E7DD9E6AE6D5775AEC9D9" : "..",
+    "32551791ACD4E293A52E06DE9D22C073BB203884" : "Flex-Project\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Scriber",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Scriber\/ios\/Scriber.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/travelingpiano\/Flex-Project.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "32551791ACD4E293A52E06DE9D22C073BB203884"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ade713\/aa_homeworks.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7A6B4CEFCE5D34BBF59E7DD9E6AE6D5775AEC9D9"
+    }
+  ]
+}
