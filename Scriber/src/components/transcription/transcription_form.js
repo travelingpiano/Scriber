@@ -12,7 +12,7 @@ import { Actions } from 'react-native-router-flux';
 export default class TranscriptionForm extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log(this.props);
     this.state = {
       title:'',
       transcription: '',
