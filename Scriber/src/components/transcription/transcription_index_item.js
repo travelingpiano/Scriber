@@ -21,13 +21,6 @@ class TranscriptionIndexItem extends Component {
             </Text>
           </View>
         </TouchableWithoutFeedback>
-
-        <View>
-          <Text style={styles.titleStyle}>
-            HELLO
-          </Text>
-        </View>
-      </View>
     );
   }
 }
