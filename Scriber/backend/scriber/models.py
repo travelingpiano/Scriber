@@ -11,10 +11,7 @@ class Transcription(models.Model):
     transcription = ArrayField(models.TextField())
     created_time = models.TimeField()
     created_date = models.DateField()
-
-class TranscriptionUsers(models.Model):
-    transcription_key = models.ForeignKey(Transcription)
-    user_key = models.ForeignKey(User)
+    users = models.ManyToManyField(User,blank=True)
 
 def validate_for_fs(value):
     if len(value) < 6:
