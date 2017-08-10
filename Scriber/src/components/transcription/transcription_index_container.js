@@ -19,6 +19,7 @@ class TranscriptionIndex extends Component {
 
   componentWillMount() {
     this.props.fetchTranscriptions();
+    console.log(this.props.transcriptions);
   }
 
   render() {
@@ -61,13 +62,13 @@ class TranscriptionIndex extends Component {
     }, 1000);
   }
 
-  onRowPress(transcription) {
-    Actions.TranscriptionShow({ transcription: transcription });
+  onRowPress(transcriptionPk) {
+    Actions.TranscriptionShow({ transcriptionPk: transcriptionPk });
   }
 
   renderItem(item) {
     return (
-      <TouchableWithoutFeedback transcription={item.transcription} onPress={() => this.onRowPress(item.transcription)}>
+      <TouchableWithoutFeedback transcriptionPk={item.transcription.pk} onPress={() => this.onRowPress(item.transcription.pk)}>
         <View style={[styles.item, {height: item.height}]}>
           <Text>{item.name}</Text>
         </View>

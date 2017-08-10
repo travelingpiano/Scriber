@@ -4,7 +4,7 @@ import merge from 'lodash/merge';
 
 const defaultState = () => ({
   transcriptions: {},
-  currentTranscription: null,
+  currentTranscription: {},
 });
 
 
@@ -16,8 +16,7 @@ const TranscriptionsReducer = (state=defaultState(), action) => {
       const transcription = action.transcription;
       return merge({}, state,
         {
-          transcriptions: {[transcription.pk]: transcription},
-          currentTranscription: transcription.pk
+          currentTranscription: transcription
         });
     case RECEIVE_TRANSCRIPTIONS:
       const transcriptions2 = action.transcriptions;
