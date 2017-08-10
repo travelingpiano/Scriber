@@ -16,7 +16,7 @@ const TranscriptionsReducer = (state=defaultState(), action) => {
       const transcription = action.transcription;
       return merge({}, state,
         {
-          currentTranscription: {[transcription.pk]: transcription}
+          currentTranscription: transcription
         });
     case RECEIVE_TRANSCRIPTIONS:
       const transcriptions2 = action.transcriptions;
