@@ -9,6 +9,7 @@ import TranscriptionForm from './components/transcription/transcription_form';
 import Splash from './components/splash';
 import RecordAudio from './components/transcription/record_audio';
 import TranscriptionIndex from './components/transcription/transcription_index_container';
+import TranscriptionShow from './components/transcription/transcription_show_container';
 import TabIcon from './lib/tabIcon';
 
 const Routes = () => (
@@ -19,12 +20,14 @@ const Routes = () => (
     >
       <Scene
         key="LoginForm"
+        back
         component={LoginForm}
         title="Login"
       />
 
       <Scene
         key="SignupForm"
+        back
         component={SignupForm}
         title="Signup"
       />
@@ -33,6 +36,13 @@ const Routes = () => (
         key="RecordAudio"
         component={RecordAudio}
         title="Record Audio"
+      />
+
+      <Scene
+        key="TranscriptionShow"
+        back
+        component={TranscriptionShow}
+        title="Transcription"
       />
 
       <Scene
@@ -57,14 +67,18 @@ const Routes = () => (
           title="All Transcriptions"
           icon={TabIcon}
         />
-      <Scene key="TranscriptionForm" title="New Transcription"
-        icon={TabIcon} component={TranscriptionIndex} />
-        <Scene
-          key="Dashboard"
-          component={Dashboard}
-          title="User Settings"
-          icon={TabIcon}
-        />
+      <Scene key="TranscriptionForm"
+        title="New Transcription"
+        back
+        icon={TabIcon}
+        component={TranscriptionIndex} />
+      <Scene
+        key="Dashboard"
+        back
+        component={Dashboard}
+        title="User Settings"
+        icon={TabIcon}
+      />
       </Scene>
     </Scene>
   </Router>
