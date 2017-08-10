@@ -5,13 +5,13 @@ import TranscriptionForm from './transcription_form';
 
 const mapStateToProps = state => {
   return {
-    transcriptions: state.transcriptions
+    transcriptions: state.transcriptions,
+    users: state.users
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchTranscription: id => dispatch(fetchTranscription(id)),
-
+  createTranscription: data => dispatch(createTranscription(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TranscriptionForm);
