@@ -10,8 +10,8 @@ from boto.s3.key import Key
 import boto.s3.connection
 import os
 
-AWS_ACCESS_KEY_ID = 'AKIAJLDHHMYCV425E22Q'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 
 AudioSegment.converter = 'ffmpeg'
 
@@ -24,6 +24,8 @@ def transcribe(url, title):
     #Armstrong
     # url = 'http://www.freeinfosociety.com/media/sounds/13.mp3'
     # url = '2518.mp3'
+    print(AWS_ACCESS_KEY_ID)
+    print(AWS_SECRET_ACCESS_KEY)
     url = 'sample.aac'
     conn = boto.s3.connect_to_region('us-west-2',
        aws_access_key_id=AWS_ACCESS_KEY_ID,
