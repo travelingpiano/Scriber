@@ -1,6 +1,6 @@
 import merge from 'lodash';
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
 
 class FullTranscription extends Component {
 
@@ -44,30 +44,34 @@ class FullTranscription extends Component {
     }
   }
 
+  playAudio() {
+    console.log('hello');
+  }
+
   render() {
     let allSnippets = null;
     this.currentSpeaker = '';
     if (this.props.transcription) {
       let { transcription, createdTime } = this.props;
-      console.log(this.props);
       let currentSpeaker = null;
       let minute = 0;
       allSnippets = transcription.map((snippet,idx) => {
-        console.log(JSON.parse(snippet).timestamps[0]);
         return (
-          <View key={`snippet-${idx}`}>
-            {this.renderSpeaker(snippet)}
-            <Text style={styles.timeStamps}>{JSON.parse(snippet).timestamps[0]}</Text>
-            <Text>{JSON.parse(snippet).text}</Text>
-          </View>
+          <TouchableHighlight key={`snippet-${idx}`} style={styles.snippet} underlayColor="#E3DAED" activeOpacity={1} onPress={this.playAudio}>
+            <View>
+              {this.renderSpeaker(snippet)}
+              <Text style={styles.timeStamps}>{JSON.parse(snippet).timestamps[0]}</Text>
+              <Text>{JSON.parse(snippet).text}</Text>
+            </View>
+          </TouchableHighlight>
         );
       });
     }
 
     return (
-      <View>
+      <ScrollView>
         {allSnippets}
-      </View>
+      </ScrollView>
     );
 
 
@@ -79,6 +83,9 @@ class FullTranscription extends Component {
 export default FullTranscription;
 
 const styles = StyleSheet.create({
+  snippet: {
+    padding: 10
+  },
 
   time: {
     flex: .2,
@@ -89,7 +96,7 @@ const styles = StyleSheet.create({
   speaker: {
     fontSize: 15,
     fontWeight: 'bold',
-    paddingTop: 15,
+    paddingTop: 20,
   },
 
   timeStamps: {
