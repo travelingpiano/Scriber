@@ -44,10 +44,6 @@ class FullTranscription extends Component {
     }
   }
 
-  playAudio() {
-    console.log('hello');
-  }
-
   render() {
     let allSnippets = null;
     this.currentSpeaker = '';
