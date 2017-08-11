@@ -3,10 +3,15 @@ import { StyleSheet,
          ListView,
          ScrollView,
 <<<<<<< HEAD
+<<<<<<< HEAD
          View,
          FlatList,
 =======
 >>>>>>> users props passed properly
+=======
+         View,
+         FlatList,
+>>>>>>> render usernames
          Button,
          Text,
          TouchableHighlight } from 'react-native';
@@ -85,6 +90,9 @@ class Attendees extends React.Component {
     return (
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> render usernames
       <View style={styles.containerStyle}>
         <FlatList
           data={this.props.users}
@@ -92,6 +100,7 @@ class Attendees extends React.Component {
           renderItem={({ item }) => <Text style={styles.userStyle}>{item.username}</Text>}
         />
       </View>
+<<<<<<< HEAD
 
 =======
       // <ListView
@@ -105,6 +114,11 @@ class Attendees extends React.Component {
 
       <Text>{this.props.users[0].username}</Text>
 >>>>>>> users props passed properly
+=======
+        // <Text>{this.props.users[0].username}</Text>
+
+
+>>>>>>> render usernames
     );
   }
 }
@@ -113,6 +127,9 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> render usernames
     flexDirection: 'column',
   },
 
@@ -120,6 +137,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "85%",
     padding: 10,
+<<<<<<< HEAD
   }
 });
 
@@ -133,6 +151,8 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Attendees);
 =======
+=======
+>>>>>>> render usernames
   }
 });
 
