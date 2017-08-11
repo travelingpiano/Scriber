@@ -40,10 +40,10 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
     def create(self, request):
         # print(request.data.get('audio_url'))
         user_array = []
-        if isinstance(request.data.get('users'),str):
-            user_array = request.data.get('users')[1:-1].split(',')
+        if isinstance(request.data.get('usernames'),str):
+            user_array = request.data.get('usernames')[1:-1].split(',')
         else:
-            user_array = request.data.get('users')
+            user_array = request.data.get('usernames')
         users = User.objects.filter(username__in=user_array)
         transcription_result = {}
         transcription_result['audio_url'] = request.data.get('audio_url')
@@ -54,11 +54,9 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         transcription_result['usernames'] = user_array
         transcription_result['description'] = request.data.get('description')
         serializer = TranscriptionSerializer(data=transcription_result)
-        print(serializer.is_valid())
-        print(serializer.errors)
         if serializer.is_valid():
             serializer.save()
-            transcription = Transcription.objects.get(title=request.data.get('title'))
+            transcription = Transcription.objects.get(pk=serializer.data['pk'])
             transcription.users.add(*users)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 

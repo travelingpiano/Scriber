@@ -1,6 +1,6 @@
 import merge from 'lodash';
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import FullTranscription from './full_transcription';
 
 class TranscriptionShow extends Component {
@@ -35,11 +35,27 @@ class TranscriptionShow extends Component {
     }
   }
 
+  renderAttendees(attendees) {
+    if (attendees) {
+
+      return(
+        <ScrollView containerStyle={{marginBottom:20}}>
+          {
+            attendees.map((attendee, i) => (
+              <Text
+                key={i}
+                title={attendee}>{attendee}
+              </Text>
+            ))
+          }
+        </ScrollView>
+      );
+    }
+  }
+
   render() {
-    console.log(this.props.currentTranscription);
     if (this.props.currentTranscription) {
       let transcription = this.props.currentTranscription;
-      console.log(transcription);
       let parsedTime = this.parseTime(transcription.created_time);
       return (
         <View style={styles.header}>
@@ -49,8 +65,9 @@ class TranscriptionShow extends Component {
           <View style={styles.additional}>
             <Text style={{fontSize: 15}}>Date: {transcription.created_date}</Text>
             <Text style={{fontSize: 15}}>Time: {parsedTime}</Text>
-            <Text style={{fontSize: 15}}>Users: {transcription.users}</Text>
-          </View>
+            <Text style={{fontSize: 15}}>Attendees: </Text>
+            {this.renderAttendees(transcription.usernames)}
+        </View>
           <View style={styles.transcription}>
             <FullTranscription transcription={transcription.transcription}
               createdTime={transcription.created_time} parseTime={this.parseTime}/>
@@ -78,7 +95,6 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
   additional: {
-    flex: .1,
     padding: 10,
   },
   transcription: {

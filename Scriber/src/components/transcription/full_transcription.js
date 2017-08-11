@@ -6,6 +6,11 @@ class FullTranscription extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      allSpeakers: [],
+      allSnippets: null,
+    };
   }
 
   renderTime(createdTime, time) {
@@ -34,10 +39,13 @@ class FullTranscription extends Component {
   }
 
   renderSpeaker(snippet) {
-    if (JSON.parse(snippet).speaker === this.currentSpeaker) {
+    if (!this.state.allSpeakers.includes(JSON.parse(snippet).speaker)) {
+      this.state.allSpeakers.push(JSON.parse(snippet).speaker);
+    }
+    if (JSON.parse(snippet).speaker === this.state.currentSpeaker) {
       return null;
     } else {
-      this.currentSpeaker = JSON.parse(snippet).speaker;
+      this.state.currentSpeaker = JSON.parse(snippet).speaker;
       return (
         <Text style={styles.speaker}>Speaker: {JSON.parse(snippet).speaker}</Text>
       );
@@ -49,13 +57,10 @@ class FullTranscription extends Component {
   }
 
   render() {
-    let allSnippets = null;
-    this.currentSpeaker = '';
     if (this.props.transcription) {
+      this.state.currentSpeaker = null;
       let { transcription, createdTime } = this.props;
-      let currentSpeaker = null;
-      let minute = 0;
-      allSnippets = transcription.map((snippet,idx) => {
+      this.state.allSnippets = transcription.map((snippet,idx) => {
         return (
           <TouchableHighlight key={`snippet-${idx}`} style={styles.snippet} underlayColor="#E3DAED" activeOpacity={1} onPress={this.playAudio}>
             <View>
@@ -70,11 +75,9 @@ class FullTranscription extends Component {
 
     return (
       <ScrollView>
-        {allSnippets}
+        {this.state.allSnippets}
       </ScrollView>
     );
-
-
 
   }
 
