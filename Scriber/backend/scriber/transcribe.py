@@ -10,6 +10,9 @@ from boto.s3.key import Key
 import boto.s3.connection
 import os
 
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+
 AudioSegment.converter = 'ffmpeg'
 
 # https://aacapps.com/lamp/sound/emma.mp3
