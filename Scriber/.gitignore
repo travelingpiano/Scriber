@@ -1,3 +1,14 @@
 node_modules/
 .expo/
 npm-debug.*
+backend/.env
+backend/backend/__pycache__/
+backend/scriber/__pycache__/
+*.mp3
+backend/scriber/migrations/
+*.aac
+*.pyc
+/ios/build/
+/ios/node_modules/
+/ios/.expo/
+/ios/npm-debug.*
