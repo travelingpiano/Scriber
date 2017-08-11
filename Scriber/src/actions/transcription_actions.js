@@ -37,3 +37,10 @@ export const fetchTranscriptions = () => dispatch => {
   .then(json => dispatch(receiveTranscriptions(json))
   );
 };
+
+export const deleteTranscription = (transcription) => dispatch => {
+  return TranscriptionAPIUtil.deleteTranscription(transcription)
+  .then(resp => resp.json())
+  .then(json => dispatch(destroyTranscription(json))
+  );
+};
