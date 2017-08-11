@@ -8,8 +8,6 @@ import boto.s3
 import sys
 from boto.s3.key import Key
 import boto.s3.connection
-AWS_ACCESS_KEY_ID = 'AKIAJLDHHMYCV425E22Q'
-AWS_SECRET_ACCESS_KEY = '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'
 
 # https://aacapps.com/lamp/sound/emma.mp3
 def transcribe(url, title):
