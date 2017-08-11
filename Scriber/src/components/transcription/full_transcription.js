@@ -8,6 +8,7 @@ class FullTranscription extends Component {
     super(props);
 
     this.state = {
+      currentSpeaker: null,
       allSpeakers: [],
       allSnippets: null,
     };
@@ -56,9 +57,46 @@ class FullTranscription extends Component {
     console.log('hello');
   }
 
+  renderTime(createdTime, time) {
+    return (
+      <Text style={styles.time}>{this.props.parseTime(createdTime)}</Text>
+    );
+  }
+
+  // NOTE: not finished/needed? Delete this if not going to use!
+  // returns the time of the snippet as an absolute time (createdTime plus timestamp start time)
+  // createdTime format: 'XX:XX:XX.XXXX'
+  // time format: X.X.XX
+  absoluteTime(createdTime, time) {
+    let parsed = '';
+    let createdTimeInt = createdTime.split(':');
+    let createdHour = parseInt(createdTimeInt[0]);
+    let createdMin = parseInt(createdTimeInt[1]);
+    let createdSec = parseInt(createdTimeInt[2].substring(0,2));
+    console.log(createdHour,createdMin,createdSec);
+    let currentTime = time.toString().split('.');
+    let currentHour = 0;
+    let currentMin = 0;
+    if (currentTime.length === 3) {
+      currentHour = currentTime[0];
+    }
+  }
+
+  renderSpeaker(snippet) {
+    if (JSON.parse(snippet).speaker === this.state.currentSpeaker) {
+      return null;
+    } else {
+      this.state.currentSpeaker = JSON.parse(snippet).speaker;
+      return (
+        <Text style={styles.speaker}>Speaker: {JSON.parse(snippet).speaker}</Text>
+      );
+    }
+  }
+
   render() {
+    this.state.currentSpeaker = null;
+    this.state.allSpeakers = [];
     if (this.props.transcription) {
-      this.state.currentSpeaker = null;
       let { transcription, createdTime } = this.props;
       this.state.allSnippets = transcription.map((snippet,idx) => {
         return (

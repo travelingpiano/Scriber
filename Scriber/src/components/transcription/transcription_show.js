@@ -37,7 +37,6 @@ class TranscriptionShow extends Component {
 
   renderAttendees(attendees) {
     if (attendees) {
-
       return(
         <ScrollView containerStyle={{marginBottom:20}}>
           {
@@ -55,6 +54,7 @@ class TranscriptionShow extends Component {
 
   render() {
     if (this.props.currentTranscription) {
+      console.log(this.props.currentTranscription);
       let transcription = this.props.currentTranscription;
       let parsedTime = this.parseTime(transcription.created_time);
       return (
@@ -65,7 +65,8 @@ class TranscriptionShow extends Component {
           <View style={styles.additional}>
             <Text style={{fontSize: 15}}>Date: {transcription.created_date}</Text>
             <Text style={{fontSize: 15}}>Time: {parsedTime}</Text>
-            <Text style={{fontSize: 15}}>Attendees: </Text>
+            <Text style={{fontSize: 15}}>{transcription.description}</Text>
+            <Text style={{fontSize: 15}}>Attendees:</Text>
             {this.renderAttendees(transcription.usernames)}
         </View>
           <View style={styles.transcription}>
