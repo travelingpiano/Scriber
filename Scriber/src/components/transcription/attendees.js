@@ -18,16 +18,28 @@ class Attendees extends React.Component {
     super(props);
     console.log('ATTENDEE', this.props);
     this.state = {
+<<<<<<< HEAD
     };
+=======
+      users: this.props.getUsers(),
+    };
+    console.log('NEW state', this.state);
+>>>>>>> dispatch props to attendees
   }
 
   componentWillMount() {
     // this.createDataSource(this.props);
+<<<<<<< HEAD
     this.props.getUsers();
   }
 
 <<<<<<< HEAD
 =======
+=======
+  }
+
+
+>>>>>>> dispatch props to attendees
   createDataSource({ users }) {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
@@ -49,6 +61,7 @@ class Attendees extends React.Component {
   render() {
     console.log(this.props.users);
     return (
+<<<<<<< HEAD
       <View style={styles.containerStyle}>
         <FlatList
           data={this.props.users}
@@ -57,6 +70,14 @@ class Attendees extends React.Component {
         />
       </View>
 
+=======
+      // <ListView
+      //   enableEmptySections
+      //   dataSource={ this.dataSource }
+      //   renderRow={ this.renderRow }
+      // />
+      <Text>Attendees List</Text>
+>>>>>>> dispatch props to attendees
     );
   }
 }
@@ -64,6 +85,7 @@ class Attendees extends React.Component {
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
+<<<<<<< HEAD
     flexDirection: 'column',
   },
 
@@ -83,3 +105,13 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Attendees);
+=======
+  }
+});
+
+const mapDispatchToProps = dispatch => ({
+  getUsers: () => dispatch(requestUsers()),
+});
+
+export default connect(null, mapDispatchToProps)(Attendees);
+>>>>>>> dispatch props to attendees
