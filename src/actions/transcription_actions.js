@@ -54,3 +54,10 @@ export const deleteTranscription = (transcription) => dispatch => {
   .then(json => dispatch(destroyTranscription(json))
   );
 };
+
+export const updateTranscription = (transcription) => dispatch => {
+  return TranscriptionAPIUtil.updateTranscription(transcription)
+  .then(resp => resp.json())
+  .then(json => dispatch(receiveTranscription(json))
+  );
+};

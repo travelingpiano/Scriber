@@ -39,4 +39,19 @@ export const deleteTranscription = (transcription) => (
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-    }));
+    }
+  )
+);
+
+export const updateTranscription = (transcription) => (
+  fetch(`http://127.0.0.1:8000/transcriptions/${transcription.pk}/`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: transcription
+    }
+  )
+);
