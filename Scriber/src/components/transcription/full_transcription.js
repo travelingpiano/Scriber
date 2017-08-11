@@ -96,12 +96,13 @@ const styles = StyleSheet.create({
   speaker: {
     fontSize: 15,
     fontWeight: 'bold',
-    paddingTop: 20,
+    paddingTop: 10,
   },
 
   timeStamps: {
     textAlign: 'right',
     paddingTop: 10,
+    paddingBottom: 10,
   }
 
 
