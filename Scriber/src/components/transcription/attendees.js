@@ -101,6 +101,7 @@ class Attendees extends React.Component {
         />
       </View>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       // <ListView
@@ -117,6 +118,8 @@ class Attendees extends React.Component {
 =======
         // <Text>{this.props.users[0].username}</Text>
 
+=======
+>>>>>>> prep to checkout master
 
 >>>>>>> render usernames
     );
