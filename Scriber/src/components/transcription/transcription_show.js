@@ -7,27 +7,52 @@ class TranscriptionShow extends Component {
 
   constructor(props) {
     super(props);
+
   }
 
   componentWillMount() {
     this.props.fetchTranscription(this.props.transcriptionPk);
-    console.log(this.props);
+  }
+
+  parseTime(theTime) {
+    if (theTime) {
+      let parsed = '';
+      let timeArr = theTime.split(':');
+      let hours = parseInt(timeArr[0]);
+      let timeRange = 'AM';
+      if (hours === 12) {
+        timeRange = 'PM';
+      }
+      if (hours > 12) {
+        timeRange = 'PM';
+        hours = hours-12;
+      }
+      hours = hours.toString();
+      parsed = hours+":"+timeArr[1]+' '+timeRange;
+      return parsed;
+    } else {
+      return null;
+    }
   }
 
   render() {
     console.log(this.props.currentTranscription);
     if (this.props.currentTranscription) {
       let transcription = this.props.currentTranscription;
+      console.log(transcription);
+      let parsedTime = this.parseTime(transcription.created_time);
       return (
         <View style={styles.header}>
           <View style={styles.titleView}>
             <Text style={styles.title}>{transcription.title}</Text>
           </View>
           <View style={styles.additional}>
-            <Text>Date:{transcription.created_date}</Text>
+            <Text>Date: {transcription.created_date}</Text>
+            <Text>Time: {parsedTime}</Text>
+            <Text>Users: {transcription.users}</Text>
           </View>
           <View style={styles.transcription}>
-            <FullTranscription transcription={transcription.transcription} />
+            <FullTranscription transcription={transcription.transcription} createdTime={transcription.created_time}/>
           </View>
         </View>
       );
@@ -57,6 +82,7 @@ const styles = StyleSheet.create({
   },
   transcription: {
     flex: .5,
-  }
+    padding: 10
+  },
 
 });
