@@ -54,7 +54,9 @@ class FullTranscription extends Component {
     if (this.props.transcription) {
       let { transcription, createdTime } = this.props;
       let currentSpeaker = null;
+      let minute = 0;
       allSnippets = transcription.map((snippet,idx) => {
+        console.log(JSON.parse(snippet).timestamps[0]);
         return (
           <TouchableHighlight key={`snippet-${idx}`} style={styles.snippet} underlayColor="#E3DAED" activeOpacity={1} onPress={this.playAudio}>
             <View>
@@ -103,6 +105,5 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
   }
-
 
 });

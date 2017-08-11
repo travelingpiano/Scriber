@@ -78,7 +78,11 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
   additional: {
+<<<<<<< HEAD
     flex: .1,
+=======
+    flex: .2,
+>>>>>>> Render timestamps
     padding: 10,
   },
   transcription: {
