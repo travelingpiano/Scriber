@@ -10,23 +10,28 @@ class TranscriptionShow extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchTranscription(this.props.transcription.pk);
+    this.props.fetchTranscription(this.props.transcriptionPk);
+    console.log(this.props);
   }
 
   render() {
-    return (
-      <View style={styles.header}>
-        <View style={styles.titleView}>
-          <Text style={styles.title}>{this.props.transcription.title}</Text>
+    console.log(this.props.currentTranscription);
+    if (this.props.currentTranscription) {
+      let transcription = this.props.currentTranscription;
+      return (
+        <View style={styles.header}>
+          <View style={styles.titleView}>
+            <Text style={styles.title}>{transcription.title}</Text>
+          </View>
+          <View style={styles.additional}>
+            <Text>Date:{transcription.created_date}</Text>
+          </View>
+          <View style={styles.transcription}>
+            <FullTranscription transcription={transcription.transcription} />
+          </View>
         </View>
-        <View style={styles.additional}>
-          <Text>Date:{this.props.transcription.created_date}</Text>
-        </View>
-        <View style={styles.transcription}>
-          <FullTranscription transcription={this.props.transcription.transcription} />
-        </View>
-      </View>
-    );
+      );
+    }
   }
 }
 
@@ -49,6 +54,9 @@ const styles = StyleSheet.create({
   additional: {
     flex: .2,
     padding: 10
+  },
+  transcription: {
+    flex: .5,
   }
 
 });
