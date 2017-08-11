@@ -1,6 +1,7 @@
 import merge from 'lodash';
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
+import Sound from 'react-native-sound';
 
 class FullTranscription extends Component {
 
@@ -30,7 +31,6 @@ class FullTranscription extends Component {
     let createdHour = parseInt(createdTimeInt[0]);
     let createdMin = parseInt(createdTimeInt[1]);
     let createdSec = parseInt(createdTimeInt[2].substring(0,2));
-    console.log(createdHour,createdMin,createdSec);
     let currentTime = time.toString().split('.');
     let currentHour = 0;
     let currentMin = 0;
@@ -53,8 +53,18 @@ class FullTranscription extends Component {
     }
   }
 
-  playAudio() {
-    console.log('hello');
+  playAudio(transcription,snippet) {
+    // need to convert timestamps to seconds
+    let timestamps = snippet.timestamps;
+    let track = new Sound(`${transcription.audio_url}`, null, (e) => {
+      if (e) {
+        console.log('error loading track:', e);
+      }
+    });
+
+    track.setCurrentTime(timestamps[0]);
+    track.play()
+      .then(setTimeout(() => track.stop(), timestamps[1]-timestamps[0]));
   }
 
   renderTime(createdTime, time) {
@@ -73,7 +83,6 @@ class FullTranscription extends Component {
     let createdHour = parseInt(createdTimeInt[0]);
     let createdMin = parseInt(createdTimeInt[1]);
     let createdSec = parseInt(createdTimeInt[2].substring(0,2));
-    console.log(createdHour,createdMin,createdSec);
     let currentTime = time.toString().split('.');
     let currentHour = 0;
     let currentMin = 0;
@@ -95,12 +104,12 @@ class FullTranscription extends Component {
 
   render() {
     this.state.currentSpeaker = null;
-    this.state.allSpeakers = [];
     if (this.props.transcription) {
       let { transcription, createdTime } = this.props;
       this.state.allSnippets = transcription.map((snippet,idx) => {
         return (
-          <TouchableHighlight key={`snippet-${idx}`} style={styles.snippet} underlayColor="#E3DAED" activeOpacity={1} onPress={this.playAudio}>
+          <TouchableHighlight key={`snippet-${idx}`} style={styles.snippet}
+            underlayColor="#E3DAED" activeOpacity={1} onPress={() => this.playAudio(transcription,snippet)}>
             <View>
               {this.renderSpeaker(snippet)}
               <Text style={styles.timeStamps}>{JSON.parse(snippet).timestamps[0]}</Text>
