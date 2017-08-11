@@ -12,33 +12,35 @@ import {connect} from 'react-redux';
 import {createTranscription} from '../../actions/transcription_actions';
 
 
+
 class TranscriptionForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+
     this.state = {
       title:'',
       transcription: '',
-      location: '',
-      url:'',
-      attendees: {}
+      description: '',
+      audio_url:'',
+      users: []
     };
 
-    // this.createTranscription = this.props.createTranscription.bind(this);
+    this.createTranscription = this.props.createTranscription.bind(this);
+    this.addTranscription = this.addTranscription.bind(this);
   }
 
-  recordAudio() {
-    //insert record audio action
-    //return audio file
-  }
+  // recordAudio() {
+  //   insert record audio action
+  //   return audio file
+  // }
 
   addTranscription() {
     let data = new FormData();
     data.append('title', this.state.title);
     data.append('transcription', this.state.transcription);
-    data.append('location', this.state.location);
-    data.appned('url', this.state.url);
-    data.append('attendees', this.state.attendees);
+    data.append('description', this.state.description);
+    data.append('audio_url', this.state.audio_url);
+    data.append('users', this.state.users);
     this.props.createTranscription(data)
       .then(Actions.TranscriptionShow());
   }
@@ -62,13 +64,13 @@ class TranscriptionForm extends React.Component {
         <View style={ formStyle }>
           <TextInput
             style={ textInputStyle }
-            label='Transcription'
+            label='Title'
             placeholder='Title'
             />
           <TextInput
             style={ textInputStyle }
-            label='Location'
-            placeholder='Location'
+            label='Description'
+            placeholder='Description'
           />
         </View>
 
@@ -78,7 +80,7 @@ class TranscriptionForm extends React.Component {
           </Text>
           <Button
             onPress={() => Actions.Attendees()}
-            title='+Attendees'
+            title='Add Attendees'
           />
       </View>
 
