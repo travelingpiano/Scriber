@@ -17,3 +17,13 @@ export const fetchTranscription = (id) => (
     },
   })
 );
+
+export const deleteTranscription = (transcription) => (
+  fetch(`http://127.0.0.1:8000/transcriptions/${transcription.pk}/`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }));

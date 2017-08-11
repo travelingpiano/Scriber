@@ -1,14 +1,11 @@
-// import ArtworkDetail from './artwork_detail';
 import {connect} from 'react-redux';
-import {fetchTranscription}
+import { fetchTranscription, deleteTranscription }
   from '../../actions/transcription_actions';
 import TranscriptionShow from './transcription_show';
 
 // import {clearErrors} from '../../actions/error_actions';
 
 const mapStateToProps = (state,ownProps) => {
-  console.log(state.transcriptions);
-  console.log(ownProps);
   return {
     currentTranscription: state.transcriptions.currentTranscription
     // currentUser: state.session.currentUser,
@@ -18,6 +15,7 @@ const mapStateToProps = (state,ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchTranscription: id => dispatch(fetchTranscription(id)),
+  deleteTranscription: transcription => dispatch(deleteTranscription(transcription))
   // clearErrors: () => dispatch(clearErrors())
 });
 

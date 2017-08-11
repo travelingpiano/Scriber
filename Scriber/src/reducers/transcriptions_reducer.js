@@ -14,15 +14,14 @@ const TranscriptionsReducer = (state=defaultState(), action) => {
   switch (action.type) {
     case RECEIVE_TRANSCRIPTION:
       const transcription = action.transcription;
-      return merge({}, state,
-        {
-          currentTranscription: transcription
-        });
+      let newMerged = merge({},state);
+      newMerged.currentTranscription = action.transcription;
+      return newMerged;
     case RECEIVE_TRANSCRIPTIONS:
       const transcriptions2 = action.transcriptions;
-      return Object.assign({}, defaultState(), {transcriptions: transcriptions2});
+      return merge({}, defaultState(), {transcriptions: transcriptions2});
     case DESTROY_TRANSCRIPTION:
-      nextState = Object.assign({},state);
+      nextState = merge({},state);
       delete nextState.transcriptions[action.transcription.pk];
       return nextState;
     default:
