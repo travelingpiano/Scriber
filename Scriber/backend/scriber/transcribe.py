@@ -8,6 +8,9 @@ import boto.s3
 import sys
 from boto.s3.key import Key
 import boto.s3.connection
+import os
+
+AudioSegment.converter = 'ffmpeg'
 
 AWS_ACCESS_KEY_ID = 'AKIAJLDHHMYCV425E22Q'
 AWS_SECRET_ACCESS_KEY = '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'
@@ -56,10 +59,11 @@ def transcribe(url, title):
         partial_sound = sound[new_json['timestamps'][0]*1000-200:new_json['timestamps'][1]*1000+200]
         filename = f"./scriber/{title}{counter}.mp3"
         partial_sound.export(filename, format="mp3")
+        os.system(f"avconv -i -y {filename} ./scriber/{title}{counter}.aac")
 
         #AWS upload
         AWSkey = Key(bucket)
-        AWSkey.key = f"{title}{counter}.mp3"
+        AWSkey.key = f"{title}{counter}.aac"
         AWSkey.set_contents_from_filename(filename)
 
         # AWSkey.send_file(partial_sound._data)
