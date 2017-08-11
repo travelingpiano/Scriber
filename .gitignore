@@ -1,1 +1,15 @@
 my_env/
+Scriber/node_modules/
+Scriber/.expo/
+Scriber/npm-debug.*
+Scriber/backend/.env
+Scriber/backend/backend/__pycache__/
+Scriber/backend/scriber/__pycache__/
+*.mp3
+Scriber/backend/scriber/migrations/
+*.aac
+*.pyc
+Scriber/ios/build/
+Scriber/ios/node_modules/
+Scriber/ios/.expo/
+Scriber/ios/npm-debug.*
