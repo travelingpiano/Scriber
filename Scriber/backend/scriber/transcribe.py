@@ -9,6 +9,9 @@ import sys
 from boto.s3.key import Key
 import boto.s3.connection
 
+AWS_ACCESS_KEY_ID = 'AKIAJLDHHMYCV425E22Q'
+AWS_SECRET_ACCESS_KEY = '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'
+
 # https://aacapps.com/lamp/sound/emma.mp3
 def transcribe(url, title):
     #Hank Aaron
@@ -17,7 +20,8 @@ def transcribe(url, title):
     # url = 'http://www.freeinfosociety.com/media/sounds/3828.mp3'
     #Armstrong
     # url = 'http://www.freeinfosociety.com/media/sounds/13.mp3'
-    url = '2518.mp3'
+    # url = '2518.mp3'
+    url = 'sample.aac'
     conn = boto.s3.connect_to_region('us-west-2',
        aws_access_key_id=AWS_ACCESS_KEY_ID,
        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
@@ -29,10 +33,12 @@ def transcribe(url, title):
 
     stt = SpeechToTextV1(username='88d9cb01-7ecb-4089-9d2c-a13828e3494e', password='1Wxsmr4kdBhp')
     # r = requests.get(url)
-    with open('./scriber/test.mp3','w+') as f:
+    with open('./scriber/test.aac','w+') as f:
         for l in bucket_list:
             if l.key == url:
-                l.get_contents_to_filename('./scriber/test.mp3')
+                l.get_contents_to_filename('./scriber/test.aac')
+    sound_aac = AudioSegment.from_file('./scriber/test.aac')
+    sound_aac.export('./scriber/test.mp3', format='mp3')
     sound = AudioSegment.from_file('./scriber/test.mp3')
     output_json = json.loads(json.dumps(stt.recognize(open('./scriber/test.mp3','rb'), content_type="audio/mp3", timestamps=True,speaker_labels=True),indent=2))
     formatted_json = []
