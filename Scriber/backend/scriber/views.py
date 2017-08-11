@@ -52,6 +52,7 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         transcription_result['created_time'] = timezone.now().time()
         transcription_result['created_date'] = timezone.now().date()
         transcription_result['usernames'] = user_array
+        transcription_result['description'] = request.data.get('description')
         serializer = TranscriptionSerializer(data=transcription_result)
         print(serializer.is_valid())
         print(serializer.errors)
@@ -63,22 +64,28 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
 
     #can keep on updating users
     def update(self,request,pk=None):
+        #editing title
+
         users = {}
         if isinstance(request.data.get('users'),str):
             users = json.loads(request.data.get('users'))
         else:
             users = request.data.get('users')
         old_transcription = Transcription.objects.get(pk=pk)
-        print(old_transcription.transcription)
+        if request.data.get('title'):
+            old_transcription.title = request.data.get('title')
+        if request.data.get('description'):
+            old_transcription.description = request.data.get('description')
         new_transcriptions = []
         #going through transcription block by block
-        for string_block in old_transcription.transcription:
-            transcript_block = json.loads(string_block)
-            #add check if speaker was not updated
-            if (str(transcript_block['speaker']) in users):
-                if (int(users[str(transcript_block['speaker'])]) != 0):
-                    transcript_block['speaker'] = users[str(transcript_block['speaker'])]
-            new_transcriptions.append(json.dumps(transcript_block))
-        old_transcription.transcription = new_transcriptions
+        if users:
+            for string_block in old_transcription.transcription:
+                transcript_block = json.loads(string_block)
+                #add check if speaker was not updated
+                if (str(transcript_block['speaker']) in users):
+                    if (int(users[str(transcript_block['speaker'])]) != 0):
+                        transcript_block['speaker'] = users[str(transcript_block['speaker'])]
+                new_transcriptions.append(json.dumps(transcript_block))
+            old_transcription.transcription = new_transcriptions
         old_transcription.save()
         return Response(request.data, status=status.HTTP_201_CREATED)

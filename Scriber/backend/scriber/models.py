@@ -7,12 +7,13 @@ from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 class Transcription(models.Model):
     audio_url = models.TextField()
-    title = models.CharField(max_length = 50, unique=True)
+    title = models.CharField(max_length = 50)
     transcription = ArrayField(models.TextField())
     created_time = models.TimeField()
     created_date = models.DateField()
     usernames = ArrayField(models.CharField(max_length=50),default=[])
     users = models.ManyToManyField(User,blank=True)
+    description = models.TextField(default="")
 
 def validate_for_fs(value):
     if len(value) < 6:
