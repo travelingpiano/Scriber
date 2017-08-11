@@ -78,12 +78,11 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
   additional: {
-    flex: .2,
+    flex: .1,
     padding: 10,
   },
   transcription: {
-    flex: .5,
-    padding: 10
+    flex: .6,
   },
 
 });
