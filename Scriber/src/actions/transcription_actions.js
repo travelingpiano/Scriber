@@ -23,18 +23,29 @@ export const destroyTranscription = transcription => ({
 });
 
 // async thunk action creators
+export const createTranscription = transcription => dispatch => {
+  return TranscriptionAPIUtil.createTranscription(transcription)
+    .then(resp => resp.json())
+    .then(json => {
+      dispatch(receiveTranscription(json));
+      console.log('CREATE-T', json);
+      console.log('LAST', json.last);
+      return json.last;
+    });
+};
+
 export const fetchTranscription = (id) => dispatch => {
   return TranscriptionAPIUtil.fetchTranscription(id)
-  .then(resp => resp.json())
-  .then( json => {dispatch(receiveTranscription(json));
-  return json;
+    .then(resp => resp.json())
+    .then( json => {dispatch(receiveTranscription(json));
+    return json;
   });
 };
 
 export const fetchTranscriptions = () => dispatch => {
-  return TranscriptionAPIUtil.fetchTranscriptions()
-  .then(resp => resp.json())
-  .then(json => dispatch(receiveTranscriptions(json))
+    return TranscriptionAPIUtil.fetchTranscriptions()
+    .then(resp => resp.json())
+    .then(json => dispatch(receiveTranscriptions(json))
   );
 };
 

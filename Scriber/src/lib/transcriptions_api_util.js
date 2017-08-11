@@ -1,3 +1,15 @@
+export const createTranscription = data => (
+  fetch('http://127.0.0.1:8000/transcriptions', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Origin': '',
+      'Host': '127.0.0.1:8000',
+    },
+    body: data
+  })
+);
+
 export const fetchTranscriptions = () => (
   fetch('http://127.0.0.1:8000/transcriptions', {
     method: 'GET',

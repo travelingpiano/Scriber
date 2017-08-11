@@ -12,6 +12,7 @@ class TranscriptionIndex extends Component {
 
   constructor(props) {
     super(props);
+    
     this.state = {
       items: {}
     };

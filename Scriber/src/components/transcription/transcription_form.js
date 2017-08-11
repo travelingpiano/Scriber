@@ -7,36 +7,42 @@ import { StyleSheet,
          TextInput,
          TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import {connect} from 'react-redux';
+
+import {createTranscription} from '../../actions/transcription_actions';
 
 
-export default class TranscriptionForm extends React.Component {
+
+class TranscriptionForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       title:'',
       transcription: '',
-      location: '',
-      url:'',
-      attendees: {}
+      description: '',
+      audio_url:'',
+      users: []
     };
 
-    this.createTranscription = this.createTranscription.bind(this);
+    this.createTranscription = this.props.createTranscription.bind(this);
+    this.addTranscription = this.addTranscription.bind(this);
   }
 
-  recordAudio() {
-    //insert record audio action
-    //return audio file
-  }
+  // recordAudio() {
+  //   insert record audio action
+  //   return audio file
+  // }
 
-  createTranscription() {
+  addTranscription() {
     let data = new FormData();
     data.append('title', this.state.title);
     data.append('transcription', this.state.transcription);
-    data.append('location', this.state.location);
-    data.appned('url', this.state.url);
-    data.append('attendees', this.state.attendees);
-    this.props.createTranscription(data);
+    data.append('description', this.state.description);
+    data.append('audio_url', this.state.audio_url);
+    data.append('users', this.state.users);
+    this.props.createTranscription(data)
+      .then(Actions.TranscriptionShow());
   }
 
   render() {
@@ -58,13 +64,13 @@ export default class TranscriptionForm extends React.Component {
         <View style={ formStyle }>
           <TextInput
             style={ textInputStyle }
-            label='Transcription'
+            label='Title'
             placeholder='Title'
             />
           <TextInput
             style={ textInputStyle }
-            label='Location'
-            placeholder='Location'
+            label='Description'
+            placeholder='Description'
           />
         </View>
 
@@ -73,21 +79,21 @@ export default class TranscriptionForm extends React.Component {
             Attendees
           </Text>
           <Button
-            onPress={() => console.log('ADD ATTENDEES')}
-            title='+Attendees'
+            onPress={() => Actions.Attendees()}
+            title='Add Attendees'
           />
       </View>
 
         <View style={ recordAudioStyle }>
           <Button
-            onPress={() => console.log('RECORD AUDIO')}
+            onPress={() => Actions.RecordAudio({users: this.props.users})}
             title="Record Audio"
           />
         </View>
 
         <View>
           <Button
-            onPress={() => console.log('CREATE TRANSCRIPTION')}
+            onPress={() => this.addTranscription()}
             title="Create Transcription"
             />
         </View>
@@ -127,3 +133,10 @@ const styles = StyleSheet.create({
     flex: 1
   },
 });
+
+
+const mapDispatchToProps = (dispatch) => ({
+  createTranscription: data => dispatch(createTranscription(data)),
+});
+
+export default connect(null, mapDispatchToProps)(TranscriptionForm);

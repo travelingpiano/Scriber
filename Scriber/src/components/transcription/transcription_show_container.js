@@ -19,4 +19,4 @@ const mapDispatchToProps = (dispatch) => ({
   // clearErrors: () => dispatch(clearErrors())
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(TranscriptionShow);
+export default connect(mapStateToProps, mapDispatchToProps)(TranscriptionShow);
