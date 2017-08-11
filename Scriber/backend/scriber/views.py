@@ -8,6 +8,7 @@ from scriber.serializers import TranscriptionSerializer, TranscriptionIndexSeria
 from rest_framework.response import Response
 from scriber.transcribe import transcribe
 from django.utils import timezone
+import json
 # Create your views here.
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -38,17 +39,46 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
             return TranscriptionSerializer
     def create(self, request):
         # print(request.data.get('audio_url'))
-        users = User.objects.filter(pk__in=[2,3])
-        print(users)
+        user_array = []
+        if isinstance(request.data.get('users'),str):
+            user_array = request.data.get('users')[1:-1].split(',')
+        else:
+            user_array = request.data.get('users')
+        users = User.objects.filter(username__in=user_array)
         transcription_result = {}
         transcription_result['audio_url'] = request.data.get('audio_url')
         transcription_result['title'] = request.data.get('title')
         transcription_result['transcription'] = transcribe(request.data.get('audio_url'),request.data.get('title'))
         transcription_result['created_time'] = timezone.now().time()
         transcription_result['created_date'] = timezone.now().date()
+        transcription_result['usernames'] = user_array
         serializer = TranscriptionSerializer(data=transcription_result)
+        print(serializer.is_valid())
+        print(serializer.errors)
         if serializer.is_valid():
             serializer.save()
             transcription = Transcription.objects.get(title=request.data.get('title'))
             transcription.users.add(*users)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    #can keep on updating users
+    def update(self,request,pk=None):
+        users = {}
+        if isinstance(request.data.get('users'),str):
+            users = json.loads(request.data.get('users'))
+        else:
+            users = request.data.get('users')
+        old_transcription = Transcription.objects.get(pk=pk)
+        print(old_transcription.transcription)
+        new_transcriptions = []
+        #going through transcription block by block
+        for string_block in old_transcription.transcription:
+            transcript_block = json.loads(string_block)
+            #add check if speaker was not updated
+            if (str(transcript_block['speaker']) in users):
+                if (int(users[str(transcript_block['speaker'])]) != 0):
+                    transcript_block['speaker'] = users[str(transcript_block['speaker'])]
+            new_transcriptions.append(json.dumps(transcript_block))
+        old_transcription.transcription = new_transcriptions
+        old_transcription.save()
+        return Response(request.data, status=status.HTTP_201_CREATED)

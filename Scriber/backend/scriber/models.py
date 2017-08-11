@@ -11,6 +11,7 @@ class Transcription(models.Model):
     transcription = ArrayField(models.TextField())
     created_time = models.TimeField()
     created_date = models.DateField()
+    usernames = ArrayField(models.CharField(max_length=50),default=[])
     users = models.ManyToManyField(User,blank=True)
 
 def validate_for_fs(value):
@@ -19,9 +20,3 @@ def validate_for_fs(value):
 
 for field in [f for f in User._meta.fields if f.name in ['password']]:
     field.validators.append(validate_for_fs)
-
-# def create(self, validated_data):
-#     obj = Transcription.objects.create(**validated_data)
-#     print(obj)
-#     obj.save()
-#     return obj
