@@ -47,12 +47,13 @@ class TranscriptionShow extends Component {
             <Text style={styles.title}>{transcription.title}</Text>
           </View>
           <View style={styles.additional}>
-            <Text>Date: {transcription.created_date}</Text>
-            <Text>Time: {parsedTime}</Text>
-            <Text>Users: {transcription.users}</Text>
+            <Text style={{fontSize: 15}}>Date: {transcription.created_date}</Text>
+            <Text style={{fontSize: 15}}>Time: {parsedTime}</Text>
+            <Text style={{fontSize: 15}}>Users: {transcription.users}</Text>
           </View>
           <View style={styles.transcription}>
-            <FullTranscription transcription={transcription.transcription} createdTime={transcription.created_time}/>
+            <FullTranscription transcription={transcription.transcription}
+              createdTime={transcription.created_time} parseTime={this.parseTime}/>
           </View>
         </View>
       );
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
   },
   additional: {
     flex: .2,
-    padding: 10
+    padding: 10,
   },
   transcription: {
     flex: .5,
