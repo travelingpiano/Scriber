@@ -8,6 +8,7 @@ class FullTranscription extends Component {
     super(props);
 
     this.state = {
+      currentSpeaker: null,
       allSpeakers: [],
       allSnippets: null,
     };
@@ -82,10 +83,10 @@ class FullTranscription extends Component {
   }
 
   renderSpeaker(snippet) {
-    if (JSON.parse(snippet).speaker === this.currentSpeaker) {
+    if (JSON.parse(snippet).speaker === this.state.currentSpeaker) {
       return null;
     } else {
-      this.currentSpeaker = JSON.parse(snippet).speaker;
+      this.state.currentSpeaker = JSON.parse(snippet).speaker;
       return (
         <Text style={styles.speaker}>Speaker: {JSON.parse(snippet).speaker}</Text>
       );
@@ -97,8 +98,9 @@ class FullTranscription extends Component {
   }
 
   render() {
+    this.state.currentSpeaker = null;
+    this.state.allSpeakers = [];
     if (this.props.transcription) {
-      this.state.currentSpeaker = null;
       let { transcription, createdTime } = this.props;
       this.state.allSnippets = transcription.map((snippet,idx) => {
         return (
