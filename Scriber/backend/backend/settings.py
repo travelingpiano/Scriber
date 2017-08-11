@@ -107,7 +107,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'scriber',
-        'USER': 'lihsuan',
+        # 'USER': 'lihsuan',
         # 'USER': 'virginiachen',
         # 'USER': 'ade',
         'PASSWORD': '',
@@ -147,9 +147,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
-
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

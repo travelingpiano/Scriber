@@ -45,10 +45,8 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         else:
             user_array = request.data.get('usernames')
         users = User.objects.filter(username__in=user_array)
-        print(users)
         transcription_result = {}
         transcription_result['audio_url'] = request.data.get('audio_url')
-        print(request.data.get('title'))
         transcription_result['title'] = request.data.get('title')
         transcription_result['transcription'] = transcribe(request.data.get('audio_url'),request.data.get('title'))
         transcription_result['created_time'] = timezone.now().time()
@@ -56,8 +54,6 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         transcription_result['usernames'] = user_array
         transcription_result['description'] = request.data.get('description')
         serializer = TranscriptionSerializer(data=transcription_result)
-        print(serializer.is_valid())
-        print(serializer.errors)
         if serializer.is_valid():
             serializer.save()
             transcription = Transcription.objects.get(pk=serializer.data['pk'])
@@ -67,7 +63,6 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
     #can keep on updating users
     def update(self,request,pk=None):
         #editing title
-
         users = {}
         if isinstance(request.data.get('users'),str):
             users = json.loads(request.data.get('users'))
