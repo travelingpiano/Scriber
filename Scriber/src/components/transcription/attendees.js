@@ -26,6 +26,13 @@ class Attendees extends React.Component {
     this.props.getUsers();
   }
 
+<<<<<<< HEAD
+=======
+  createDataSource({ users }) {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
+>>>>>>> move connect function to tranc form
 
   // createDataSource({ users }) {
   //   const ds = new ListView.DataSource({

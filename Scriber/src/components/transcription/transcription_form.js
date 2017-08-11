@@ -7,9 +7,12 @@ import { StyleSheet,
          TextInput,
          TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import {connect} from 'react-redux';
+
+import {createTranscription} from '../../actions/transcription_actions';
 
 
-export default class TranscriptionForm extends React.Component {
+class TranscriptionForm extends React.Component {
   constructor(props) {
     super(props);
     console.log(this.props);
@@ -29,7 +32,7 @@ export default class TranscriptionForm extends React.Component {
     //return audio file
   }
 
-  createTranscription() {
+  addTranscription() {
     let data = new FormData();
     data.append('title', this.state.title);
     data.append('transcription', this.state.transcription);
@@ -88,7 +91,7 @@ export default class TranscriptionForm extends React.Component {
 
         <View>
           <Button
-            onPress={() => console.log('CREATE TRANSCRIPTION')}
+            onPress={() => this.addTranscription()}
             title="Create Transcription"
             />
         </View>
@@ -128,3 +131,10 @@ const styles = StyleSheet.create({
     flex: 1
   },
 });
+
+
+const mapDispatchToProps = (dispatch) => ({
+  createTranscription: data => dispatch(createTranscription(data)),
+});
+
+export default connect(null, mapDispatchToProps)(TranscriptionForm);
