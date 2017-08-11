@@ -2,8 +2,11 @@ import React from 'react';
 import { StyleSheet,
          ListView,
          ScrollView,
+<<<<<<< HEAD
          View,
          FlatList,
+=======
+>>>>>>> users props passed properly
          Button,
          Text,
          TouchableHighlight } from 'react-native';
@@ -19,16 +22,21 @@ class Attendees extends React.Component {
     console.log('ATTENDEE', this.props);
     this.state = {
 <<<<<<< HEAD
+<<<<<<< HEAD
     };
 =======
       users: this.props.getUsers(),
     };
     console.log('NEW state', this.state);
 >>>>>>> dispatch props to attendees
+=======
+    };
+>>>>>>> users props passed properly
   }
 
   componentWillMount() {
     // this.createDataSource(this.props);
+<<<<<<< HEAD
 <<<<<<< HEAD
     this.props.getUsers();
   }
@@ -54,6 +62,20 @@ class Attendees extends React.Component {
   //   this.dataSource = ds.cloneWithRows(users);
   // }
 
+=======
+    this.props.getUsers();
+  }
+
+
+  // createDataSource({ users }) {
+  //   const ds = new ListView.DataSource({
+  //     rowHasChanged: (r1, r2) => r1 !== r2
+  //   });
+  //
+  //   this.dataSource = ds.cloneWithRows(users);
+  // }
+
+>>>>>>> users props passed properly
   // renderRow(user) {
   //   return
   // }
@@ -61,6 +83,7 @@ class Attendees extends React.Component {
   render() {
     console.log(this.props.users);
     return (
+<<<<<<< HEAD
 <<<<<<< HEAD
       <View style={styles.containerStyle}>
         <FlatList
@@ -78,6 +101,10 @@ class Attendees extends React.Component {
       // />
       <Text>Attendees List</Text>
 >>>>>>> dispatch props to attendees
+=======
+
+      <Text>{this.props.users[0].username}</Text>
+>>>>>>> users props passed properly
     );
   }
 }
@@ -109,9 +136,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(Attendees);
   }
 });
 
+const mapStateToProps = state => ({
+  users: state.users.users,
+});
+
 const mapDispatchToProps = dispatch => ({
   getUsers: () => dispatch(requestUsers()),
 });
 
+<<<<<<< HEAD
 export default connect(null, mapDispatchToProps)(Attendees);
 >>>>>>> dispatch props to attendees
+=======
+export default connect(mapStateToProps, mapDispatchToProps)(Attendees);
+>>>>>>> users props passed properly
