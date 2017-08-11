@@ -59,10 +59,14 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self,request,pk=None):
-        print(request.data.get('users'))
-        users = request.data.get('users')
+        users = {}
+        if isinstance(request.data.get('users'),str):
+            users = json.loads(request.data.get('users'))
+            print(isinstance(json.load(request.data.get('users')),str))
+        else:
+            users = request.data.get('users')
         old_transcription = Transcription.objects.get(pk=pk)
-        print(old_transcription.transcription)
+        print(isinstance(users,str))
         new_transcription = {}
         new_transcription['title'] = old_transcription.title
         new_transcription['audio_url'] = old_transcription.audio_url
@@ -74,12 +78,17 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         for string_block in old_transcription.transcription:
             transcript_block = json.loads(string_block)
             print(transcript_block)
+            print(users[transcript_block['speaker']])
             transcript_block['speaker'] = users[transcript_block['speaker']]
             new_transcriptions.append(json.dumps(transcript_block))
-        new_transcription['transcription'] = new_transcriptions
-        serializer = TranscriptionSerializer(data=new_transcription)
+        # new_transcription['transcription'] = new_transcriptions
+        old_transcription.transcription = new_transcriptions
+        # old_transcription.save()
+        serializer = TranscriptionSerializer(data=old_transcription.__dict__)
+        print(old_transcription.transcription)
+        # serializer = TranscriptionSerializer(data=new_transcription)
         print(serializer.is_valid())
         print(serializer.errors)
         if serializer.is_valid():
-            serializer.save()
+            # serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
