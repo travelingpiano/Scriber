@@ -1,6 +1,5 @@
-// import ArtworkDetail from './artwork_detail';
 import {connect} from 'react-redux';
-import {fetchTranscription}
+import { fetchTranscription, deleteTranscription }
   from '../../actions/transcription_actions';
 import TranscriptionShow from './transcription_show';
 
@@ -16,6 +15,7 @@ const mapStateToProps = (state,ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchTranscription: id => dispatch(fetchTranscription(id)),
+  deleteTranscription: transcription => dispatch(deleteTranscription(transcription))
   // clearErrors: () => dispatch(clearErrors())
 });
 

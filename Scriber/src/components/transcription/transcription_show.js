@@ -1,6 +1,6 @@
 import merge from 'lodash';
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
 import FullTranscription from './full_transcription';
 
 class TranscriptionShow extends Component {
@@ -52,6 +52,21 @@ class TranscriptionShow extends Component {
     }
   }
 
+  renderDelete() {
+    if (this.props.currentTranscription.usernames[0] === this.state.currentUser) {
+      return (
+        <TouchableHighlight
+          onPress={ () =>
+          this.props.deleteTranscription()}
+          style={ styles.buttonStyle } >
+          <Text>
+            Delete
+          </Text>
+        </TouchableHighlight>
+      );
+    }
+  }
+
   render() {
     if (this.props.currentTranscription) {
       console.log(this.props.currentTranscription);
@@ -68,7 +83,7 @@ class TranscriptionShow extends Component {
             <Text style={{fontSize: 15}}>{transcription.description}</Text>
             <Text style={{fontSize: 15}}>Attendees:</Text>
             {this.renderAttendees(transcription.usernames)}
-        </View>
+          </View>
           <View style={styles.transcription}>
             <FullTranscription transcription={transcription.transcription}
               createdTime={transcription.created_time} parseTime={this.parseTime}/>
@@ -100,6 +115,15 @@ const styles = StyleSheet.create({
   },
   transcription: {
     flex: .6,
+  },
+
+  buttonStyle: {
+    backgroundColor: '#eeeeee',
+    padding: 10,
+    marginRight: 5,
+    marginLeft: 5,
+    minWidth: 50,
+    flex: 0.2,
   },
 
 });
