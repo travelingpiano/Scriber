@@ -10,9 +10,9 @@ class UserSerializer(serializers.ModelSerializer):
 class TranscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transcription
-        fields = ('audio_url', 'transcription', 'title', 'created_date','created_time', 'pk','users')
+        fields = ('audio_url', 'transcription', 'title', 'created_date','created_time', 'pk','users','usernames')
 
 class TranscriptionIndexSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transcription
-        fields = ('audio_url','title','created_time','created_date','users','pk')
+        fields = ('audio_url','title','created_time','created_date','users','usernames','pk')

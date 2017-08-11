@@ -44,14 +44,17 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
             user_array = request.data.get('users')[1:-1].split(',')
         else:
             user_array = request.data.get('users')
-        users = User.objects.filter(pk__in=user_array)
+        users = User.objects.filter(username__in=user_array)
         transcription_result = {}
         transcription_result['audio_url'] = request.data.get('audio_url')
         transcription_result['title'] = request.data.get('title')
         transcription_result['transcription'] = transcribe(request.data.get('audio_url'),request.data.get('title'))
         transcription_result['created_time'] = timezone.now().time()
         transcription_result['created_date'] = timezone.now().date()
+        transcription_result['usernames'] = user_array
         serializer = TranscriptionSerializer(data=transcription_result)
+        print(serializer.is_valid())
+        print(serializer.errors)
         if serializer.is_valid():
             serializer.save()
             transcription = Transcription.objects.get(title=request.data.get('title'))

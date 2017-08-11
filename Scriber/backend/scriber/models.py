@@ -11,6 +11,7 @@ class Transcription(models.Model):
     transcription = ArrayField(models.TextField())
     created_time = models.TimeField()
     created_date = models.DateField()
+    usernames = ArrayField(models.CharField(max_length=50),default=[])
     users = models.ManyToManyField(User,blank=True)
 
 def validate_for_fs(value):
