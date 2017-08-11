@@ -12,6 +12,7 @@ class FullTranscription extends Component {
     let allSnippets = null;
     if (this.props.transcription) {
       let transcription = this.props.transcription;
+      let currentSpeaker = null;
       allSnippets = transcription.map((snippet,idx) => {
         return (
           <View key={`snippet-${idx}`}>
