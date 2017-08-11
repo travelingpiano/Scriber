@@ -110,8 +110,7 @@ DATABASES = {
         # 'USER': 'lihsuan',
         # 'USER': 'virginiachen',
         # 'USER': 'ade',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
     }
