@@ -44,6 +44,10 @@ class FullTranscription extends Component {
     }
   }
 
+  playAudio() {
+    console.log('hello');
+  }
+
   render() {
     let allSnippets = null;
     this.currentSpeaker = '';
@@ -52,7 +56,6 @@ class FullTranscription extends Component {
       let currentSpeaker = null;
       let minute = 0;
       allSnippets = transcription.map((snippet,idx) => {
-        console.log(JSON.parse(snippet).timestamps[0]);
         return (
           <TouchableHighlight key={`snippet-${idx}`} style={styles.snippet} underlayColor="#E3DAED" activeOpacity={1} onPress={this.playAudio}>
             <View>
