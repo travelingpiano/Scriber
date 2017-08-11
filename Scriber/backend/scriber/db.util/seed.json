@@ -1,0 +1,16 @@
+[
+  {
+    "model": "auth.user",
+    "fields": {
+      "username": "joey",
+      "password": "flexproject"
+    }
+  },
+  {
+    "model": "auth.user",
+    "fields": {
+      "username": "chris",
+      "password": "flexproject"
+    }
+  }
+]

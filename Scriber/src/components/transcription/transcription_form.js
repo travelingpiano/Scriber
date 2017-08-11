@@ -21,7 +21,7 @@ export default class TranscriptionForm extends React.Component {
       attendees: {}
     };
 
-    this.createTranscription = this.props.createTranscription.bind(this);
+    // this.createTranscription = this.props.createTranscription.bind(this);
   }
 
   recordAudio() {
@@ -36,7 +36,8 @@ export default class TranscriptionForm extends React.Component {
     data.append('location', this.state.location);
     data.appned('url', this.state.url);
     data.append('attendees', this.state.attendees);
-    this.props.createTranscription(data);
+    this.props.createTranscription(data)
+      .then(Actions.TranscriptionShow());
   }
 
   render() {
