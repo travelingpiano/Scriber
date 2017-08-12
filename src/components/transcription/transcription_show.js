@@ -2,6 +2,7 @@ import merge from 'lodash';
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
 import FullTranscription from './full_transcription';
+import { Actions } from 'react-native-router-flux';
 
 class TranscriptionShow extends Component {
 
@@ -69,7 +70,6 @@ class TranscriptionShow extends Component {
 
   render() {
     if (this.props.currentTranscription) {
-      console.log(this.props.currentTranscription);
       let transcription = this.props.currentTranscription;
       let parsedTime = this.parseTime(transcription.created_time);
       return (
@@ -83,6 +83,14 @@ class TranscriptionShow extends Component {
             <Text style={{fontSize: 15}}>{transcription.description}</Text>
             <Text style={{fontSize: 15}}>Attendees:</Text>
             {this.renderAttendees(transcription.usernames)}
+            <TouchableHighlight
+              onPress={ () =>
+              Actions.TranscriptionEdit()}
+              style={ styles.buttonStyle } >
+              <Text>
+                Edit
+              </Text>
+            </TouchableHighlight>
           </View>
           <View style={styles.transcription}>
             <FullTranscription transcription={transcription.transcription}

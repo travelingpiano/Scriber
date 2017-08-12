@@ -11,8 +11,6 @@ import {connect} from 'react-redux';
 
 import {createTranscription} from '../../actions/transcription_actions';
 
-
-
 class TranscriptionForm extends React.Component {
   constructor(props) {
     super(props);
