@@ -10,6 +10,7 @@ import { StyleSheet,
          TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {connect} from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { requestUsers } from '../../actions/users_actions';
 
@@ -66,7 +67,8 @@ class Attendees extends React.Component {
         <FlatList
           data={this.props.users}
           keyExtractor={item => item.pk}
-          renderItem={({ item }) => <Text style={styles.userStyle}>{item.username}</Text>}
+          renderItem={({ item }) =>
+          <Text style={styles.userStyle}>{item.username}{myIcon}</Text>}
         />
       </View>
 
@@ -84,6 +86,8 @@ class Attendees extends React.Component {
     );
   }
 }
+
+const myIcon = <Icon name="plus-circle" size={25} color="#900"/>;
 
 const styles = StyleSheet.create({
   containerStyle: {
