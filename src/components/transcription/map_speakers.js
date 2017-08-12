@@ -48,12 +48,20 @@ class MapSpeakers extends Component {
   renderSpeakersList() {
     if (this.state.allSpeakers) {
       console.log(this.state.allSpeakers);
-      this.state.allSpeakers.map((speaker, idx) => {
-        return (
-          <View key={`speaker-${idx}`}>
-            <Text>{speaker}</Text>
-          </View>
-        );
+      return this.state.allSpeakers.map((speaker, idx) => {
+        if (Number.isInteger(speaker)) {
+          return (
+            <View key={`speaker-${idx}`}>
+              <Text style={styles.speaker}>Speaker {speaker}</Text>
+            </View>
+          );
+        } else {
+          return (
+            <View key={`speaker-${idx}`}>
+              <Text style={styles.speaker}>{speaker}</Text>
+            </View>
+          );
+        }
       });
     }
   }
@@ -112,7 +120,7 @@ const styles = StyleSheet.create({
   },
 
   snippets: {
-    flex: .5,
+    height: 20,
   },
 
   speakersList: {

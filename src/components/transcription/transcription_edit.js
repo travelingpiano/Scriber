@@ -22,8 +22,12 @@ class TranscriptionEdit extends React.Component {
     data.append('title', this.state.title);
     data.append('transcription', this.state.transcription);
     data.append('description', this.state.description);
-    // data.append('audio_url', this.state.audio_url);
+    data.append('audio_url', this.state.audio_url);
     data.append('usernames', this.state.usernames);
+    data.append('pk',this.state.pk);
+    data.append('created_time', this.state.created_time);
+    data.append('created_date', this.state.created_date);
+    console.log(this.state.pk);
     this.props.updateTranscription(data)
       .then(Actions.TranscriptionShow({transcriptionPk: this.state.transcription.pk}));
   }
@@ -67,12 +71,14 @@ class TranscriptionEdit extends React.Component {
             value={ this.state.title }
             label='Title'
             placeholder='Title'
+            onChangeText={ title => this.setState({title})}
             />
           <TextInput
             style={ textInputStyle }
             label='Description'
             value={ this.state.description }
             placeholder='Description'
+            onChangeText={ description => this.setState({description})}
           />
         </View>
 

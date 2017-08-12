@@ -60,6 +60,7 @@ class LoginForm extends React.Component {
     data.append('client_secret', client_key);
     data.append('username', username);
     data.append('password', password);
+    console.log(data);
     let response = await fetch('http://127.0.0.1:8000/o/token/', { // adjust to actual site url
       method: 'POST',
       headers: {
