@@ -10,7 +10,7 @@ import {
          StyleSheet,
          Text,
          View } from 'react-native';
-
+import { MenuContext } from 'react-native-popup-menu';
 import Routes from './src/Routes';
 import { Actions } from 'react-native-router-flux';
 import configureStore from './src/store/store';
@@ -38,7 +38,9 @@ export default class App extends React.Component {
 
       return (
         <Provider store={store}>
-          <Routes />
+          <MenuContext>
+            <Routes />
+          </MenuContext>
         </Provider>
       );
   }

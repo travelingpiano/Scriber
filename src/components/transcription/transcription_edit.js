@@ -6,10 +6,10 @@ import { StyleSheet,
          Text,
          TextInput,
          TouchableHighlight,
-         ScrollView } from 'react-native';
+         ScrollView,
+         Picker } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-
 import merge from 'lodash';
 
 class TranscriptionEdit extends React.Component {
@@ -76,26 +76,19 @@ class TranscriptionEdit extends React.Component {
     );
   }
 
-  renderSpeakersList() {
-    if (this.allSpeakers) {
-      console.log(this.allSpeakers);
-      return this.allSpeakers.map((speaker, idx) => {
-        if (Number.isInteger(speaker)) {
-          return (
-            <View key={`speaker-${idx}`}>
-              <Text style={styles.speaker}>Speaker {speaker}</Text>
-            </View>
-          );
-        } else {
-          return (
-            <View key={`speaker-${idx}`}>
-              <Text style={styles.speaker}>{speaker}</Text>
-            </View>
-          );
-        }
-      });
-    }
-  }
+  // render list of attendees to pick speaker from
+  // renderPicker() {
+  //   return (
+  //     <Picker
+  //       style={styles.picker}
+  //       onValueChange={() => console.log("New Val")}
+  //       mode="dropdown">
+  //       <Picker.Item label="Test 1" value="test1" />
+  //       <Picker.Item label="Test 2" value="test2" />
+  //       <Picker.Item label="Test 3" value="test3" />
+  //     </Picker>
+  //   );
+  // }
 
   render() {
     const { textInputStyle,
@@ -158,10 +151,7 @@ class TranscriptionEdit extends React.Component {
           />
         </View>
 
-        <View style={styles.speakersList}>
-          {this.renderSpeakersList()}
-        </View>
-
+        <MapSpeakers allSpeakers={this.allSpeakers} attendees={this.state.usernames} />
         <View style={styles.buttonStyle}>
           <Button
             onPress={() => this.updateTranscription()}
@@ -171,6 +161,7 @@ class TranscriptionEdit extends React.Component {
 
         <View style={styles.container}>
           <ScrollView style={styles.snippets}>
+            <Text style={styles.title}>Transcription</Text>
             {this.allSnippets}
           </ScrollView>
         </View>
@@ -237,15 +228,17 @@ const styles = StyleSheet.create({
     height: 20,
   },
 
-  speakersList: {
-    flex: .3,
-  },
-
   container: {
     flex: .5
   },
 
   buttonStyle: {
     flex: .1,
-  }
+  },
+
+  title: {
+    fontWeight: 'bold',
+    paddingTop: 20
+  },
+
 });
