@@ -26,38 +26,8 @@ class Attendees extends React.Component {
   }
 
   componentWillMount() {
-    // this.createDataSource(this.props);
-
     this.props.getUsers();
   }
-
-  createDataSource({ users }) {
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
-
-  // createDataSource({ users }) {
-  //   const ds = new ListView.DataSource({
-  //     rowHasChanged: (r1, r2) => r1 !== r2
-  //   });
-  //
-  //   this.dataSource = ds.cloneWithRows(users);
-  // }
-
-    this.props.getUsers();
-  }
-
-
-  // createDataSource({ users }) {
-  //   const ds = new ListView.DataSource({
-  //     rowHasChanged: (r1, r2) => r1 !== r2
-  //   });
-  //
-  //   this.dataSource = ds.cloneWithRows(users);
-  // }
-  // renderRow(user) {
-  //   return
-  // }
 
   render() {
     console.log(this.props.users);
@@ -74,18 +44,6 @@ class Attendees extends React.Component {
           </View>}
         />
       </View>
-
-      // <ListView
-      //   enableEmptySections
-      //   dataSource={ this.dataSource }
-      //   renderRow={ this.renderRow }
-      // />
-      // <Text>Attendees List</Text>
-      //
-      //
-      // <Text>{this.props.users[0].username}</Text>
-
-        // <Text>{this.props.users[0].username}</Text>
     );
   }
 }
