@@ -5,7 +5,8 @@ import { StyleSheet,
          Button,
          Text,
          TextInput,
-         TouchableHighlight } from 'react-native';
+         TouchableHighlight,
+         ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
@@ -13,23 +14,35 @@ class TranscriptionEdit extends React.Component {
   constructor(props) {
     super(props);
     console.log(this.props);
-    // this.state = this.props.posts[this.props.match.params.postId];
+    this.state = this.props.currentTranscription;
   }
 
-  // recordAudio() {
-  //   insert record audio action
-  //   return audio file
-  // }
-
-  addTranscription() {
-    let data = new EditData();
+  updateTranscription() {
+    let data = new FormData();
     data.append('title', this.state.title);
     data.append('transcription', this.state.transcription);
     data.append('description', this.state.description);
-    data.append('audio_url', this.state.audio_url);
-    data.append('users', this.state.users);
-    this.props.createTranscription(data)
-      .then(Actions.TranscriptionShow());
+    // data.append('audio_url', this.state.audio_url);
+    data.append('usernames', this.state.usernames);
+    this.props.updateTranscription(data)
+      .then(Actions.TranscriptionShow({transcriptionPk: this.state.transcription.pk}));
+  }
+
+  renderAttendees(attendees) {
+    if (attendees) {
+      return(
+        <ScrollView containerStyle={{marginBottom:20}}>
+          {
+            attendees.map((attendee, i) => (
+              <Text
+                key={i}
+                title={attendee}>{attendee}
+              </Text>
+            ))
+          }
+        </ScrollView>
+      );
+    }
   }
 
   render() {
@@ -51,44 +64,39 @@ class TranscriptionEdit extends React.Component {
         <View style={ formStyle }>
           <TextInput
             style={ textInputStyle }
+            value={ this.state.title }
             label='Title'
             placeholder='Title'
             />
           <TextInput
             style={ textInputStyle }
             label='Description'
+            value={ this.state.description }
             placeholder='Description'
           />
         </View>
 
         <View style={ attendeeTabStyle }>
           <Text>
-            Attendees
+            Attendees:
           </Text>
+          {this.renderAttendees(this.state.usernames)}
           <Button
             onPress={() => Actions.Attendees()}
-            title='Add Attendees'
+            title='Edit Attendees'
           />
       </View>
 
-        <View style={ recordAudioStyle }>
-          <Button
-            onPress={() => Actions.RecordAudio({users: this.props.users})}
-            title="Record Audio"
-          />
-        </View>
-
         <View>
           <Button
-            onPress={() => this.addTranscription()}
-            title="Create Transcription"
+            onPress={() => this.updateTranscription()}
+            title="Update Transcription"
             />
         </View>
       </View>
     );
   }
 }
-// got to a new page with list of attendees to choose from to pick attendees
 
 export default TranscriptionEdit;
 
