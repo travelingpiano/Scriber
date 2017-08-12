@@ -90,16 +90,6 @@ class TranscriptionShow extends Component {
             {this.renderAttendees(transcription.usernames)}
           </View>
           <View style={styles.transcription}>
-            <TouchableHighlight
-              underlayColor="#E3DAED"
-              activeOpacity={1}
-              onPress={ () =>
-              Actions.MapSpeakers()}
-              style={ styles.buttonStyle } >
-              <Text>
-                Map Speakers
-              </Text>
-            </TouchableHighlight>
             <FullTranscription transcription={transcription.transcription}
               createdTime={transcription.created_time} parseTime={this.parseTime}/>
           </View>

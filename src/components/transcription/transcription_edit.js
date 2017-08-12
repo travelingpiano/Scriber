@@ -10,6 +10,8 @@ import { StyleSheet,
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
+import merge from 'lodash';
+
 class TranscriptionEdit extends React.Component {
   constructor(props) {
     super(props);
@@ -48,6 +50,53 @@ class TranscriptionEdit extends React.Component {
     }
   }
 
+  renderTime(createdTime, time) {
+    return (
+      <Text style={styles.time}>{this.props.parseTime(createdTime)}</Text>
+    );
+  }
+
+  renderSpeaker(snippet) {
+    if (!this.allSpeakers.includes(JSON.parse(snippet).speaker)) {
+      this.allSpeakers.push(JSON.parse(snippet).speaker);
+    }
+    if (JSON.parse(snippet).speaker === this.currentSpeaker) {
+      return null;
+    } else {
+      this.currentSpeaker = JSON.parse(snippet).speaker;
+      return (
+        <Text style={styles.speaker}>Speaker: {JSON.parse(snippet).speaker}</Text>
+      );
+    }
+  }
+
+  renderTime(createdTime, time) {
+    return (
+      <Text style={styles.time}>{this.props.parseTime(createdTime)}</Text>
+    );
+  }
+
+  renderSpeakersList() {
+    if (this.allSpeakers) {
+      console.log(this.allSpeakers);
+      return this.allSpeakers.map((speaker, idx) => {
+        if (Number.isInteger(speaker)) {
+          return (
+            <View key={`speaker-${idx}`}>
+              <Text style={styles.speaker}>Speaker {speaker}</Text>
+            </View>
+          );
+        } else {
+          return (
+            <View key={`speaker-${idx}`}>
+              <Text style={styles.speaker}>{speaker}</Text>
+            </View>
+          );
+        }
+      });
+    }
+  }
+
   render() {
     const { textInputStyle,
             attendeeTabStyle,
@@ -55,6 +104,23 @@ class TranscriptionEdit extends React.Component {
             headerStyle,
             recordAudioStyle,
             transcriptionEditStyle } = styles;
+
+    this.currentSpeaker = null;
+    this.allSpeakers = [];
+    this.allSnippets = null;
+    if (this.props.currentTranscription) {
+      let { currentTranscription, createdTime } = this.props;
+      this.allSnippets = currentTranscription.transcription.map((snippet,idx) => {
+        return (
+          <View key={`snippet-${idx}`}>
+            {this.renderSpeaker(snippet)}
+            <Text style={styles.timeStamps}>{JSON.parse(snippet).timestamps[0]}</Text>
+            <Text>{JSON.parse(snippet).text}</Text>
+          </View>
+        );
+      });
+    }
+    console.log(this.allSnippets);
 
     return (
       <View style={ transcriptionEditStyle } >
@@ -90,13 +156,23 @@ class TranscriptionEdit extends React.Component {
             onPress={() => Actions.Attendees()}
             title='Edit Attendees'
           />
-      </View>
+        </View>
 
-        <View>
+        <View style={styles.speakersList}>
+          {this.renderSpeakersList()}
+        </View>
+
+        <View style={styles.buttonStyle}>
           <Button
             onPress={() => this.updateTranscription()}
             title="Update Transcription"
             />
+        </View>
+
+        <View style={styles.container}>
+          <ScrollView style={styles.snippets}>
+            {this.allSnippets}
+          </ScrollView>
         </View>
       </View>
     );
@@ -108,16 +184,17 @@ export default TranscriptionEdit;
 const styles = StyleSheet.create({
   transcriptionEditStyle: {
     flex: 1,
+    padding: 10,
   },
 
   attendeeTabStyle: {
-    flex: 1,
+    flex: .3,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
 
   headerStyle: {
-    flex: 1,
+    flex: .1,
   },
 
   textInputStyle: {
@@ -125,7 +202,7 @@ const styles = StyleSheet.create({
   },
 
   formStyle: {
-    flex: 1,
+    flex: .2,
     flexDirection: 'column',
     backgroundColor: '#C6F1E4'
   },
@@ -133,4 +210,42 @@ const styles = StyleSheet.create({
   recordAudioStyle: {
     flex: 1
   },
+
+  snippet: {
+    padding: 10
+  },
+
+  time: {
+    flex: .2,
+    justifyContent: 'center',
+    padding: 10
+  },
+
+  speaker: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingTop: 10,
+  },
+
+  timeStamps: {
+    textAlign: 'right',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+
+  snippets: {
+    height: 20,
+  },
+
+  speakersList: {
+    flex: .3,
+  },
+
+  container: {
+    flex: .5
+  },
+
+  buttonStyle: {
+    flex: .1,
+  }
 });

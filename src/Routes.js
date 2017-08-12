@@ -12,7 +12,6 @@ import RecordAudio from './components/transcription/record_audio';
 import TranscriptionIndex from './components/transcription/transcription_index_container';
 import TranscriptionShow from './components/transcription/transcription_show_container';
 import TranscriptionEdit from './components/transcription/transcription_edit_container';
-import MapSpeakers from './components/transcription/map_speakers';
 import TabIcon from './lib/tabIcon';
 
 const Routes = () => (
@@ -33,13 +32,6 @@ const Routes = () => (
         back
         component={TranscriptionEdit}
         title="Edit Transcription"
-      />
-
-      <Scene
-        key="MapSpeakers"
-        back
-        component={MapSpeakers}
-        title="Map Speakers"
       />
 
       <Scene
@@ -91,8 +83,9 @@ const Routes = () => (
           key="TranscriptionIndex"
           component={TranscriptionIndex}
           title="Your Transcriptions"
-          icon={TabIcon}
-        />
+          icon={TabIcon}>
+
+        </Scene>
       <Scene key="TranscriptionForm"
         title="New Transcription"
         back
