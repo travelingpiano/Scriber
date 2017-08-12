@@ -27,7 +27,7 @@ SECRET_KEY = 'i!+vp*yi7!hcu$+*l_*_ao+_#)r08&y*j=&ap=-o_dy4!5y1c&'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ['scribr.herokuapp.com', 'www.scriber.com', 'scriber.us']
+ALLOWED_HOSTS = ['scribr.herokuapp.com', 'www.scriber.us', 'scriber.us']
 
 
 # Application definition
