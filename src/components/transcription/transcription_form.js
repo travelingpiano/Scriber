@@ -22,7 +22,7 @@ class TranscriptionForm extends React.Component {
       transcription: '',
       description: '',
       audio_url:'',
-      users: []
+      usernames: []
     };
 
     this.createTranscription = this.props.createTranscription.bind(this);

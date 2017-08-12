@@ -6,12 +6,13 @@ import { StyleSheet,
          FlatList,
          Button,
          Text,
+
          TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
 import { requestUsers } from '../../actions/users_actions';
-// import { selectAllUsers } from '../../reducers/selectors';
+
 
 class Attendees extends React.Component {
   constructor(props) {
