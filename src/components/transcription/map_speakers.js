@@ -28,6 +28,14 @@ class MapSpeakers extends React.Component {
     };
   }
 
+  renderAttendeesOptions() {
+    return this.state.attendees.map(attendee => {
+      return (
+        <MenuOption value={`${attendee}`} text={`${attendee}`} />
+      );
+    });
+  }
+
   renderSpeakersList() {
     if (this.state.allSpeakers) {
       console.log(this.state.allSpeakers);
@@ -38,17 +46,13 @@ class MapSpeakers extends React.Component {
               <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => {
                   let newSpeakers = JSON.parse(JSON.stringify(this.state.allSpeakers));
                   newSpeakers[idx] = value;
-                  console.log(newSpeakers);
                   this.setState({allSpeakers: newSpeakers});
                 }}>
                 <MenuTrigger style={styles.trigger}>
                   <Text style={styles.triggerText}>Speaker {speaker}</Text>
                 </MenuTrigger>
                 <MenuOptions>
-                  <MenuOption value={1} text='Option one' />
-                  <MenuOption value={2} text='Option two' />
-                  { null /* conditional not rendered option */ }
-                  <MenuOption value={5} text='Option five' />
+                  {this.renderAttendeesOptions()}
                 </MenuOptions>
               </Menu>
             </View>
@@ -57,18 +61,15 @@ class MapSpeakers extends React.Component {
           return (
             <View style={styles.topbar} key={`speaker-${idx}`}>
               <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => {
-                  let newSpeakers = merge({},this.state.allSpeakers);
-                  newSpeakers[idx] = value;
-                  this.setState({allSpeakers: newSpeakers});
+                let newSpeakers = JSON.parse(JSON.stringify(this.state.allSpeakers));
+                newSpeakers[idx] = value;
+                this.setState({allSpeakers: newSpeakers});
                 }}>
                 <MenuTrigger style={styles.trigger}>
                   <Text style={styles.triggerText}>{speaker}</Text>
                 </MenuTrigger>
                 <MenuOptions>
-                  <MenuOption value={1} text='Option one' />
-                  <MenuOption value={2} text='Option two' />
-                  { null /* conditional not rendered option */ }
-                  <MenuOption value={5} text='Option five' />
+                  {this.renderAttendeesOptions()}
                 </MenuOptions>
               </Menu>
             </View>
@@ -94,7 +95,6 @@ const styles = StyleSheet.create({
   },
 
   speakerPicker: {
-    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -111,25 +111,7 @@ const styles = StyleSheet.create({
   triggerText: {
     color: 'white',
   },
-  disabled: {
-    color: '#ccc',
-  },
-  divider: {
-    marginVertical: 5,
-    marginHorizontal: 2,
-    borderBottomWidth: 1,
-    borderColor: '#ccc'
-  },
-  logView: {
-    flex: 1,
-    flexDirection: 'column',
-  },
-  logItem: {
-    flexDirection: 'row',
-    padding: 8,
-  },
 
 });
-
 
 export default MapSpeakers;
