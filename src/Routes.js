@@ -66,6 +66,9 @@ const Routes = () => (
         back
         component={TranscriptionShow}
         title="Transcription"
+        rightTitle="Edit"
+        onRight={() => Actions.TranscriptionEdit()}
+        onBack={() => Actions.TranscriptionIndex()}
       />
 
       <Scene

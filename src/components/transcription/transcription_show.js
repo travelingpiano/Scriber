@@ -12,7 +12,12 @@ class TranscriptionShow extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchTranscription(this.props.transcriptionPk);
+    console.log(this.props);
+    if (this.props.transcriptionPk) {
+      this.props.fetchTranscription(this.props.transcriptionPk);
+    } else {
+      this.props.fetchTranscription(this.props.currentTranscription.pk);
+    }
   }
 
   parseTime(theTime) {
@@ -83,16 +88,6 @@ class TranscriptionShow extends Component {
             <Text style={{fontSize: 15}}>{transcription.description}</Text>
             <Text style={{fontSize: 15}}>Attendees:</Text>
             {this.renderAttendees(transcription.usernames)}
-            <TouchableHighlight
-              underlayColor="#E3DAED"
-              activeOpacity={1}
-              onPress={ () =>
-              Actions.TranscriptionEdit()}
-              style={ styles.buttonStyle } >
-              <Text>
-                Edit
-              </Text>
-            </TouchableHighlight>
           </View>
           <View style={styles.transcription}>
             <TouchableHighlight

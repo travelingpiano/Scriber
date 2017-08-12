@@ -27,7 +27,6 @@ class TranscriptionEdit extends React.Component {
     data.append('pk',this.state.pk);
     data.append('created_time', this.state.created_time);
     data.append('created_date', this.state.created_date);
-    console.log(this.state.pk);
     this.props.updateTranscription(data)
       .then(Actions.TranscriptionShow({transcriptionPk: this.state.transcription.pk}));
   }
