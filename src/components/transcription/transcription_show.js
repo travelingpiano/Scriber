@@ -84,6 +84,8 @@ class TranscriptionShow extends Component {
             <Text style={{fontSize: 15}}>Attendees:</Text>
             {this.renderAttendees(transcription.usernames)}
             <TouchableHighlight
+              underlayColor="#E3DAED"
+              activeOpacity={1}
               onPress={ () =>
               Actions.TranscriptionEdit()}
               style={ styles.buttonStyle } >
@@ -93,6 +95,16 @@ class TranscriptionShow extends Component {
             </TouchableHighlight>
           </View>
           <View style={styles.transcription}>
+            <TouchableHighlight
+              underlayColor="#E3DAED"
+              activeOpacity={1}
+              onPress={ () =>
+              Actions.MapSpeakers()}
+              style={ styles.buttonStyle } >
+              <Text>
+                Map Speakers
+              </Text>
+            </TouchableHighlight>
             <FullTranscription transcription={transcription.transcription}
               createdTime={transcription.created_time} parseTime={this.parseTime}/>
           </View>
