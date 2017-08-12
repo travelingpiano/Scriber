@@ -2,9 +2,11 @@ import React from 'react';
 import { StyleSheet,
          View,
          TouchableHighlight,
-         ScrollView } from 'react-native';
+         ScrollView,
+         Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { merge } from 'lodash';
 
 import Menu, {
   MenuContext,
@@ -20,22 +22,55 @@ class MapSpeakers extends React.Component {
   constructor(props) {
     super(props);
     console.log(this.props);
+    this.state = {
+      allSpeakers: this.props.allSpeakers,
+      attendees: this.props.attendees
+    };
   }
 
   renderSpeakersList() {
-    if (this.allSpeakers) {
-      console.log(this.allSpeakers);
-      return this.allSpeakers.map((speaker, idx) => {
+    if (this.state.allSpeakers) {
+      console.log(this.state.allSpeakers);
+      return this.state.allSpeakers.map((speaker, idx) => {
         if (Number.isInteger(speaker)) {
           return (
-            <View style={styles.speakerPicker} key={`speaker-${idx}`}>
-              <Text style={styles.speaker}>Speaker {speaker}</Text>
+            <View style={styles.topbar} key={`speaker-${idx}`}>
+              <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => {
+                  let newSpeakers = JSON.parse(JSON.stringify(this.state.allSpeakers));
+                  newSpeakers[idx] = value;
+                  console.log(newSpeakers);
+                  this.setState({allSpeakers: newSpeakers});
+                }}>
+                <MenuTrigger style={styles.trigger}>
+                  <Text style={styles.triggerText}>Speaker {speaker}</Text>
+                </MenuTrigger>
+                <MenuOptions>
+                  <MenuOption value={1} text='Option one' />
+                  <MenuOption value={2} text='Option two' />
+                  { null /* conditional not rendered option */ }
+                  <MenuOption value={5} text='Option five' />
+                </MenuOptions>
+              </Menu>
             </View>
           );
         } else {
           return (
-            <View key={`speaker-${idx}`}>
-              <Text style={styles.speaker}>{speaker}</Text>
+            <View style={styles.topbar} key={`speaker-${idx}`}>
+              <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => {
+                  let newSpeakers = merge({},this.state.allSpeakers);
+                  newSpeakers[idx] = value;
+                  this.setState({allSpeakers: newSpeakers});
+                }}>
+                <MenuTrigger style={styles.trigger}>
+                  <Text style={styles.triggerText}>{speaker}</Text>
+                </MenuTrigger>
+                <MenuOptions>
+                  <MenuOption value={1} text='Option one' />
+                  <MenuOption value={2} text='Option two' />
+                  { null /* conditional not rendered option */ }
+                  <MenuOption value={5} text='Option five' />
+                </MenuOptions>
+              </Menu>
             </View>
           );
         }
@@ -46,50 +81,9 @@ class MapSpeakers extends React.Component {
   render() {
 
     return (
-      <View>
-        <View style={styles.speakersList}>
-          <Text style={styles.title}>Map Speakers</Text>
-          {this.renderSpeakersList()}
-        </View>
-
         <MenuContext style={{flex: 1}}>
-          <View style={styles.container}>
-
-            <View style={styles.topbar}>
-              <Menu name="numbers" renderer={SlideInMenu} onSelect={value => console.log(value)}>
-                <MenuTrigger style={styles.trigger}>
-                  <Text style={styles.triggerText}>Slide-in menu...</Text>
-                </MenuTrigger>
-                <MenuOptions>
-                  <MenuOption value={1} text='Option one' />
-                  <MenuOption value={2} text='Option two' />
-                  <MenuOption value={3} text='Option three' />
-                  <MenuOption value={4} text='Option four' />
-                  { null /* conditional not rendered option */ }
-                  <MenuOption value={5} text='Option five' />
-                </MenuOptions>
-              </Menu>
-              <View style={{flex:1}}></View>
-              <Menu name="types" onSelect={value => this.selectOptionType(value)}
-                onBackdropPress={() => this.addLog('menu will be closed by backdrop')}
-                onOpen={() => this.addLog('menu is opening')}
-                onClose={() => this.addLog('menu is closing')}
-                >
-                <MenuTrigger style={styles.trigger}>
-                  <Text style={styles.triggerText}>Context menu...</Text>
-                </MenuTrigger>
-                <MenuOptions>
-                  <MenuOption value="Normal" text='Normal' />
-                  <MenuOption value="Disabled" disabled={true} text='Disabled' />
-                  <MenuOption value="Do not close" text='Do not close' />
-                  <View style={styles.divider}/>
-                  <MenuOption value={{ text: 'Hello world!' }} text='Object as value' />
-                </MenuOptions>
-              </Menu>
-            </View>
-          </View>
+          {this.renderSpeakersList()}
         </MenuContext>
-      </View>
     );
   }
 }

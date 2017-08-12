@@ -11,6 +11,7 @@ import { StyleSheet,
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import merge from 'lodash';
+import MapSpeakers from './map_speakers';
 
 class TranscriptionEdit extends React.Component {
   constructor(props) {
@@ -151,8 +152,9 @@ class TranscriptionEdit extends React.Component {
           />
         </View>
 
-        <MapSpeakers allSpeakers={this.allSpeakers} attendees={this.state.usernames} />
-        <View style={styles.buttonStyle}>
+        <MapSpeakers style={{flex:.5}} allSpeakers={this.allSpeakers} attendees={this.state.usernames} />
+
+      <View style={styles.buttonStyle}>
           <Button
             onPress={() => this.updateTranscription()}
             title="Update Transcription"
