@@ -6,7 +6,7 @@ import { StyleSheet,
          FlatList,
          Button,
          Text,
-
+         TouchableWithoutFeedback,
          TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {connect} from 'react-redux';
@@ -18,21 +18,31 @@ import { requestUsers } from '../../actions/users_actions';
 class Attendees extends React.Component {
   constructor(props) {
     super(props);
-    console.log('ATTENDEE', this.props);
-    this.state = {
-      users: this.props.getUsers(),
-    };
-    console.log('NEW state', this.state);
+    // console.log('ATTENDEE', this.props);
+    this.attendees = [];
   }
 
   componentWillMount() {
     this.props.getUsers();
   }
 
-  render() {
-    console.log(this.props.users);
-    return (
+  toggleAddAttendee(username) {
+    if (this.attendees.includes(username)) {
+      // console.log('Hit Me');
+      // this.attendees.push(username);
+      console.log(this.attendees);
+      return checkIcon;
+    } else if (!(this.attendees.includes(username))) {
+      console.log('LEAVING!');
+      // this.attendees.splice(this.attendees.indexOf(username), 1);
+      return plusIcon;
+    }
+  }
 
+  render() {
+    console.log('USERS', this.props.users);
+    console.log(this.attendees);
+    return (
       <View style={styles.containerStyle}>
         <FlatList
           data={this.props.users}
@@ -40,22 +50,38 @@ class Attendees extends React.Component {
           renderItem={({ item }) =>
           <View style={styles.listItemStyle}>
             <Text style={styles.userStyle}>{item.username}</Text>
-            <Text>{plusIcon}</Text>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                console.log('click Plus');
+                this.attendees.push(item.username);
+                this.toggleAddAttendee(item.username);
+              } }
+              style={ styles.iconStyle }>
+              {this.toggleAddAttendee(item.username)}
+            </TouchableWithoutFeedback>
           </View>}
+        />
+        <Button
+          onPress={() => {
+            this.setState();
+            Actions.TranscriptionForm();
+          }}
+          title="Add Attendees"
         />
       </View>
     );
   }
 }
 
-const plusIcon = <Icon name="plus-circle" size={30} color="#F00" />;
-const checkIcon = <Icon name="check-circle" size={30} color="#32CD32" />;
+const plusIcon = (<Icon name="plus-circle" size={30} color="#F00" />);
+const checkIcon = (<Icon name="check-circle" size={30} color="#32CD32" />);
 
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     marginTop: 5,
     flexDirection: 'column',
+    justifyContent: 'space-between',
   },
 
   userStyle: {
@@ -68,11 +94,17 @@ const styles = StyleSheet.create({
   listItemStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 30,
+    height: 35,
     paddingLeft: 5,
     paddingRight: 10,
     marginBottom: 5,
+    borderBottomColor: 'lightgrey',
+    borderBottomWidth: 1,
   },
+
+  iconStyle: {
+    width: 30,
+  }
 });
 
 const mapStateToProps = state => ({

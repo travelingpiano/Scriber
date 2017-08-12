@@ -40,7 +40,7 @@ class TranscriptionForm extends React.Component {
     data.append('transcription', this.state.transcription);
     data.append('description', this.state.description);
     data.append('audio_url', this.state.audio_url);
-    data.append('users', this.state.users);
+    data.append('usernames', this.state.usernames);
     this.props.createTranscription(data)
       .then(Actions.TranscriptionShow());
   }
