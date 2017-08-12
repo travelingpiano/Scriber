@@ -25,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'i!+vp*yi7!hcu$+*l_*_ao+_#)r08&y*j=&ap=-o_dy4!5y1c&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = ['scribr.herokuapp.com']
+ALLOWED_HOSTS = ['scribr.herokuapp.com', 'www.scriber.com', 'scriber.us']
 
 
 # Application definition
