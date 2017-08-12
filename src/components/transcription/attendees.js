@@ -68,7 +68,10 @@ class Attendees extends React.Component {
           data={this.props.users}
           keyExtractor={item => item.pk}
           renderItem={({ item }) =>
-          <Text style={styles.userStyle}>{item.username}{myIcon}</Text>}
+          <View style={styles.listItemStyle}>
+            <Text style={styles.userStyle}>{item.username}</Text>
+            <Text>{plusIcon}</Text>
+          </View>}
         />
       </View>
 
@@ -87,20 +90,31 @@ class Attendees extends React.Component {
   }
 }
 
-const myIcon = <Icon name="plus-circle" size={25} color="#900"/>;
+const plusIcon = <Icon name="plus-circle" size={30} color="#F00" />;
+const checkIcon = <Icon name="check-circle" size={30} color="#32CD32" />;
 
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
-
+    marginTop: 5,
     flexDirection: 'column',
   },
 
   userStyle: {
     flex: 1,
     width: "85%",
-    padding: 10,
-  }
+    padding: 5,
+    fontWeight: 'bold',
+  },
+
+  listItemStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 30,
+    paddingLeft: 5,
+    paddingRight: 10,
+    marginBottom: 5,
+  },
 });
 
 const mapStateToProps = state => ({
