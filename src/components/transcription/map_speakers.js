@@ -1,7 +1,7 @@
 import merge from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, Text, StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
+import { ListView, Text, StyleSheet, View, TouchableWithoutFeedback, ScrollView } from 'react-native';
 import { fetchTranscription } from '../../actions/transcription_actions';
 import {Actions} from 'react-native-router-flux';
 
@@ -10,6 +10,7 @@ class MapSpeakers extends Component {
 
   constructor(props) {
     super(props);
+    console.log(this.props);
 
     this.state = {
       currentSpeaker: null,
@@ -44,13 +45,26 @@ class MapSpeakers extends Component {
     );
   }
 
+  renderSpeakersList() {
+    if (this.state.allSpeakers) {
+      console.log(this.state.allSpeakers);
+      this.state.allSpeakers.map((speaker, idx) => {
+        return (
+          <View key={`speaker-${idx}`}>
+            <Text>{speaker}</Text>
+          </View>
+        );
+      });
+    }
+  }
+
   render() {
     this.state.currentSpeaker = null;
-    if (this.props.transcription) {
-      let { transcription, createdTime } = this.props;
-      this.state.allSnippets = transcription.map((snippet,idx) => {
+    if (this.props.currentTranscription) {
+      let { currentTranscription, createdTime } = this.props;
+      this.state.allSnippets = currentTranscription.transcription.map((snippet,idx) => {
         return (
-          <View>
+          <View key={`snippet-${idx}`}>
             {this.renderSpeaker(snippet)}
             <Text style={styles.timeStamps}>{JSON.parse(snippet).timestamps[0]}</Text>
             <Text>{JSON.parse(snippet).text}</Text>
@@ -60,9 +74,14 @@ class MapSpeakers extends Component {
     }
 
     return (
-      <ScrollView>
-        {this.state.allSnippets}
-      </ScrollView>
+      <View style={styles.container}>
+        <View style={styles.speakersList}>
+          {this.renderSpeakersList()}
+        </View>
+        <ScrollView style={styles.snippets}>
+          {this.state.allSnippets}
+        </ScrollView>
+      </View>
     );
 
   }
@@ -90,6 +109,18 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     paddingTop: 10,
     paddingBottom: 10,
+  },
+
+  snippets: {
+    flex: .5,
+  },
+
+  speakersList: {
+    flex: .5,
+  },
+
+  container: {
+    flex: 1
   }
 
 });
