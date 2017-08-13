@@ -18,7 +18,10 @@ class Attendees extends React.Component {
     super(props);
     // console.log('ATTENDEE', this.props);
     this.state = {
+      users: [],
       attendees: [],
+      icons: [],
+      dataChange: true
     };
 
     this.toggleAttendee = this.toggleAttendee.bind(this);
@@ -26,7 +29,16 @@ class Attendees extends React.Component {
   }
 
   componentWillMount() {
-    this.props.getUsers();
+    this.props.getUsers().then(({users})=>{
+      console.log(users.length);
+      let iconList = [];
+      for(let i = 0; i<users.length; i++){
+        users[i]['icon'] = plusIcon;
+        iconList.push('plus');
+      }
+      console.log(iconList);
+      this.setState({users,icons: iconList});
+    });
   }
 
   componentReceiveProps() {
@@ -36,67 +48,82 @@ class Attendees extends React.Component {
   componentDidUpdate() {
   }
 
-  toggleAttendee(username) {
+  toggleAttendee(icons, index) {
+    let usernames = this.state.attendees.slice();
+    let username = this.state.users[index]['username'];
     if (this.state.attendees.includes(username)) {
       console.log('Leave!');
       let userIndex = this.state.attendees.indexOf(username);
-      let usernames = this.state.attendees.slice();
       usernames.splice(userIndex, 1);
-
-      this.setState({
-        attendees: usernames
-      });
-      this.toggleIcon(username);
     } else if (!(this.state.attendees.includes(username))) {
       console.log('Enter!');
-      let usernames = this.state.attendees.slice();
       usernames = usernames.concat(username);
-
-      this.setState({
-        attendees: usernames
-      });
-      this.toggleIcon(username);
     }
+    let users = this.toggleIcon(this.state.users,index);
+    this.setState({
+      attendees: usernames,
+      users
+    });
   }
 
-  toggleIcon(username) {
-    if (this.state.attendees.includes(username)) {
-      // console.log('green');
-      return checkIcon;
-    } else if (!(this.state.attendees.includes(username))) {
-      // console.log('red');
-      return plusIcon;
+  toggleIcon(users,index) {
+    console.log(index);
+    let icons = this.state.icons;
+    if(icons[index]==='check'){
+      users[index]['icon'] = plusIcon;
+      icons[index] = 'plus';
+    }else{
+      users[index]['icon'] = checkIcon;
+      icons[index] = 'check';
     }
+    this.setState({icons, dataChange: !this.state.dataChange});
+    return users;
   }
 
   render() {
-    console.log('USERS', this.props.users);
-    console.log('In MEETING',this.state.attendees);
-    return (
-      <View style={styles.containerStyle}>
-        <FlatList
-          data={this.props.users}
-          keyExtractor={item => item.pk}
-          renderItem={({ item }) =>
-          <View style={styles.listItemStyle}>
-            <Text style={styles.userStyle}>{item.username}</Text>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                this.toggleAttendee(item.username);
-              }}
-              style={ styles.iconStyle }>
-              {this.toggleIcon(item.username)}
-            </TouchableWithoutFeedback>
-          </View>}
-        />
-        <Button
-          onPress={() => {
-            Actions.TranscriptionForm({attendees: this.state.attendees});
-          }}
-          title="Add Attendees"
-        />
-      </View>
-    );
+    // console.log('USERS', this.state.users);
+    // console.log('In MEETING',this.state.attendees);
+    // console.log('ICONS',this.state.icons);
+    let icons = [];
+    if(this.state.icons.length==this.props.users.length){
+      icons = this.state.icons;
+    }else if(this.props.users){
+      for(let i = 0; i<this.props.users.length; i++){
+        icons.push('plus');
+      }
+    }
+    if(this.props.users){
+      // console.log(icons[0]);
+      return (
+        <View style={styles.containerStyle}>
+          <FlatList
+            data={this.state.icons} extraData={this.state.dataChange}
+            keyExtractor={(item,index) => index}
+            renderItem={({ item, index }) =>
+            <View style={styles.listItemStyle}>
+              <Text style={styles.userStyle}>{this.state.users[index]['username']}</Text>
+              <TouchableWithoutFeedback
+                onPress={() => {
+                  this.toggleAttendee(item, index);
+                }}
+                style={ styles.iconStyle }>
+                {this.state.users[index]['icon']}
+              </TouchableWithoutFeedback>
+            </View>}
+          />
+          <Button
+            onPress={() => {
+              Actions.TranscriptionForm({usernames: this.state.attendees, transcriptionTitle: this.props.transcriptionTitle, description: this.props.description});
+            }}
+            title="Add Attendees"
+          />
+        </View>
+      );
+    }else{
+      return (
+        <View style={styles.containerStyle}></View>
+      );
+    }
   }
 }
 

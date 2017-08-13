@@ -23,6 +23,7 @@ class TranscriptionIndex extends Component {
   }
 
   render() {
+    console.log('RENDERINDEX', this.state);
     return (
         <Agenda
           style={styles.agenda}
