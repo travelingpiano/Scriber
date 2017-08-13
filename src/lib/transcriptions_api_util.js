@@ -3,7 +3,8 @@ export const createTranscription = data => (
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Origin': '',
+      // 'Origin': '',
+      'Content-Type': 'application/json',
       'Host': '127.0.0.1:8000',
     },
     body: data

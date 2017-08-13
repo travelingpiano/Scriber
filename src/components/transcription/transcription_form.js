@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet,
          View,
-         ListView,
+         FlatList,
          Button,
          Text,
          TextInput,
@@ -16,13 +16,13 @@ import {createTranscription} from '../../actions/transcription_actions';
 class TranscriptionForm extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log('form props', this.props);
     this.state = {
       title:'',
       transcription: '',
       description: '',
       audio_url:'',
-      users: []
+      usernames: []
     };
 
     this.createTranscription = this.props.createTranscription.bind(this);
@@ -40,14 +40,16 @@ class TranscriptionForm extends React.Component {
     data.append('transcription', this.state.transcription);
     data.append('description', this.state.description);
     data.append('audio_url', this.state.audio_url);
-    data.append('users', this.state.users);
+    data.append('usernames', this.state.usernames);
     this.props.createTranscription(data)
       .then(Actions.TranscriptionShow());
   }
 
   render() {
     const { textInputStyle,
+            attendeeNamesStyle,
             attendeeTabStyle,
+            attendeeTopStyle,
             formStyle,
             headerStyle,
             recordAudioStyle,
@@ -75,13 +77,26 @@ class TranscriptionForm extends React.Component {
         </View>
 
         <View style={ attendeeTabStyle }>
-          <Text>
-            Attendees
-          </Text>
-          <Button
-            onPress={() => Actions.Attendees()}
-            title='Add Attendees'
-          />
+          <View style={ attendeeTopStyle }>
+            <Text>
+              Attendees
+            </Text>
+
+            <Button
+              onPress={() => Actions.Attendees()}
+              title='Add Attendees'
+              />
+          </View>
+
+          <View style={ attendeeNamesStyle }>
+            <FlatList
+              data={this.props.attendees}
+              keyExtractor={item => item}
+              renderItem={({ item }) =>
+              <Text>{item}</Text>
+            }
+            />
+          </View>
       </View>
 
         <View style={ recordAudioStyle }>
@@ -93,7 +108,15 @@ class TranscriptionForm extends React.Component {
 
         <View>
           <Button
-            onPress={() => this.addTranscription()}
+            onPress={() => {
+              let users = this.state.usernames.slice();
+              users = users.concat(this.props.attendees);
+              this.setState({
+                usernames: users
+              });
+              console.log('adding', this.state.usernames);
+              this.addTranscription();
+            }}
             title="Create Transcription"
             />
         </View>
@@ -109,7 +132,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  attendeeNamesStyle: {
+    flexDirection: 'row',
+  },
+
   attendeeTabStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+
+  attendeeTopStyle: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
