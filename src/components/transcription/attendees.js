@@ -43,9 +43,12 @@ class Attendees extends React.Component {
       });
     } else if (!(this.state.attendees.includes(username))) {
       console.log('Enter!');
-      // let usernames = this.state.attendees.slice();
+      let usernames = this.state.attendees;
+      usernames = usernames.concat(username);
+
       this.setState({
-        attendees: this.state.attendees.concat(username)
+        // attendees: this.state.attendees.concat(username)
+        attendees: usernames
       });
     }
   }
