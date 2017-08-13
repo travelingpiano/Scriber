@@ -8,6 +8,6 @@ module.exports = {
   // client_id: 'LkqS9l22dpTDuVDB1u540vDJLeCwP0gMEEBK32Dv',
 
   // ade
-  // client_key: 'qDX7tj0nj7Q56qZGPYQXHy6G12KXjQq0a6D9PVRFk4u9bZtNzrBRO3ETP3X02mKS3ZuTgebiuvfrXl0f8sCawc280btM19vzShBDUrroICDoSSdgoU57JAXj7Q94D0zN',
-  // client_id: 'p5kvXkN0IzAVoUzdqvLtbEHcx8D3pjhAIjRKnb0n',
+  client_key: 'qDX7tj0nj7Q56qZGPYQXHy6G12KXjQq0a6D9PVRFk4u9bZtNzrBRO3ETP3X02mKS3ZuTgebiuvfrXl0f8sCawc280btM19vzShBDUrroICDoSSdgoU57JAXj7Q94D0zN',
+  client_id: 'p5kvXkN0IzAVoUzdqvLtbEHcx8D3pjhAIjRKnb0n',
 };
