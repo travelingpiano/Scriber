@@ -1,5 +1,5 @@
 import * as SessionAPIUtil from '../lib/session_api_util';
-import {receiveErrors, clearErrors} from './error_actions';
+// import {receiveErrors, clearErrors} from './error_actions';
 import { Actions } from 'react-native-router-flux';
 import { AsyncStorage } from 'react-native';
 
