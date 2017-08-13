@@ -16,7 +16,7 @@ import {createTranscription} from '../../actions/transcription_actions';
 class TranscriptionForm extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log('form props', this.props);
     this.state = {
       title:'',
       transcription: '',

@@ -23,6 +23,8 @@ class Attendees extends React.Component {
       attendees: [],
     };
     this.props.users = this.props.getUsers;
+    this.toggleAttendee = this.toggleAttendee.bind(this);
+    this.toggleIcon = this.toggleIcon.bind(this);
   }
 
   componentWillMount() {
@@ -32,7 +34,7 @@ class Attendees extends React.Component {
   componentDidUpdate() {
   }
 
-  toggleAddAttendee(username) {
+  toggleAttendee(username) {
     if (this.state.attendees.includes(username)) {
       console.log('Leave!');
       let userIndex = this.state.attendees.indexOf(username);
@@ -42,6 +44,7 @@ class Attendees extends React.Component {
       this.setState({
         attendees: usernames
       });
+      this.toggleIcon(username);
     } else if (!(this.state.attendees.includes(username))) {
       console.log('Enter!');
       let usernames = this.state.attendees.slice();
@@ -50,6 +53,7 @@ class Attendees extends React.Component {
       this.setState({
         attendees: usernames
       });
+      this.toggleIcon(username);
     }
   }
 
@@ -74,10 +78,7 @@ class Attendees extends React.Component {
             <Text style={styles.userStyle}>{item.username}</Text>
             <TouchableWithoutFeedback
               onPress={() => {
-                console.log('clicked');
-                // this.state.attendees.push(item.username);
-                this.toggleAddAttendee(item.username);
-
+                this.toggleAttendee(item.username);
               }}
               style={ styles.iconStyle }>
               {this.toggleIcon(item.username)}
@@ -86,7 +87,7 @@ class Attendees extends React.Component {
         />
         <Button
           onPress={() => {
-            Actions.TranscriptionForm({attendess: this.state.attendees});
+            Actions.TranscriptionForm({attendees: this.state.attendees});
           }}
           title="Add Attendees"
         />
