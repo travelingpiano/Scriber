@@ -25,15 +25,24 @@ class MapSpeakers extends React.Component {
     this.state = {
       attendees: this.props.attendees,
       currentSpeaker: null,
-      allSpeakers: {},
+      // allSpeakers: {},
       allSnippets: null,
     };
+
+    this.allSpeakers = {};
+    this.updateSpeaker = this.updateSpeaker.bind(this);
+    this.renderTranscriptionSnippets = this.renderTranscriptionSnippets.bind(this);
   }
 
   componentWillMount() {
     this.renderTranscriptionSnippets();
     console.log(this.state);
   }
+
+  // componentDidUpdate(nextProps) {
+  //   console.log(this.state);
+  //   this.renderTranscriptionSnippets();
+  // }
 
   renderAttendeesOptions() {
     return this.state.attendees.map(attendee => {
@@ -50,22 +59,36 @@ class MapSpeakers extends React.Component {
   }
 
   updateSpeaker(value,key) {
-    let newSpeakers = merge({},this.state.allSpeakers);
-    newSpeakers[key] = value;
-    this.setState({allSpeakers: newSpeakers});
+    let newSpeakers = {};
+    Object.keys(this.allSpeakers).forEach((k) => {
+      if (k === key) {
+        newSpeakers[key] = value;
+      } else {
+        newSpeakers[key] = this.allSpeakers[key];
+      }
+    });
+    console.log(newSpeakers);
+    // this.allSpeakers = newSpeakers;
+    // this.state.currentSpeaker = null;
+    this.allSpeakers = newSpeakers;
+    this.setState({currentSpeaker: null});
+    // this.setState({currentSpeaker: null});
+    console.log(this.state);
+    console.log(this.allSpeakers);
     this.renderTranscriptionSnippets();
+    // this.renderTranscriptionSnippets();
   }
 
+  // renders the list of speakers and attendees that show up in the pop-up menu to map speakers to attendees
   renderSpeakersList() {
-    if (this.state.allSpeakers) {
-      console.log(this.state.allSpeakers);
-      return Object.keys(this.state.allSpeakers).map((key, idx) => {
-        if (Number.isInteger(this.state.allSpeakers[key])) {
+    if (this.allSpeakers) {
+      return Object.keys(this.allSpeakers).map((key, idx) => {
+        if (Number.isInteger(this.allSpeakers[key])) {
           return (
             <View style={styles.topbar} key={`speaker-${idx}`}>
               <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => this.updateSpeaker(value,key)}>
                 <MenuTrigger style={styles.trigger}>
-                  <Text style={styles.triggerText}>Speaker {this.state.allSpeakers[key]}</Text>
+                  <Text style={styles.triggerText}>Speaker {this.allSpeakers[key]}</Text>
                 </MenuTrigger>
                 <MenuOptions>
                   {this.renderAttendeesOptions()}
@@ -74,12 +97,11 @@ class MapSpeakers extends React.Component {
             </View>
           );
         } else {
-          console.log(this.state.allSpeakers[key]);
           return (
             <View style={styles.topbar} key={`speaker-${idx}`}>
               <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => this.updateSpeaker(value,key)}>
                 <MenuTrigger style={styles.trigger}>
-                  <Text style={styles.triggerText}>{this.state.allSpeakers[key]}</Text>
+                  <Text style={styles.triggerText}>{this.allSpeakers[key]}</Text>
                 </MenuTrigger>
                 <MenuOptions>
                   {this.renderAttendeesOptions()}
@@ -93,6 +115,7 @@ class MapSpeakers extends React.Component {
   }
 
   renderTranscriptionSnippets() {
+    console.log(this.state);
     if (this.props.transcription) {
       let { transcription, createdTime } = this.props;
       let newSnippets = transcription.transcription.map((snippet,idx) => {
@@ -109,14 +132,17 @@ class MapSpeakers extends React.Component {
   }
 
   renderSpeaker(snippet) {
+    console.log(this.state);
     let snippetSpeaker = JSON.parse(snippet).speaker;
-    if (!Object.keys(this.state.allSpeakers).includes(snippetSpeaker)) {
-      this.state.allSpeakers[snippetSpeaker]=snippetSpeaker;
+    if (!Object.keys(this.allSpeakers).includes(snippetSpeaker)) {
+      this.allSpeakers[snippetSpeaker]=snippetSpeaker;
     }
-    if (snippetSpeaker === this.state.currentSpeaker) {
-      return null;
+    if (this.allSpeakers[snippetSpeaker] === this.state.currentSpeaker) {
+      return (
+      <Text style={styles.speaker}>Speaker: {this.state.currentSpeaker}</Text>
+      );
     } else {
-      this.state.currentSpeaker = this.state.allSpeakers[snippetSpeaker];
+      this.state.currentSpeaker = this.allSpeakers[snippetSpeaker];
       return (
         <Text style={styles.speaker}>Speaker: {this.state.currentSpeaker}</Text>
       );
@@ -124,7 +150,7 @@ class MapSpeakers extends React.Component {
   }
 
   render() {
-
+    console.log('rendering');
     return (
         <MenuContext style={{flex: 1}}>
           <Text>Map Speakers</Text>
