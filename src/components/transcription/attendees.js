@@ -81,9 +81,9 @@ class Attendees extends React.Component {
   }
 
   render() {
-    console.log('USERS', this.state.users);
-    console.log('In MEETING',this.state.attendees);
-    console.log('ICONS',this.state.icons);
+    // console.log('USERS', this.state.users);
+    // console.log('In MEETING',this.state.attendees);
+    // console.log('ICONS',this.state.icons);
     let icons = [];
     if(this.state.icons.length==this.props.users.length){
       icons = this.state.icons;
@@ -113,7 +113,7 @@ class Attendees extends React.Component {
           />
           <Button
             onPress={() => {
-              Actions.TranscriptionForm({attendees: this.state.attendees});
+              Actions.TranscriptionForm({usernames: this.state.attendees, transcriptionTitle: this.props.transcriptionTitle, description: this.props.description});
             }}
             title="Add Attendees"
           />

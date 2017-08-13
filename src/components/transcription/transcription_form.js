@@ -18,31 +18,67 @@ class TranscriptionForm extends React.Component {
     super(props);
     console.log('form props', this.props);
     this.state = {
-      title:'',
+      transcriptionTitle:'',
       transcription: '',
       description: '',
       audio_url:'',
-      usernames: []
+      usernames: ''
     };
 
     this.createTranscription = this.props.createTranscription.bind(this);
     this.addTranscription = this.addTranscription.bind(this);
   }
 
-  // recordAudio() {
-  //   insert record audio action
-  //   return audio file
-  // }
+  componentDidMount(){
+    console.log(this.props);
+    this.setState({
+      transcriptionTitle: this.props.transcriptionTitle,
+      description: this.props.description,
+      usernames: this.props.usernames
+    });
+  }
+
+  componentDidUpdate(){
+    console.log('didupdate');
+  }
+
+
+  componentWillReceiveProps(newProps){
+    console.log(newProps);
+    this.setState({
+      transcriptionTitle: newProps.transcriptionTitle,
+      description: newProps.description
+    });
+  }
+
+
 
   addTranscription() {
-    let data = new FormData();
-    data.append('title', this.state.title);
-    data.append('transcription', this.state.transcription);
-    data.append('description', this.state.description);
-    data.append('audio_url', this.state.audio_url);
-    data.append('usernames', this.state.usernames);
-    this.props.createTranscription(data)
-      .then(Actions.TranscriptionShow());
+    // let data = new FormData();
+    // data.append('title', this.state.transcriptionTitle);
+    // data.append('transcription', this.state.transcription);
+    // data.append('description', this.state.description);
+    // data.append('audio_url', `${this.state.transcriptionTitle}.aac`);
+    // data.append('usernames', this.state.usernames);
+    let data = {};
+    data['title'] = this.state.transcriptionTitle;
+    data['description'] = this.state.description;
+    data['audio_url'] = `${this.state.transcriptionTitle}.aac`;
+    data['usernames'] = this.state.usernames;
+    console.log(data);
+    // if(this.props.recorded){
+    // this.props.createTranscription(data)
+    //   .then(()=>Actions.TranscriptionIndex());
+    // // }
+    fetch('http://127.0.0.1:8000/transcriptions/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Host': '127.0.0.1'
+      },
+      body: JSON.stringify(data)
+    }).then(()=>Actions.TranscriptionIndex());
   }
 
   render() {
@@ -54,7 +90,6 @@ class TranscriptionForm extends React.Component {
             headerStyle,
             recordAudioStyle,
             transcriptionFormStyle } = styles;
-
     return (
       <View style={ transcriptionFormStyle } >
         <View style={ headerStyle }>
@@ -68,11 +103,15 @@ class TranscriptionForm extends React.Component {
             style={ textInputStyle }
             label='Title'
             placeholder='Title'
+            value={this.state.transcriptionTitle}
+            onChangeText={(transcriptionTitle)=>this.setState({transcriptionTitle})}
             />
           <TextInput
             style={ textInputStyle }
             label='Description'
             placeholder='Description'
+            value={this.state.description}
+            onChangeText={(description)=>this.setState({description})}
           />
         </View>
 
@@ -83,25 +122,21 @@ class TranscriptionForm extends React.Component {
             </Text>
 
             <Button
-              onPress={() => Actions.Attendees()}
+              onPress={() => Actions.Attendees({transcriptionTitle: this.state.transcriptionTitle, description: this.state.description})}
               title='Add Attendees'
               />
           </View>
 
           <View style={ attendeeNamesStyle }>
-            <FlatList
-              data={this.props.attendees}
-              keyExtractor={item => item}
-              renderItem={({ item }) =>
-              <Text>{item}</Text>
-            }
-            />
+            <Text>
+              PLACEHOLDer
+            </Text>
           </View>
       </View>
 
         <View style={ recordAudioStyle }>
           <Button
-            onPress={() => Actions.RecordAudio({users: this.props.users})}
+            onPress={() => Actions.RecordAudio({users: this.props.users, transcriptionTitle: this.state.transcriptionTitle, description: this.state.description, usernames: this.state.usernames})}
             title="Record Audio"
           />
         </View>
@@ -125,6 +160,16 @@ class TranscriptionForm extends React.Component {
   }
 }
 // got to a new page with list of attendees to choose from to pick attendees
+
+
+
+// <FlatList
+//   data={this.state.usernames}
+//   keyExtractor={item => item}
+//   renderItem={({ item }) =>
+//   <Text>{item}</Text>
+// }
+// />
 
 
 const styles = StyleSheet.create({
