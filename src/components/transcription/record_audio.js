@@ -12,6 +12,9 @@ import {
 
 import Sound from 'react-native-sound';
 import {AudioRecorder, AudioUtils} from 'react-native-audio';
+//uploading to AWS
+import { RNS3 } from 'react-native-aws3';
+// import Config from 'react-native-config';
 
 class RecordAudio extends Component {
 
@@ -182,6 +185,34 @@ class RecordAudio extends Component {
     _finishRecording(didSucceed, filePath) {
       this.setState({ finished: didSucceed });
       console.log(`Finished recording of duration ${this.state.currentTime} seconds at path: ${filePath}`);
+      const file = {
+        uri: filePath,
+        name: 'testA.aac',
+        type: 'audio/vnd.dlna.adts'
+      }
+      const options = {
+        keyPrefix: "uploads/",
+        bucket: "scriberflexproject",
+        region: "us-west-2",
+        accessKey: "AKIAJLDHHMYCV425E22Q",
+        secretKey: "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",
+        successActionStatus: 201
+      }
+      RNS3.put(file, options).then(response => {
+        if (response.status !== 201)
+          throw new Error("Failed to upload image to S3");
+        console.log(response.body);
+        /**
+         * {
+         *   postResponse: {
+         *     bucket: "your-bucket",
+         *     etag : "9f620878e06d28774406017480a59fd4",
+         *     key: "uploads/image.png",
+         *     location: "https://your-bucket.s3.amazonaws.com/uploads%2Fimage.png"
+         *   }
+         * }
+         */
+      });
     }
 
     render() {

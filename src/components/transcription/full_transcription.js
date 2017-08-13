@@ -54,7 +54,6 @@ class FullTranscription extends Component {
   }
 
   playAudio(transcription,snippet) {
-    // need to convert timestamps to seconds
     snippet = JSON.parse(snippet);
     let track = new Sound(`https://s3-us-west-2.amazonaws.com/scriberflexproject/food34.mp3/${snippet.filename}`, null, (e) => {
       if (e) {
