@@ -51,46 +51,6 @@ class TranscriptionEdit extends React.Component {
     }
   }
 
-  renderTime(createdTime, time) {
-    return (
-      <Text style={styles.time}>{this.props.parseTime(createdTime)}</Text>
-    );
-  }
-
-  renderSpeaker(snippet) {
-    if (!this.allSpeakers.includes(JSON.parse(snippet).speaker)) {
-      this.allSpeakers.push(JSON.parse(snippet).speaker);
-    }
-    if (JSON.parse(snippet).speaker === this.currentSpeaker) {
-      return null;
-    } else {
-      this.currentSpeaker = JSON.parse(snippet).speaker;
-      return (
-        <Text style={styles.speaker}>Speaker: {JSON.parse(snippet).speaker}</Text>
-      );
-    }
-  }
-
-  renderTime(createdTime, time) {
-    return (
-      <Text style={styles.time}>{this.props.parseTime(createdTime)}</Text>
-    );
-  }
-
-  // render list of attendees to pick speaker from
-  // renderPicker() {
-  //   return (
-  //     <Picker
-  //       style={styles.picker}
-  //       onValueChange={() => console.log("New Val")}
-  //       mode="dropdown">
-  //       <Picker.Item label="Test 1" value="test1" />
-  //       <Picker.Item label="Test 2" value="test2" />
-  //       <Picker.Item label="Test 3" value="test3" />
-  //     </Picker>
-  //   );
-  // }
-
   render() {
     const { textInputStyle,
             attendeeTabStyle,
@@ -98,23 +58,6 @@ class TranscriptionEdit extends React.Component {
             headerStyle,
             recordAudioStyle,
             transcriptionEditStyle } = styles;
-
-    this.currentSpeaker = null;
-    this.allSpeakers = [];
-    this.allSnippets = null;
-    if (this.props.currentTranscription) {
-      let { currentTranscription, createdTime } = this.props;
-      this.allSnippets = currentTranscription.transcription.map((snippet,idx) => {
-        return (
-          <View key={`snippet-${idx}`}>
-            {this.renderSpeaker(snippet)}
-            <Text style={styles.timeStamps}>{JSON.parse(snippet).timestamps[0]}</Text>
-            <Text>{JSON.parse(snippet).text}</Text>
-          </View>
-        );
-      });
-    }
-    console.log(this.allSnippets);
 
     return (
       <View style={ transcriptionEditStyle } >
@@ -152,21 +95,15 @@ class TranscriptionEdit extends React.Component {
           />
         </View>
 
-        <MapSpeakers style={{flex:.5}} allSpeakers={this.allSpeakers} attendees={this.state.usernames} />
+        <MapSpeakers style={{flex:.5}} attendees={this.state.usernames} transcription={this.state} />
 
-      <View style={styles.buttonStyle}>
+        <View style={styles.buttonStyle}>
           <Button
             onPress={() => this.updateTranscription()}
             title="Update Transcription"
             />
         </View>
 
-        <View style={styles.container}>
-          <ScrollView style={styles.snippets}>
-            <Text style={styles.title}>Transcription</Text>
-            {this.allSnippets}
-          </ScrollView>
-        </View>
       </View>
     );
   }
@@ -198,36 +135,6 @@ const styles = StyleSheet.create({
     flex: .2,
     flexDirection: 'column',
     backgroundColor: '#C6F1E4'
-  },
-
-  recordAudioStyle: {
-    flex: 1
-  },
-
-  snippet: {
-    padding: 10
-  },
-
-  time: {
-    flex: .2,
-    justifyContent: 'center',
-    padding: 10
-  },
-
-  speaker: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    paddingTop: 10,
-  },
-
-  timeStamps: {
-    textAlign: 'right',
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-
-  snippets: {
-    height: 20,
   },
 
   container: {

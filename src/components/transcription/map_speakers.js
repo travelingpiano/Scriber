@@ -21,19 +21,38 @@ const { SlideInMenu } = renderers;
 class MapSpeakers extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+
     this.state = {
-      allSpeakers: this.props.allSpeakers,
-      attendees: this.props.attendees
+      attendees: this.props.attendees,
+      currentSpeaker: null,
+      allSpeakers: [],
+      allSnippets: null,
     };
+    console.log(this.props);
+  }
+
+  componentWillMount() {
+    this.renderTranscriptionSnippets();
   }
 
   renderAttendeesOptions() {
     return this.state.attendees.map(attendee => {
       return (
-        <MenuOption value={`${attendee}`} text={`${attendee}`} />
+        <MenuOption key={`${attendee}`} value={`${attendee}`} text={`${attendee}`} />
       );
     });
+  }
+
+  renderTime(createdTime, time) {
+    return (
+      <Text style={styles.time}>{this.props.parseTime(createdTime)}</Text>
+    );
+  }
+
+  updateSpeaker(value,idx) {
+    let newSpeakers = JSON.parse(JSON.stringify(this.state.allSpeakers));
+    newSpeakers[idx] = value;
+    this.setState({allSpeakers: newSpeakers});
   }
 
   renderSpeakersList() {
@@ -43,11 +62,7 @@ class MapSpeakers extends React.Component {
         if (Number.isInteger(speaker)) {
           return (
             <View style={styles.topbar} key={`speaker-${idx}`}>
-              <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => {
-                  let newSpeakers = JSON.parse(JSON.stringify(this.state.allSpeakers));
-                  newSpeakers[idx] = value;
-                  this.setState({allSpeakers: newSpeakers});
-                }}>
+              <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => this.updateSpeaker(value,idx)}>
                 <MenuTrigger style={styles.trigger}>
                   <Text style={styles.triggerText}>Speaker {speaker}</Text>
                 </MenuTrigger>
@@ -60,11 +75,7 @@ class MapSpeakers extends React.Component {
         } else {
           return (
             <View style={styles.topbar} key={`speaker-${idx}`}>
-              <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => {
-                let newSpeakers = JSON.parse(JSON.stringify(this.state.allSpeakers));
-                newSpeakers[idx] = value;
-                this.setState({allSpeakers: newSpeakers});
-                }}>
+              <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => this.updateSpeaker(value,idx)}>
                 <MenuTrigger style={styles.trigger}>
                   <Text style={styles.triggerText}>{speaker}</Text>
                 </MenuTrigger>
@@ -79,11 +90,47 @@ class MapSpeakers extends React.Component {
     }
   }
 
+  renderTranscriptionSnippets() {
+    if (this.props.transcription) {
+      let { transcription, createdTime } = this.props;
+      let newSnippets = transcription.transcription.map((snippet,idx) => {
+        return (
+          <View key={`snippet-${idx}`}>
+            {this.renderSpeaker(snippet)}
+            <Text style={styles.timeStamps}>{JSON.parse(snippet).timestamps[0]}</Text>
+            <Text>{JSON.parse(snippet).text}</Text>
+          </View>
+        );
+      });
+      this.setState({allSnippets: newSnippets});
+    }
+  }
+
+  renderSpeaker(snippet) {
+    if (!this.state.allSpeakers.includes(JSON.parse(snippet).speaker)) {
+      this.state.allSpeakers.push(JSON.parse(snippet).speaker);
+    }
+    if (JSON.parse(snippet).speaker === this.state.currentSpeaker) {
+      return null;
+    } else {
+      this.state.currentSpeaker = JSON.parse(snippet).speaker;
+      return (
+        <Text style={styles.speaker}>Speaker: {JSON.parse(snippet).speaker}</Text>
+      );
+    }
+  }
+
   render() {
 
     return (
         <MenuContext style={{flex: 1}}>
+          <Text>Map Speakers</Text>
           {this.renderSpeakersList()}
+
+          <ScrollView style={styles.snippets}>
+            <Text style={styles.title}>Transcription</Text>
+            {this.state.allSnippets}
+          </ScrollView>
         </MenuContext>
     );
   }
@@ -110,6 +157,31 @@ const styles = StyleSheet.create({
   },
   triggerText: {
     color: 'white',
+  },
+  speaker: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingTop: 10,
+  },
+
+  timeStamps: {
+    textAlign: 'right',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+
+  snippets: {
+    height: 20,
+  },
+
+  snippet: {
+    padding: 10
+  },
+
+  time: {
+    flex: .2,
+    justifyContent: 'center',
+    padding: 10
   },
 
 });
