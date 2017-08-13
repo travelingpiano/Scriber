@@ -59,6 +59,21 @@ class TranscriptionShow extends Component {
     }
   }
 
+  submitDelete(){
+    fetch(`http://127.0.0.1:8000/transcriptions/${this.props.currentTranscription.pk}`, { // adjust to actual site url
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Origin': '',
+          'Host': '127.0.0.1:8000',
+        }
+      }).then(
+      ()=>{
+        Actions.TranscriptionIndex();
+      }
+    );
+  }
+
   renderAttendees(attendees) {
     if (attendees) {
       return(
@@ -78,14 +93,13 @@ class TranscriptionShow extends Component {
 
   renderDelete() {
     // console.log(this.state);
-    // console.log(this.props);
+    console.log(this.props.currentTranscription.usersnames);
     if (this.props.currentTranscription && this.props.currentTranscription.usernames) {
-      if (this.props.currentTranscription.usernames[0] === 'virginiachen') {
+      if (this.props.currentTranscription.usernames[0] === 'virginia') {
         return (
           <TouchableHighlight
             onPress={ () => {
-            this.props.deleteTranscription(this.props.currentTranscription);
-            Actions.TranscriptionIndex();
+              this.submitDelete();
             }}
             style={ styles.buttonStyle } >
             <Text>

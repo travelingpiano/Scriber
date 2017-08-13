@@ -23,10 +23,10 @@ class TranscriptionIndex extends Component {
   }
 
   componentDidUpdate(nextprops) {
-    if (this.props !== nextprops) {
-      console.log('great');
-      this.props.fetchTranscriptions();
-    }
+    // if (this.props !== nextprops) {
+    //   console.log('great');
+    //   this.props.fetchTranscriptions();
+    // }
   }
 
   render() {
