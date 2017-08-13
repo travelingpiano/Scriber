@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet,
          View,
-         ListView,
+         FlatList,
          Button,
          Text,
          TextInput,
@@ -47,7 +47,9 @@ class TranscriptionForm extends React.Component {
 
   render() {
     const { textInputStyle,
+            attendeeNamesStyle,
             attendeeTabStyle,
+            attendeeTopStyle,
             formStyle,
             headerStyle,
             recordAudioStyle,
@@ -75,13 +77,26 @@ class TranscriptionForm extends React.Component {
         </View>
 
         <View style={ attendeeTabStyle }>
-          <Text>
-            Attendees
-          </Text>
-          <Button
-            onPress={() => Actions.Attendees()}
-            title='Add Attendees'
-          />
+          <View style={ attendeeTopStyle }>
+            <Text>
+              Attendees
+            </Text>
+
+            <Button
+              onPress={() => Actions.Attendees()}
+              title='Add Attendees'
+              />
+          </View>
+
+          <View style={ attendeeNamesStyle }>
+            <FlatList
+              data={this.props.attendees}
+              keyExtractor={item => item}
+              renderItem={({ item }) =>
+              <Text>{item}</Text>
+            }
+            />
+          </View>
       </View>
 
         <View style={ recordAudioStyle }>
@@ -93,7 +108,15 @@ class TranscriptionForm extends React.Component {
 
         <View>
           <Button
-            onPress={() => this.addTranscription()}
+            onPress={() => {
+              let users = this.state.usernames.slice();
+              users = users.concat(this.props.attendees);
+              this.setState({
+                usernames: users
+              });
+              console.log('adding', this.state.usernames);
+              this.addTranscription();
+            }}
             title="Create Transcription"
             />
         </View>
@@ -109,7 +132,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  attendeeNamesStyle: {
+    flexDirection: 'row',
+  },
+
   attendeeTabStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+
+  attendeeTopStyle: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',

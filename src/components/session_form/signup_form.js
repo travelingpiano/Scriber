@@ -153,11 +153,13 @@ class SignupForm extends React.Component {
         </View>
 
         <TouchableHighlight
-          onPress={ () =>
+          onPress={ () => {
             this.createUser(config.client_id,
-                         config.client_key,
-                         this.state.username,
-                         this.state.password) }
+              config.client_key,
+              this.state.username,
+              this.state.password);
+            }
+          }
           style={ buttonStyle } >
           <Text>
             SignUp

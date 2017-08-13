@@ -1,7 +1,5 @@
 import React from 'react';
 import { StyleSheet,
-         ListView,
-         ScrollView,
          View,
          FlatList,
          Button,
@@ -22,13 +20,17 @@ class Attendees extends React.Component {
     this.state = {
       attendees: [],
     };
-    this.props.users = this.props.getUsers;
+
     this.toggleAttendee = this.toggleAttendee.bind(this);
     this.toggleIcon = this.toggleIcon.bind(this);
   }
 
   componentWillMount() {
     this.props.getUsers();
+  }
+
+  componentReceiveProps() {
+    // this.props.getUsers();
   }
 
   componentDidUpdate() {
@@ -59,8 +61,10 @@ class Attendees extends React.Component {
 
   toggleIcon(username) {
     if (this.state.attendees.includes(username)) {
+      // console.log('green');
       return checkIcon;
     } else if (!(this.state.attendees.includes(username))) {
+      // console.log('red');
       return plusIcon;
     }
   }

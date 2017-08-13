@@ -29,7 +29,6 @@ export const createTranscription = transcription => dispatch => {
     .then(json => {
       dispatch(receiveTranscription(json));
       console.log('CREATE-T', json);
-      console.log('LAST', json.last);
       return json.last;
     });
 };
