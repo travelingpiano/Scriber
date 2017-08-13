@@ -104,27 +104,26 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.environ["DATABASE_URL"])
+# }
+
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ["DATABASE_URL"])
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'scriber',
+        # 'USER': 'lihsuan',
+        # 'USER': 'virginiachen',
+        # 'USER': 'adefarquhar',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
 }
 
-# DATABASES = {
-#     'default': {
-#
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'scriber',
-#         # 'USER': 'lihsuan',
-#         # 'USER': 'virginiachen',
-#         # 'USER': 'adefarquhar',
-#         'USER': 'postgres',
-#         'PASSWORD': 'password',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
-#
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config()
+# DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
