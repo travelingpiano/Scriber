@@ -54,17 +54,14 @@ class FullTranscription extends Component {
   }
 
   playAudio(transcription,snippet) {
-    // need to convert timestamps to seconds
-    let timestamps = snippet.timestamps;
-    let track = new Sound(`${transcription.audio_url}`, null, (e) => {
+    snippet = JSON.parse(snippet);
+    let track = new Sound(`https://s3-us-west-2.amazonaws.com/scriberflexproject/food34.mp3/${snippet.filename}`, null, (e) => {
       if (e) {
         console.log('error loading track:', e);
+      } else {
+        track.play();
       }
     });
-
-    track.setCurrentTime(timestamps[0]);
-    track.play()
-      .then(setTimeout(() => track.stop(), timestamps[1]-timestamps[0]));
   }
 
   renderTime(createdTime, time) {

@@ -66,7 +66,7 @@ def transcribe(url, title):
         AWSkey = Key(bucket)
         AWSkey.key = f"{title}{counter}.aac"
         AWSkey.set_contents_from_filename(filename)
-
+        new_json['filename'] = AWSkey.key
         # AWSkey.send_file(partial_sound._data)
         # with open(filename, 'rb') as f:
         #     print(f)
