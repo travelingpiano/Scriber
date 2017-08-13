@@ -113,18 +113,18 @@ DATABASES = {
 #
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'scriber',
-#         'USER': 'lihsuan',
-#         'USER': 'virginiachen',
-#         'USER': 'adefarquhar',
+#         # 'USER': 'lihsuan',
+#         # 'USER': 'virginiachen',
+#         # 'USER': 'adefarquhar',
 #         'USER': 'postgres',
 #         'PASSWORD': 'password',
 #         'HOST': 'localhost',
 #         'PORT': '',
 #     }
 # }
-
-# db_from_env = dj_database_url.config()
-# DATABASES['default'].update(db_from_env)
+#
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
