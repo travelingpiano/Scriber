@@ -25,11 +25,10 @@ class MapSpeakers extends React.Component {
     this.state = {
       attendees: this.props.attendees,
       currentSpeaker: null,
-      // allSpeakers: {},
+      allSpeakers: {},
       allSnippets: null,
     };
 
-    this.allSpeakers = {};
     this.updateSpeaker = this.updateSpeaker.bind(this);
     this.renderTranscriptionSnippets = this.renderTranscriptionSnippets.bind(this);
   }
@@ -59,36 +58,33 @@ class MapSpeakers extends React.Component {
   }
 
   updateSpeaker(value,key) {
-    let newSpeakers = {};
-    Object.keys(this.allSpeakers).forEach((k) => {
-      if (k === key) {
-        newSpeakers[key] = value;
-      } else {
-        newSpeakers[key] = this.allSpeakers[key];
-      }
-    });
+    let newSpeakers = Object.assign({}, this.state.allSpeakers);
+    // Object.keys(this.state.allSpeakers).forEach((k) => {
+    //   if (k === key) {
+    //     newSpeakers[key] = value;
+    //   } else {
+    //     newSpeakers[key] = this.state.allSpeakers[key];
+    //   }
+    // })
+    newSpeakers[key] = value;
     console.log(newSpeakers);
-    // this.allSpeakers = newSpeakers;
-    // this.state.currentSpeaker = null;
-    this.allSpeakers = newSpeakers;
-    this.setState({currentSpeaker: null});
-    // this.setState({currentSpeaker: null});
+    this.setState({allSpeakers: newSpeakers, currentSpeaker: null});
+    console.log(newSpeakers);
     console.log(this.state);
-    console.log(this.allSpeakers);
+    console.log(this.state.allSpeakers);
     this.renderTranscriptionSnippets();
-    // this.renderTranscriptionSnippets();
   }
 
   // renders the list of speakers and attendees that show up in the pop-up menu to map speakers to attendees
   renderSpeakersList() {
-    if (this.allSpeakers) {
-      return Object.keys(this.allSpeakers).map((key, idx) => {
-        if (Number.isInteger(this.allSpeakers[key])) {
+    if (this.state.allSpeakers) {
+      return Object.keys(this.state.allSpeakers).map((key, idx) => {
+        if (Number.isInteger(this.state.allSpeakers[key])) {
           return (
             <View style={styles.topbar} key={`speaker-${idx}`}>
               <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => this.updateSpeaker(value,key)}>
                 <MenuTrigger style={styles.trigger}>
-                  <Text style={styles.triggerText}>Speaker {this.allSpeakers[key]}</Text>
+                  <Text style={styles.triggerText}>Speaker {this.state.allSpeakers[key]}</Text>
                 </MenuTrigger>
                 <MenuOptions>
                   {this.renderAttendeesOptions()}
@@ -101,7 +97,7 @@ class MapSpeakers extends React.Component {
             <View style={styles.topbar} key={`speaker-${idx}`}>
               <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => this.updateSpeaker(value,key)}>
                 <MenuTrigger style={styles.trigger}>
-                  <Text style={styles.triggerText}>{this.allSpeakers[key]}</Text>
+                  <Text style={styles.triggerText}>{this.state.allSpeakers[key]}</Text>
                 </MenuTrigger>
                 <MenuOptions>
                   {this.renderAttendeesOptions()}
@@ -134,15 +130,17 @@ class MapSpeakers extends React.Component {
   renderSpeaker(snippet) {
     console.log(this.state);
     let snippetSpeaker = JSON.parse(snippet).speaker;
-    if (!Object.keys(this.allSpeakers).includes(snippetSpeaker)) {
-      this.allSpeakers[snippetSpeaker]=snippetSpeaker;
+    if (!Object.keys(this.state.allSpeakers).includes(snippetSpeaker)) {
+      let newSpeakers = Object.assign({},this.state.allSpeakers);
+      newSpeakers[snippetSpeaker] = snippetSpeaker;
+      this.setState({allSpeakers: newSpeakers});
     }
-    if (this.allSpeakers[snippetSpeaker] === this.state.currentSpeaker) {
+    if (this.state.allSpeakers[snippetSpeaker] === this.state.currentSpeaker) {
       return (
       <Text style={styles.speaker}>Speaker: {this.state.currentSpeaker}</Text>
       );
     } else {
-      this.state.currentSpeaker = this.allSpeakers[snippetSpeaker];
+      this.setState({currentSpeaker: this.state.allSpeakers[snippetSpeaker]});
       return (
         <Text style={styles.speaker}>Speaker: {this.state.currentSpeaker}</Text>
       );
