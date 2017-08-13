@@ -38,7 +38,8 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         else:
             return TranscriptionSerializer
     def create(self, request):
-        # print(request.data.get('audio_url'))
+        # print(request.data.get('audio_url')
+        print(request.data)
         user_array = []
         if isinstance(request.data.get('usernames'),str):
             user_array = request.data.get('usernames')[1:-1].split(',')

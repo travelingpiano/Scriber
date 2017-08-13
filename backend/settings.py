@@ -115,7 +115,7 @@ DATABASES = {
         'NAME': 'scriber',
         # 'USER': 'lihsuan',
         # 'USER': 'virginiachen',
-        # 'USER': 'adefarquhar',
+        'USER': 'adefarquhar',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',

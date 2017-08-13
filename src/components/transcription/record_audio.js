@@ -9,6 +9,7 @@ import {
   Platform,
   PermissionsAndroid,
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import Sound from 'react-native-sound';
 import {AudioRecorder, AudioUtils} from 'react-native-audio';
@@ -20,7 +21,7 @@ class RecordAudio extends Component {
 
   constructor(props) {
     super(props);
-
+    console.log(props);
     this.state = {
       currentTime: 0.0,
       recording: false,
@@ -28,6 +29,7 @@ class RecordAudio extends Component {
       finished: false,
       audioPath: AudioUtils.DocumentDirectoryPath + '/test.aac',
       hasPermission: undefined,
+      errors: ""
     };
   }
 
@@ -187,11 +189,11 @@ class RecordAudio extends Component {
       console.log(`Finished recording of duration ${this.state.currentTime} seconds at path: ${filePath}`);
       const file = {
         uri: filePath,
-        name: 'testA.aac',
+        name: `${this.props.title}.aac`,
         type: 'audio/vnd.dlna.adts'
       }
       const options = {
-        keyPrefix: "uploads/",
+        keyPrefix: "",
         bucket: "scriberflexproject",
         region: "us-west-2",
         accessKey: "AKIAJLDHHMYCV425E22Q",
@@ -202,17 +204,15 @@ class RecordAudio extends Component {
         if (response.status !== 201)
           throw new Error("Failed to upload image to S3");
         console.log(response.body);
-        /**
-         * {
-         *   postResponse: {
-         *     bucket: "your-bucket",
-         *     etag : "9f620878e06d28774406017480a59fd4",
-         *     key: "uploads/image.png",
-         *     location: "https://your-bucket.s3.amazonaws.com/uploads%2Fimage.png"
-         *   }
-         * }
-         */
       });
+    }
+
+    _submit(){
+      if(this.state.finished){
+        Actions.TranscriptionForm({recorded: true, transcriptionTitle: this.props.transcriptionTitle, description: this.props.description, usernames: this.props.usernames});
+      }else{
+        this.setState({errors: "No file has been recorded!"})
+      }
     }
 
     render() {
@@ -224,6 +224,8 @@ class RecordAudio extends Component {
             {this._renderButton("PLAY", () => {this._play()} )}
             {this._renderButton("STOP", () => {this._stop()} )}
             {this._renderButton("PAUSE", () => {this._pause()} )}
+            {this._renderButton("SUBMIT", ()=>{this._submit()})}
+            <Text>{this.state.errors}</Text>
             <Text style={styles.progressText}>{this.state.currentTime}s</Text>
           </View>
         </View>
