@@ -68,11 +68,10 @@ class MapSpeakers extends React.Component {
     // })
     newSpeakers[key] = value;
     console.log(newSpeakers);
-    this.setState({allSpeakers: newSpeakers, currentSpeaker: null});
+    this.setState({allSpeakers: newSpeakers, currentSpeaker: null}, () => this.renderTranscriptionSnippets());
     console.log(newSpeakers);
     console.log(this.state);
     console.log(this.state.allSpeakers);
-    this.renderTranscriptionSnippets();
   }
 
   // renders the list of speakers and attendees that show up in the pop-up menu to map speakers to attendees
