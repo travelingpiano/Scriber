@@ -19,29 +19,44 @@ class Attendees extends React.Component {
   constructor(props) {
     super(props);
     // console.log('ATTENDEE', this.props);
-    this.attendees = [];
+    this.state = {
+      attendees: [],
+    };
+    this.props.users = this.props.getUsers;
   }
 
   componentWillMount() {
     this.props.getUsers();
   }
 
+  componentDidUpdate() {
+  }
+
   toggleAddAttendee(username) {
-    if (this.attendees.includes(username)) {
-      // console.log('Hit Me');
-      // this.attendees.push(username);
-      console.log(this.attendees);
+    if (this.state.attendees.includes(username)) {
+      console.log('Leave!');
+      console.log(this.state.attendees);
+    } else if (!(this.state.attendees.includes(username))) {
+      console.log('Enter!');
+      let usernames = this.state.attendees.slice();
+      this.setState({
+        attendees: this.state.attendees.concat(username)
+      });
+      // this.setState(this.state.attendees.splice(this.state.attendees.indexOf(username), 1));
+    }
+  }
+
+  toggleIcon(username) {
+    if (this.state.attendees.includes(username)) {
       return checkIcon;
-    } else if (!(this.attendees.includes(username))) {
-      console.log('LEAVING!');
-      // this.attendees.splice(this.attendees.indexOf(username), 1);
+    } else if (!(this.state.attendees.includes(username))) {
       return plusIcon;
     }
   }
 
   render() {
     console.log('USERS', this.props.users);
-    console.log(this.attendees);
+    console.log(this.state.attendees);
     return (
       <View style={styles.containerStyle}>
         <FlatList
@@ -52,19 +67,19 @@ class Attendees extends React.Component {
             <Text style={styles.userStyle}>{item.username}</Text>
             <TouchableWithoutFeedback
               onPress={() => {
-                console.log('click Plus');
-                this.attendees.push(item.username);
+                console.log('clicked');
+                // this.state.attendees.push(item.username);
                 this.toggleAddAttendee(item.username);
-              } }
+
+              }}
               style={ styles.iconStyle }>
-              {this.toggleAddAttendee(item.username)}
+              {this.toggleIcon(item.username)}
             </TouchableWithoutFeedback>
           </View>}
         />
         <Button
           onPress={() => {
-            this.setState();
-            Actions.TranscriptionForm();
+            Actions.TranscriptionForm({attendess: this.state.attendees});
           }}
           title="Add Attendees"
         />
