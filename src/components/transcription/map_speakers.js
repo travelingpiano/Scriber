@@ -145,14 +145,21 @@ class MapSpeakers extends React.Component {
     } else {
       console.log('RENDERSPEAKER', this.state.allSpeakers[snippetSpeaker]);
       this.setState({currentSpeaker: this.state.allSpeakers[snippetSpeaker]});
-      return (
-        <Text style={styles.speaker}>Speaker: {this.state.allSpeakers[snippetSpeaker]}</Text>
-      );
+
+      if (this.state.allSpeakers[snippetSpeaker]) {
+        return (
+          <Text style={styles.speaker}>Speaker: {this.state.allSpeakers[snippetSpeaker]}</Text>
+        );
+      } else {
+        return (
+          <Text style={styles.speaker}>Speaker: {snippetSpeaker}</Text>
+        );
+      }
+
     }
   }
 
   render() {
-    console.log('rendering');
     return (
         <MenuContext style={{flex: 1}}>
           <Text>Map Speakers</Text>
