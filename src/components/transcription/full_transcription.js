@@ -1,7 +1,7 @@
 import merge from 'lodash';
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
-import Sound from 'react-native-sound';
+// import Sound from 'react-native-sound';
 
 class FullTranscription extends Component {
 

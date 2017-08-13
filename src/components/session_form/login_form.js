@@ -10,6 +10,7 @@ import { AsyncStorage,
          View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import config from '../../lib/config.js';
+// import {receiveCurrentUser} from '../../actions/session_actions';
 
 
 class LoginForm extends React.Component {
@@ -30,6 +31,7 @@ class LoginForm extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     this.loadInitialState().done();
   }
 
@@ -78,10 +80,12 @@ class LoginForm extends React.Component {
       });
     } else {
       AsyncStorage.setItem('token', responseJson.access_token);
-      AsyncStorage.setItem('username',username)
+      AsyncStorage.setItem('username',username);
+
+      console.log('props!',this.props);
       this.setState({
         'token': responseJson.access_token
-      });
+      })
       this.getData(this.state.token);
     }
   }

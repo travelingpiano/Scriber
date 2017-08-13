@@ -114,7 +114,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'scriber',
         # 'USER': 'lihsuan',
-        # 'USER': 'virginiachen',
+        'USER': 'virginiachen',
         # 'USER': 'adefarquhar',
         'PASSWORD': '',
         'HOST': 'localhost',

@@ -12,7 +12,7 @@ class TranscriptionIndex extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
       items: {}
     };
@@ -20,6 +20,13 @@ class TranscriptionIndex extends Component {
 
   componentWillMount() {
     this.props.fetchTranscriptions();
+  }
+
+  componentDidUpdate(nextprops) {
+    if (this.props !== nextprops) {
+      console.log('great');
+      this.props.fetchTranscriptions();
+    }
   }
 
   render() {

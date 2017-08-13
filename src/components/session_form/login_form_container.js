@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-// import {login, logout, signup} from '../../actions/session_actions';
+import {receiveCurrentUser} from '../../actions/session_actions';
 import LoginForm from './login_form';
 
 import {
@@ -10,20 +10,19 @@ import {
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: Boolean(state.session.currentUser),
-    errors: state.errors.errors
+    currentUser: state.session.currentUser
   };
 };
 
-const mapDispatchToProps = (dispatch, {location}) => {
-  const formType = location.pathname.slice(1);
-  // const processForm = (formType === 'login') ? login : signup;
+const mapDispatchToProps = (dispatch) => {
+  console.log('dispatch here');
   return {
-    processForm: user => dispatch(login(user)),
-    formType,
-    // clearErrors: () => dispatch(clearErrors())
+  receiveCurrentUser: username => dispatch(receiveCurrentUser(username)),
   };
+    // clearErrors: () => dispatch(clearErrors())
 };
+
+
 
 // export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
-export default connect(null,null)(LoginForm);
+export default connect(mapStateToProps,mapDispatchToProps)(LoginForm);
