@@ -5,7 +5,7 @@ export const createTranscription = data => (
       'Accept': 'application/json',
       // 'Origin': '',
       'Content-Type': 'application/json',
-      // 'Host': '127.0.0.1:8000',
+      'Host': '127.0.0.1:8000',
     },
     body: data
   })
