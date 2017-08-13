@@ -11,6 +11,7 @@ import Attendees from './components/transcription/attendees';
 import RecordAudio from './components/transcription/record_audio';
 import TranscriptionIndex from './components/transcription/transcription_index_container';
 import TranscriptionShow from './components/transcription/transcription_show_container';
+import TranscriptionEdit from './components/transcription/transcription_edit_container';
 import TabIcon from './lib/tabIcon';
 
 const Routes = () => (
@@ -24,6 +25,13 @@ const Routes = () => (
         back
         component={LoginForm}
         title="Login"
+      />
+
+      <Scene
+        key="TranscriptionEdit"
+        back
+        component={TranscriptionEdit}
+        title="Edit Transcription"
       />
 
       <Scene
@@ -50,6 +58,9 @@ const Routes = () => (
         back
         component={TranscriptionShow}
         title="Transcription"
+        rightTitle="Edit"
+        onRight={() => Actions.TranscriptionEdit()}
+        onBack={() => Actions.TranscriptionIndex()}
       />
 
       <Scene
@@ -72,8 +83,9 @@ const Routes = () => (
           key="TranscriptionIndex"
           component={TranscriptionIndex}
           title="Your Transcriptions"
-          icon={TabIcon}
-        />
+          icon={TabIcon}>
+
+        </Scene>
       <Scene key="TranscriptionForm"
         title="New Transcription"
         back

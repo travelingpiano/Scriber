@@ -39,4 +39,21 @@ export const deleteTranscription = (transcription) => (
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-    }));
+    }
+  )
+);
+
+export const updateTranscription = (transcription) => {
+  let pk = transcription._parts[5][1];
+  console.log(transcription);
+  return fetch(`http://127.0.0.1:8000/transcriptions/${pk}/`,
+    {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: transcription
+    }
+  );
+};
