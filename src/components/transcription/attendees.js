@@ -35,14 +35,18 @@ class Attendees extends React.Component {
   toggleAddAttendee(username) {
     if (this.state.attendees.includes(username)) {
       console.log('Leave!');
-      console.log(this.state.attendees);
+      let userIndex = this.state.attendees.indexOf(username);
+      this.state.attendees.splice(userIndex, 1);
+
+      this.setState({
+        attendees: this.state.attendees
+      });
     } else if (!(this.state.attendees.includes(username))) {
       console.log('Enter!');
-      let usernames = this.state.attendees.slice();
+      // let usernames = this.state.attendees.slice();
       this.setState({
         attendees: this.state.attendees.concat(username)
       });
-      // this.setState(this.state.attendees.splice(this.state.attendees.indexOf(username), 1));
     }
   }
 
@@ -56,7 +60,7 @@ class Attendees extends React.Component {
 
   render() {
     console.log('USERS', this.props.users);
-    console.log(this.state.attendees);
+    console.log('In MEETING',this.state.attendees);
     return (
       <View style={styles.containerStyle}>
         <FlatList
