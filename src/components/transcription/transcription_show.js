@@ -16,10 +16,10 @@ class TranscriptionShow extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props);
+    // console.log(this.props);
 
     let hi = this.getUser();
-    console.log(hi);
+    // console.log(hi);
 
     if (this.props.transcriptionPk) {
       this.props.fetchTranscription(this.props.transcriptionPk);
@@ -31,7 +31,7 @@ class TranscriptionShow extends Component {
   getUser() {
     // AsyncStorage.getItem('username').then(result => this.setState({currentUser: result}));
     AsyncStorage.getItem('username').then(result => {
-      console.log(result);
+      // console.log(result);
       return result;
     });
   //   this.setState({currentUser: result});
@@ -77,8 +77,8 @@ class TranscriptionShow extends Component {
   }
 
   renderDelete() {
-    console.log(this.state);
-    console.log(this.props);
+    // console.log(this.state);
+    // console.log(this.props);
     if (this.props.currentTranscription && this.props.currentTranscription.usernames) {
       if (this.props.currentTranscription.usernames[0] === 'virginiachen') {
         return (
@@ -98,7 +98,7 @@ class TranscriptionShow extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     if (this.props.currentTranscription) {
       let transcription = this.props.currentTranscription;
       let parsedTime = this.parseTime(transcription.created_time);

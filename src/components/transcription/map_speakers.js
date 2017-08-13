@@ -35,13 +35,17 @@ class MapSpeakers extends React.Component {
 
   componentWillMount() {
     this.renderTranscriptionSnippets();
-    console.log(this.state);
+    // console.log(this.state);
   }
 
-  // componentDidUpdate(nextProps) {
-  //   console.log(this.state);
-  //   this.renderTranscriptionSnippets();
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    console.log('HASDFHASDHF', prevState);
+    console.log('AHSDFDHSAF', this.state);
+    if (JSON.stringify(prevState.allSpeakers) !== JSON.stringify(this.state.allSpeakers)) {
+      console.log('RENDERTRANSITPIDJFSD');
+      this.renderTranscriptionSnippets();
+    }
+  }
 
   renderAttendeesOptions() {
     return this.state.attendees.map(attendee => {
@@ -67,11 +71,10 @@ class MapSpeakers extends React.Component {
     //   }
     // })
     newSpeakers[key] = value;
-    console.log(newSpeakers);
-    this.setState({allSpeakers: newSpeakers, currentSpeaker: null}, () => this.renderTranscriptionSnippets());
-    console.log(newSpeakers);
-    console.log(this.state);
-    console.log(this.state.allSpeakers);
+    console.log('NEWSPEAKERS', newSpeakers);
+    this.setState({allSpeakers: newSpeakers, currentSpeaker: null});
+    // () => setTimeout(this.renderTranscriptionSnippets, 100)
+    // console.log('after setstate');
   }
 
   // renders the list of speakers and attendees that show up in the pop-up menu to map speakers to attendees
@@ -110,7 +113,6 @@ class MapSpeakers extends React.Component {
   }
 
   renderTranscriptionSnippets() {
-    console.log(this.state);
     if (this.props.transcription) {
       let { transcription, createdTime } = this.props;
       let newSnippets = transcription.transcription.map((snippet,idx) => {
@@ -127,21 +129,24 @@ class MapSpeakers extends React.Component {
   }
 
   renderSpeaker(snippet) {
-    console.log(this.state);
     let snippetSpeaker = JSON.parse(snippet).speaker;
-    if (!Object.keys(this.state.allSpeakers).includes(snippetSpeaker)) {
+    console.log('CONDITION', this.state.allSpeakers, 'INLCUDES?', snippetSpeaker);
+    console.log(Object.keys(this.state.allSpeakers));
+    if (!Object.keys(this.state.allSpeakers).includes(`${snippetSpeaker}`)) {
+      console.log('PLEASE DONT SHOW');
       let newSpeakers = Object.assign({},this.state.allSpeakers);
       newSpeakers[snippetSpeaker] = snippetSpeaker;
       this.setState({allSpeakers: newSpeakers});
     }
     if (this.state.allSpeakers[snippetSpeaker] === this.state.currentSpeaker) {
       return (
-      <Text style={styles.speaker}>Speaker: {this.state.currentSpeaker}</Text>
+        null
       );
     } else {
+      console.log('RENDERSPEAKER', this.state.allSpeakers[snippetSpeaker]);
       this.setState({currentSpeaker: this.state.allSpeakers[snippetSpeaker]});
       return (
-        <Text style={styles.speaker}>Speaker: {this.state.currentSpeaker}</Text>
+        <Text style={styles.speaker}>Speaker: {this.state.allSpeakers[snippetSpeaker]}</Text>
       );
     }
   }
