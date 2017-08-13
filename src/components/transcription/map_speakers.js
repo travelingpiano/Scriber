@@ -25,14 +25,14 @@ class MapSpeakers extends React.Component {
     this.state = {
       attendees: this.props.attendees,
       currentSpeaker: null,
-      allSpeakers: [],
+      allSpeakers: {},
       allSnippets: null,
     };
-    console.log(this.props);
   }
 
   componentWillMount() {
     this.renderTranscriptionSnippets();
+    console.log(this.state);
   }
 
   renderAttendeesOptions() {
@@ -49,22 +49,23 @@ class MapSpeakers extends React.Component {
     );
   }
 
-  updateSpeaker(value,idx) {
-    let newSpeakers = JSON.parse(JSON.stringify(this.state.allSpeakers));
-    newSpeakers[idx] = value;
+  updateSpeaker(value,key) {
+    let newSpeakers = merge({},this.state.allSpeakers);
+    newSpeakers[key] = value;
     this.setState({allSpeakers: newSpeakers});
+    this.renderTranscriptionSnippets();
   }
 
   renderSpeakersList() {
     if (this.state.allSpeakers) {
       console.log(this.state.allSpeakers);
-      return this.state.allSpeakers.map((speaker, idx) => {
-        if (Number.isInteger(speaker)) {
+      return Object.keys(this.state.allSpeakers).map((key, idx) => {
+        if (Number.isInteger(this.state.allSpeakers[key])) {
           return (
             <View style={styles.topbar} key={`speaker-${idx}`}>
-              <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => this.updateSpeaker(value,idx)}>
+              <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => this.updateSpeaker(value,key)}>
                 <MenuTrigger style={styles.trigger}>
-                  <Text style={styles.triggerText}>Speaker {speaker}</Text>
+                  <Text style={styles.triggerText}>Speaker {this.state.allSpeakers[key]}</Text>
                 </MenuTrigger>
                 <MenuOptions>
                   {this.renderAttendeesOptions()}
@@ -73,11 +74,12 @@ class MapSpeakers extends React.Component {
             </View>
           );
         } else {
+          console.log(this.state.allSpeakers[key]);
           return (
             <View style={styles.topbar} key={`speaker-${idx}`}>
-              <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => this.updateSpeaker(value,idx)}>
+              <Menu name={`speaker-${idx}`} renderer={SlideInMenu} onSelect={value => this.updateSpeaker(value,key)}>
                 <MenuTrigger style={styles.trigger}>
-                  <Text style={styles.triggerText}>{speaker}</Text>
+                  <Text style={styles.triggerText}>{this.state.allSpeakers[key]}</Text>
                 </MenuTrigger>
                 <MenuOptions>
                   {this.renderAttendeesOptions()}
@@ -107,15 +109,16 @@ class MapSpeakers extends React.Component {
   }
 
   renderSpeaker(snippet) {
-    if (!this.state.allSpeakers.includes(JSON.parse(snippet).speaker)) {
-      this.state.allSpeakers.push(JSON.parse(snippet).speaker);
+    let snippetSpeaker = JSON.parse(snippet).speaker;
+    if (!Object.keys(this.state.allSpeakers).includes(snippetSpeaker)) {
+      this.state.allSpeakers[snippetSpeaker]=snippetSpeaker;
     }
-    if (JSON.parse(snippet).speaker === this.state.currentSpeaker) {
+    if (snippetSpeaker === this.state.currentSpeaker) {
       return null;
     } else {
-      this.state.currentSpeaker = JSON.parse(snippet).speaker;
+      this.state.currentSpeaker = this.state.allSpeakers[snippetSpeaker];
       return (
-        <Text style={styles.speaker}>Speaker: {JSON.parse(snippet).speaker}</Text>
+        <Text style={styles.speaker}>Speaker: {this.state.currentSpeaker}</Text>
       );
     }
   }
