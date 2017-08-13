@@ -31,8 +31,7 @@ class TranscriptionShow extends Component {
   getUser() {
     // AsyncStorage.getItem('username').then(result => this.setState({currentUser: result}));
     AsyncStorage.getItem('username').then(result => {
-      // console.log(result);
-      return result;
+      this.setState({currentUser: result});
     });
   //   this.setState({currentUser: result});
   //   console.log(this.state);
@@ -92,10 +91,8 @@ class TranscriptionShow extends Component {
   }
 
   renderDelete() {
-    // console.log(this.state);
-    console.log(this.props.currentTranscription.usersnames);
     if (this.props.currentTranscription && this.props.currentTranscription.usernames) {
-      if (this.props.currentTranscription.usernames[0] === 'virginia') {
+      if (this.props.currentTranscription.usernames[0] === this.state.currentUser) {
         return (
           <TouchableHighlight
             onPress={ () => {

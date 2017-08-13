@@ -22,13 +22,6 @@ class TranscriptionIndex extends Component {
     this.props.fetchTranscriptions();
   }
 
-  componentDidUpdate(nextprops) {
-    // if (this.props !== nextprops) {
-    //   console.log('great');
-    //   this.props.fetchTranscriptions();
-    // }
-  }
-
   render() {
     return (
         <Agenda
