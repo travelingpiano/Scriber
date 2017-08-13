@@ -57,10 +57,10 @@ def transcribe(url, title):
         new_json['timestamps'][1] = key['alternatives'][0]['timestamps'][word_length-1][2]
         new_json['speaker'] = output_json['speaker_labels'][counter]['speaker']
         #sound slicing done below
-        partial_sound = sound[new_json['timestamps'][0]*1000-200:new_json['timestamps'][1]*1000+200]
+        partial_sound = sound[new_json['timestamps'][0]*1000:new_json['timestamps'][1]*1000+200]
         filename = f"./scriber/{title}{counter}.mp3"
         partial_sound.export(filename, format="mp3")
-        os.system(f"avconv -i -y {filename} ./scriber/{title}{counter}.aac")
+        os.system(f"ffmpeg -i {filename} -c:a aac -b:a 160k ./scriber/{title}{counter}.aac")
 
         #AWS upload
         AWSkey = Key(bucket)
