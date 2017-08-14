@@ -120,7 +120,7 @@ class Attendees extends React.Component {
             style={ styles.buttonStyle }
             activeOpacity={.8}
             onPress={() => {
-              if (this.props.transcriptionUsers) {
+              if (this.props.edit) {
                 Actions.TranscriptionEdit({newUsernames:this.state.attendees});
               } else {
                 Actions.TranscriptionForm({usernames: this.state.attendees, transcriptionTitle: this.props.transcriptionTitle, description: this.props.description});

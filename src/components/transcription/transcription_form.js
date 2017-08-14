@@ -111,7 +111,9 @@ class TranscriptionForm extends React.Component {
         <View style={ attendeeTabStyle }>
           <View style={ attendeeTopStyle }>
             <Button style={styles.button}
-              onPress={() => Actions.Attendees()}
+              onPress={() => Actions.Attendees(
+                {users: this.props.users, transcriptionTitle: this.state.transcriptionTitle, description: this.state.description, usernames: this.state.usernames}
+              )}
               activeOpacity={.8}>
               <View style={styles.addAttendees}>
                 <Text style={styles.title}>ADD ATTENDEES</Text>
@@ -151,7 +153,6 @@ class TranscriptionForm extends React.Component {
                this.setState({
                  usernames: users
                });
-               console.log('adding', this.state.usernames);
                this.addTranscription();
              }}>
              <Text style={ styles.buttonText }>

@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from rest_framework import permissions, routers, viewsets, authentication, status
 from django.contrib.auth.models import User
@@ -23,22 +24,17 @@ class UserViewSet(viewsets.ModelViewSet):
         user.set_password(request.data.get('password'))
         user.save()
         serializer = UserSerializer(data=request.data)
-        # print(serializer.is_valid())
-        # if serializer.is_valid():
-        #     print(serializer.data)
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(request.data, status=status.HTTP_201_CREATED)
 
 class TranscriptionViewSet(viewsets.ModelViewSet):
     queryset = Transcription.objects.all()
-    # serializer_class = TranscriptionSerializer
     def get_serializer_class(self):
         if self.action == 'list':
             return TranscriptionIndexSerializer
         else:
             return TranscriptionSerializer
     def create(self, request):
-        # print(request.data.get('audio_url'))
+        print(request.data)
         user_array = []
         if isinstance(request.data.get('usernames'),str):
             user_array = request.data.get('usernames')[1:-1].split(',')
@@ -54,16 +50,12 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         transcription_result['usernames'] = user_array
         transcription_result['description'] = request.data.get('description')
         serializer = TranscriptionSerializer(data=transcription_result)
-        # print(transcription_result['usernames'])
-        # print(serializer.is_valid())
-        # print(serializer.errors)
         if serializer.is_valid():
+            print('print')
             serializer.save()
             transcription = Transcription.objects.get(pk=serializer.data['pk'])
             transcription.users.add(*users)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            print(serializer.errors)
 
     #can keep on updating users
     def update(self,request,pk=None):
@@ -78,6 +70,8 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
             old_transcription.title = request.data.get('title')
         if request.data.get('description'):
             old_transcription.description = request.data.get('description')
+        if request.data.get('usernames'):
+            old_transcription.usernames = request.data.get('usernames')
         new_transcriptions = []
         #going through transcription block by block
         if users:
@@ -85,7 +79,6 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
                 transcript_block = json.loads(string_block)
                 #add check if speaker was not updated
                 if (str(transcript_block['speaker']) in users):
-                    # if (int(users[str(transcript_block['speaker'])]) != 0):
                     transcript_block['speaker'] = users[str(transcript_block['speaker'])]
                 new_transcriptions.append(json.dumps(transcript_block))
             old_transcription.transcription = new_transcriptions

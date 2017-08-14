@@ -7,7 +7,6 @@ const defaultState = () => ({
   currentTranscription: {},
 });
 
-
 const TranscriptionsReducer = (state=defaultState(), action) => {
   Object.freeze(state);
   let nextState;

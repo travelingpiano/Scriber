@@ -101,7 +101,7 @@ class TranscriptionEdit extends React.Component {
 
         <View style={ attendeeTabStyle }>
           <Button style={styles.button}
-            onPress={() => Actions.Attendees({usernames: this.state.usernames})}
+            onPress={() => Actions.Attendees({usernames: this.state.usernames, edit: true})}
             activeOpacity={.8}>
             <View style={styles.editAttendees}>
               <Text style={styles.title}>

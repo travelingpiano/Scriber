@@ -1,5 +1,6 @@
 // import {receiveErrors, clearErrors} from './error_actions';
 import * as TranscriptionAPIUtil from '../lib/transcriptions_api_util';
+import {Actions} from 'react-native-router-flux';
 
 export const RECEIVE_TRANSCRIPTION = 'RECEIVE_TRANSCRIPTION';
 export const RECEIVE_TRANSCRIPTIONS = 'RECEIVE_TRANSCRIPTIONS';
@@ -7,7 +8,6 @@ export const DESTROY_TRANSCRIPTION = 'DESTROY_TRANSCRIPTION';
 
 // synchronous action creators
 export const receiveTranscription = transcription => {
-  console.log(transcription);
   return {
   type: RECEIVE_TRANSCRIPTION,
   transcription
@@ -28,9 +28,7 @@ export const createTranscription = transcription => dispatch => {
   return TranscriptionAPIUtil.createTranscription(transcription)
     .then(resp => resp.json())
     .then(json => {
-      console.log(json);
       dispatch(receiveTranscription(json));
-      console.log('CREATE-T', json);
       return json;
     });
 };
@@ -60,6 +58,5 @@ export const deleteTranscription = (transcription) => dispatch => {
 export const updateTranscription = (transcription) => dispatch => {
   return TranscriptionAPIUtil.updateTranscription(transcription)
   .then(resp => resp.json())
-  .then(json => dispatch(receiveTranscription(json))
-  );
+  .then(() => Actions.TranscriptionShow());
 };

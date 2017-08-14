@@ -1,5 +1,4 @@
 export const createTranscription = data => {
-  console.log(data);
   return (
     fetch('http://127.0.0.1:8000/transcriptions/', {
       method: 'POST',
@@ -46,8 +45,7 @@ export const deleteTranscription = (transcription) => (
 );
 
 export const updateTranscription = (transcription) => {
-  let pk = transcription._parts[5][1];
-  console.log(transcription);
+  let pk = JSON.parse(transcription).pk;
   return fetch(`http://127.0.0.1:8000/transcriptions/${pk}/`,
     {
       method: 'PUT',
