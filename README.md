@@ -2,14 +2,17 @@
 
 Keeping tracks of meeting notes is often a meticulous task. There is the option of recording the meeting and then paying for transcribing services. Scriber provides the ability to create meeting (of various types) transcriptions, audio playback of specific segments and viewing transcription text, with minimal expense.
 
-Scriber's contributing members include [Virginia Chen][virginia_git], [Spencer Chan][spencer_git], [Li Hsuan Lu][lihsuan_git] and [Ade Farquhar][ade_git].
+[Scriber][scriber_page]'s contributing members include [Virginia Chen][virginia_git], [Spencer Chan][spencer_git], [Li Hsuan Lu][lihsuan_git] and [Ade Farquhar][ade_git].
 
+[scriber_page]:http://wwww.scriber.us
 [virginia_git]:https://github.com/virginiac32
 [spencer_git]:https://github.com/schan1031
 [lihsuan_git]:https://github.com/travelingpiano
 [ade_git]:https://github.com/ade713
 
-![app_screenshot/gif]()
+![splash_page](./assets/scriber_splash.jpeg "Splash Page")
+![login_page](./assets/Login.gif "Login Action")
+
 
 ## Features
 
@@ -46,8 +49,8 @@ async loadInitialState() {
 }
 ```
 
-![splash_page](./assets/scriber_splash.jpeg "Splash Page")
-![index_page](./assets/index_page.jpeg "Index Page")
+
+![index_page](./assets/TranscriptionsIndex_Show.gif "Index Page Gif")
 
 
 All transcriptions are organized and displayed by the date created with a React Native's calendar library. Displays are rendered using components such as **Text**, **View**, and **TouchableWithoutFeedback**.
@@ -66,7 +69,7 @@ All transcriptions are organized and displayed by the date created with a React 
 When a transcription is being made, users can add or remove participants, add a title and description and record the meeting.
 
 ![create_page](./assets/create_transcription_page.jpeg "Create Transcription Page")
-![attendees_page](./assets/attendees_page.jpeg "Attendees Page")
+![record_page](./assets/RecordAudio.gif "Record audio")
 
 Once recording is finished and the user presses the button to create the transcription, data is sent to the back-end for handling by the Django actions in the views file.
 
@@ -102,6 +105,11 @@ class TranscriptionIndexSerializer(serializers.ModelSerializer):
         model = Transcription
         fields = ('audio_url','title','created_time','created_date','description','usernames','pk')
 ```
+
+Users can also edit transcriptions as needed, adding or removing attendees, properly identifying speakers, the meeting's title, and description.
+
+![edit_page](./assets/TranscriptionsEdit.gif "Edit Transcription Page")
+
 
 ## Technology
 Scriber was developed with a combination of the following frameworks and technologies:
