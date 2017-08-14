@@ -1,7 +1,6 @@
 import React from 'react';
 import { AsyncStorage,
          Component,
-         Linking,
          ListView,
          StyleSheet,
          Text,
@@ -10,8 +9,6 @@ import { AsyncStorage,
 import { Actions } from 'react-native-router-flux';
 import config from '../../lib/config.js';
 import Button from 'apsl-react-native-button';
-
-// import {receiveCurrentUser} from '../../actions/session_actions';
 
 
 class LoginForm extends React.Component {
@@ -46,13 +43,9 @@ class LoginForm extends React.Component {
           token: token, error: null, username: username
         });
         this.getData(this.state.token);
-      } else {
-        this.setState({
-          'error': 'Login Error'
-        })
       }
     } catch (error) {
-
+      console.error(error);
     }
   }
 
@@ -111,7 +104,6 @@ class LoginForm extends React.Component {
       this.setState({
         'users': this.state.users.cloneWithRows(responseJson)
       });
-      console.log(this.state.users);
       Actions.tabbar();
     }
   }
@@ -156,12 +148,14 @@ class LoginForm extends React.Component {
         </View>
 
         <Button
-          onPress={ () =>
-          this.getToken(config.client_id,
-                         config.client_key,
-                         this.state.username,
-                         this.state.password)
-                  }
+          onPress={ () => {
+            this.getToken(config.client_id,
+              config.client_key,
+              this.state.username,
+              this.state.password);
+            Actions.tabbar();
+            }
+          }
           style={ buttonStyle }
           activeOpacity={.8} >
           <Text style={ buttonText }>
