@@ -1,14 +1,12 @@
 import React from 'react';
 import { StyleSheet,
          View,
-         TouchableHighlight,
          ScrollView,
          Button,
          Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { merge } from 'lodash';
-// import Button from 'apsl-react-native-button';
 import Icon from 'react-native-vector-icons/Entypo';
 
 import Menu, {
@@ -24,7 +22,6 @@ const { SlideInMenu } = renderers;
 class MapSpeakers extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
 
     this.state = {
       attendees: this.props.attendees,
@@ -48,6 +45,7 @@ class MapSpeakers extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (JSON.stringify(prevState.allSpeakers) !== JSON.stringify(this.state.allSpeakers)) {
       this.renderTranscriptionSnippets();
+      this.props.sendSpeakerUpdates(this.state.allSpeakers);
     }
   }
 

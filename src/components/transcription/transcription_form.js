@@ -3,8 +3,7 @@ import { StyleSheet,
          View,
          FlatList,
          Text,
-         TextInput,
-         TouchableHighlight } from 'react-native';
+         TextInput } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import Button from 'apsl-react-native-button';
@@ -16,7 +15,6 @@ import {createTranscription} from '../../actions/transcription_actions';
 class TranscriptionForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log('form props', this.props);
     this.state = {
       transcriptionTitle:'',
       transcription: '',
@@ -38,7 +36,6 @@ class TranscriptionForm extends React.Component {
   }
 
   componentWillReceiveProps(newProps){
-    console.log(newProps);
     this.setState({
       transcriptionTitle: newProps.transcriptionTitle,
       description: newProps.description
@@ -53,29 +50,20 @@ class TranscriptionForm extends React.Component {
     data['description'] = this.state.description;
     data['audio_url'] = `${this.state.transcriptionTitle}.aac`;
     data['usernames'] = this.state.usernames;
-    try{
-      fetch('http://127.0.0.1:8000/transcriptions/', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Origin': '',
-          'Host': '127.0.0.1:8000',
-        },
-        body: JSON.stringify(data)
-      }).then(
-        ()=>{
-          console.log(data);
-          setTimeout(
-            ()=>{Actions.TranscriptionIndex({create: true});},5000
-          );
-        }, (errors)=>{
-          console.log(errors);
-        }
-      );
-    }catch(e){
-        console.log(e);
-    }
+    fetch('http://127.0.0.1:8000/transcriptions/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Origin': '',
+        'Host': '127.0.0.1:8000',
+      },
+      body: JSON.stringify(data)
+    }).then(
+      ()=>{
+        Actions.TranscriptionIndex({create: true});
+      }
+    );
   }
 
   render() {
@@ -86,9 +74,9 @@ class TranscriptionForm extends React.Component {
             formStyle,
             headerStyle,
             recordAudioStyle,
+            oneInput,
             transcriptionFormStyle } = styles;
     let usernames = [];
-    // console.log(this.state);
     if(this.state.usernames){
       for(let i = 0; i< this.state.usernames.length; i++){
         if(this.state.usernames[i]){
@@ -100,7 +88,7 @@ class TranscriptionForm extends React.Component {
       <View style={ transcriptionFormStyle } >
 
         <View style={ formStyle }>
-          <View style={styles.oneInput}>
+          <View style={ oneInput }>
             <TextInput
               style={ textInputStyle }
               label='Title'
@@ -109,7 +97,7 @@ class TranscriptionForm extends React.Component {
               onChangeText={(transcriptionTitle)=>this.setState({transcriptionTitle})}
               />
           </View>
-          <View style={styles.oneInput}>
+          <View style={ oneInput }>
             <TextInput
               style={ textInputStyle }
               label='Description'
@@ -144,31 +132,34 @@ class TranscriptionForm extends React.Component {
       </View>
 
         <View style={ recordAudioStyle }>
-          <Button
-            onPress={() => Actions.RecordAudio({users: this.props.users, transcriptionTitle: this.state.transcriptionTitle, description: this.state.description, usernames: this.state.usernames})}
-            title="Record Audio"
-          />
-        </View>
+           <Button
+             onPress={() => Actions.RecordAudio({users: this.props.users, transcriptionTitle: this.state.transcriptionTitle, description: this.state.description, usernames: this.state.usernames})}
+             style={ styles.recordButton }
+             activeOpacity={.8} >
+             <Icon2 name="record-rec" size={100} style={{color:'#F26367'}}/>
+           </Button>
+           <Text style={{alignSelf:'center'}}>Record Audio</Text>
+         </View>
 
-        <View>
-          <Button
-            style={ styles.buttonStyle }
-            activeOpacity={.8}
-            onPress={() => {
-              let users = this.state.usernames.slice();
-              users = users.concat(this.props.attendees);
-              this.setState({
-                usernames: users
-              });
-              console.log('adding', this.state.usernames);
-              this.addTranscription();
-            }}>
-            <Text style={ styles.buttonText }>
-            Create Transcription
-            </Text>
-          </Button>
-        </View>
-      </View>
+         <View>
+           <Button
+             style={ styles.buttonStyle }
+             activeOpacity={.8}
+             onPress={() => {
+               let users = this.state.usernames.slice();
+               users = users.concat(this.props.attendees);
+               this.setState({
+                 usernames: users
+               });
+               console.log('adding', this.state.usernames);
+               this.addTranscription();
+             }}>
+             <Text style={ styles.buttonText }>
+             Create Transcription
+             </Text>
+           </Button>
+         </View>
+       </View>
     );
   }
 }
@@ -208,7 +199,14 @@ const styles = StyleSheet.create({
   },
 
   button: {
+    height: 10,
     borderColor: 'transparent',
+    alignSelf: 'flex-start',
+    marginTop: 10
+  },
+
+  recordButton: {
+    borderColor: 'transparent'
   },
 
   buttonStyle: {

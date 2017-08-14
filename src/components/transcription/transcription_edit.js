@@ -19,20 +19,35 @@ class TranscriptionEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.props.currentTranscription;
+    this.state['allSpeakers'] = {};
+
+    this.getSpeakerUpdates = this.getSpeakerUpdates.bind(this);
+  }
+
+  componentDidMount() {
+    console.log(this.props);
+    if (this.props.newUsernames && this.props.newUsernames !== this.state.usernames) {
+      this.setState({
+        usernames: this.props.newUsernames
+      });
+    }
   }
 
   updateTranscription() {
-    let data = new FormData();
-    data.append('title', this.state.title);
-    data.append('transcription', this.state.transcription);
-    data.append('description', this.state.description);
-    data.append('audio_url', this.state.audio_url);
-    data.append('usernames', this.state.usernames);
-    data.append('pk',this.state.pk);
-    data.append('created_time', this.state.created_time);
-    data.append('created_date', this.state.created_date);
-    this.props.updateTranscription(data)
-      .then(Actions.TranscriptionShow({transcriptionPk: this.state.transcription.pk}));
+
+    let data = {};
+    data['title'] = this.state.title;
+    data['description'] = this.state.description;
+    data['usernames'] = this.state.usernames;
+    data['users'] = this.state.allSpeakers;
+    data['pk'] = this.state.pk;
+
+    data = JSON.stringify(data);
+    this.props.updateTranscription(data);
+  }
+
+  getSpeakerUpdates(data) {
+    this.setState({allSpeakers: data});
   }
 
   renderAttendees(attendees) {
@@ -86,7 +101,7 @@ class TranscriptionEdit extends React.Component {
 
         <View style={ attendeeTabStyle }>
           <Button style={styles.button}
-            onPress={() => Actions.Attendees()}
+            onPress={() => Actions.Attendees({usernames: this.state.usernames})}
             activeOpacity={.8}>
             <View style={styles.editAttendees}>
               <Text style={styles.title}>
@@ -101,7 +116,8 @@ class TranscriptionEdit extends React.Component {
           </View>
         </View>
 
-        <MapSpeakers style={{flex:.5}} attendees={this.state.usernames} transcription={this.state} />
+        <MapSpeakers style={{flex:.5}} attendees={this.state.usernames}
+          transcription={this.state} sendSpeakerUpdates={this.getSpeakerUpdates}/>
 
           <Button
             onPress={() => this.updateTranscription()}
