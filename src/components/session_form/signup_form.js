@@ -1,7 +1,5 @@
 import React from 'react';
 import { AsyncStorage,
-         Component,
-         Linking,
          ListView,
          StyleSheet,
          Text,
@@ -65,7 +63,7 @@ class SignupForm extends React.Component {
     data.append('client_secret', client_key);
     data.append('username', username);
     data.append('password', password);
-    let response = await fetch('http://127.0.0.1:8000/o/token/', { // adjust to actual site url
+    let response = await fetch('http://127.0.0.1:8000/o/token/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -111,7 +109,6 @@ class SignupForm extends React.Component {
       this.setState({
         'user': this.state.users.cloneWithRows(responseJson)
       });
-      Actions.tabbar();
     }
   }
 
@@ -160,6 +157,7 @@ class SignupForm extends React.Component {
               config.client_key,
               this.state.username,
               this.state.password);
+            Actions.tabbar();
             }
           }
           style={ buttonStyle }
