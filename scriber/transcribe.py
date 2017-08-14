@@ -18,14 +18,6 @@ AudioSegment.converter = 'ffmpeg'
 
 # https://aacapps.com/lamp/sound/emma.mp3
 def transcribe(url, title):
-    #Hank Aaron
-    # url = 'http://www.freeinfosociety.com/media/sounds/2518.mp3'
-    #Agassi
-    # url = 'http://www.freeinfosociety.com/media/sounds/3828.mp3'
-    #Armstrong
-    # url = 'http://www.freeinfosociety.com/media/sounds/13.mp3'
-    # url = '2518.mp3'
-    # url = 'sample.aac'
     conn = boto.s3.connect_to_region('us-west-2',
        aws_access_key_id=AWS_ACCESS_KEY_ID,
        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
@@ -34,16 +26,12 @@ def transcribe(url, title):
     )
     bucket = conn.get_bucket('scriberflexproject')
     bucket_list = bucket.list()
-
     stt = SpeechToTextV1(username='88d9cb01-7ecb-4089-9d2c-a13828e3494e', password='1Wxsmr4kdBhp')
-    # r = requests.get(url)
     with open('./scriber/test.aac','w+') as f:
         for l in bucket_list:
             if l.key == url:
-                print(url)
                 l.get_contents_to_filename('./scriber/test.aac')
-    sound_aac = AudioSegment.from_file('./scriber/test.aac')
-    sound_aac.export('./scriber/test.mp3', format='mp3')
+    os.system(f"ffmpeg -i ./scriber/test.aac -c:a mp3 -b:a 160k ./scriber/test.mp3")
     sound = AudioSegment.from_file('./scriber/test.mp3')
     output_json = json.loads(json.dumps(stt.recognize(open('./scriber/test.mp3','rb'), content_type="audio/mp3", timestamps=True,speaker_labels=True),indent=2))
     formatted_json = []
@@ -68,10 +56,6 @@ def transcribe(url, title):
         AWSkey.key = f"{title}{counter}.aac"
         AWSkey.set_contents_from_filename(filename)
         new_json['filename'] = AWSkey.key
-        # AWSkey.send_file(partial_sound._data)
-        # with open(filename, 'rb') as f:
-        #     print(f)
-        #     AWSkey.send_file(f)
 
         counter += word_length
         formatted_json.append(json.dumps(new_json))

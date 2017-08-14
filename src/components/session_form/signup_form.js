@@ -6,11 +6,12 @@ import { AsyncStorage,
          StyleSheet,
          Text,
          TextInput,
-         TouchableHighlight,
          View } from 'react-native';
 
 import config from '../../lib/config.js';
 import { Actions } from 'react-native-router-flux';
+import Button from 'apsl-react-native-button';
+
 
 class SignupForm extends React.Component {
 
@@ -64,8 +65,6 @@ class SignupForm extends React.Component {
     data.append('client_secret', client_key);
     data.append('username', username);
     data.append('password', password);
-    console.log(username);
-    console.log(password);
     let response = await fetch('http://127.0.0.1:8000/o/token/', { // adjust to actual site url
       method: 'POST',
       headers: {
@@ -123,46 +122,52 @@ class SignupForm extends React.Component {
             textStyle,
             textInputStyle,
             buttonStyle,
-            listViewStyle,
-            loginViewStyle,
-            welcomeStyle } = styles;
+            buttonText,
+            oneInput,
+            loginViewStyle } = styles;
 
     return (
       <View style={ loginViewStyle}>
         <View style={ formStyle }>
-          <TextInput
-            style={ textInputStyle }
-            onChangeText={ username =>
-              this.setState({
-                'username': username
-              })
-            }
-            value={ this.state.username }
-            autoCapitalize = 'none'
-            placeholder="username"/>
-
-          <TextInput secureTextEntry={ true }
-            style={ textInputStyle }
-            onChangeText={ password =>
-              this.setState({
-                'password': password
-              })
-            }
-            value={ this.state.password }
-            placeholder="password"/>
+          <View style={ oneInput }>
+            <TextInput
+              style={ textInputStyle }
+              onChangeText={ username =>
+                this.setState({
+                  'username': username
+                })
+              }
+              value={ this.state.username }
+              autoCapitalize = 'none'
+              placeholder="username"/>
+          </View>
+          <View style={ oneInput }>
+            <TextInput secureTextEntry={ true }
+              style={ textInputStyle }
+              onChangeText={ password =>
+                this.setState({
+                  'password': password
+                })
+              }
+              value={ this.state.password }
+              placeholder="password"/>
+          </View>
         </View>
 
-        <TouchableHighlight
-          onPress={ () =>
+        <Button
+          onPress={ () => {
             this.createUser(config.client_id,
-                         config.client_key,
-                         this.state.username,
-                         this.state.password) }
-          style={ buttonStyle } >
-          <Text>
-            SignUp
+              config.client_key,
+              this.state.username,
+              this.state.password);
+            }
+          }
+          style={ buttonStyle }
+          activeOpacity={.8} >
+          <Text style={ buttonText }>
+            SIGN UP
           </Text>
-        </TouchableHighlight>
+        </Button>
 
         <Text style={ errorStyle }>
           { this.state.error }
@@ -175,50 +180,48 @@ class SignupForm extends React.Component {
 
 const styles = StyleSheet.create({
 
-  textStyle: {
-    fontSize: 40,
-  },
-
   textInputStyle: {
+    flexDirection: 'row',
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    width: 200,
-  },
-
-  buttonStyle: {
-    backgroundColor: '#F26367',
-    padding: 10,
-    marginRight: 5,
-    marginLeft: 5,
-    minWidth: 50,
-    flex: 0.2,
-    borderRadius: 3,
+    alignSelf: 'stretch',
+    borderBottomWidth: .5,
+    borderColor: 'lightgray',
   },
 
   formStyle: {
+    paddingTop: 100,
+    paddingLeft: 10,
+    paddingRight: 10,
+    flex: .2,
+    alignItems: 'center',
     flexDirection: 'column',
-    height: 50,
-    width: null,
-    marginTop: 10,
-    marginBottom: 10,
-    flex: 0.5
+    alignSelf: 'stretch',
   },
 
-  listViewStyle: {
-    paddingTop: 20,
-    backgroundColor: '#5BCAD3',
+  oneInput: {
+    paddingTop: 10,
+    alignSelf: 'stretch'
+  },
+
+  buttonStyle: {
+    width: 250,
+    backgroundColor: '#F26367',
+    borderColor: '#F26367',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18
   },
 
   loginViewStyle: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  welcomeStyle: {
-    fontSize: 45,
   },
 
   errorStyle: {

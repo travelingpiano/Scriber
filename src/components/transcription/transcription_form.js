@@ -2,12 +2,14 @@ import React from 'react';
 import { StyleSheet,
          View,
          FlatList,
-         Button,
          Text,
          TextInput,
          TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {connect} from 'react-redux';
+import Button from 'apsl-react-native-button';
+import Icon from 'react-native-vector-icons/Entypo';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {createTranscription} from '../../actions/transcription_actions';
 
@@ -51,23 +53,29 @@ class TranscriptionForm extends React.Component {
     data['description'] = this.state.description;
     data['audio_url'] = `${this.state.transcriptionTitle}.aac`;
     data['usernames'] = this.state.usernames;
-    fetch('http://127.0.0.1:8000/transcriptions/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Origin': '',
-        'Host': '127.0.0.1:8000',
-      },
-      body: JSON.stringify(data)
-    }).then(
-      ()=>{
-        console.log(data);
-        setTimeout(
-          ()=>{Actions.TranscriptionIndex({create: true});},5000
-        );
-      }
-    );
+    try{
+      fetch('http://127.0.0.1:8000/transcriptions/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Origin': '',
+          'Host': '127.0.0.1:8000',
+        },
+        body: JSON.stringify(data)
+      }).then(
+        ()=>{
+          console.log(data);
+          setTimeout(
+            ()=>{Actions.TranscriptionIndex({create: true});},5000
+          );
+        }, (errors)=>{
+          console.log(errors);
+        }
+      );
+    }catch(e){
+        console.log(e);
+    }
   }
 
   render() {
@@ -90,42 +98,41 @@ class TranscriptionForm extends React.Component {
     }
     return (
       <View style={ transcriptionFormStyle } >
-        <View style={ headerStyle }>
-          <Text>
-            New Transcription
-          </Text>
-        </View>
 
         <View style={ formStyle }>
-          <TextInput
-            style={ textInputStyle }
-            label='Title'
-            placeholder='Title'
-            value={this.state.transcriptionTitle}
-            onChangeText={(transcriptionTitle)=>this.setState({transcriptionTitle})}
+          <View style={styles.oneInput}>
+            <TextInput
+              style={ textInputStyle }
+              label='Title'
+              placeholder='Title'
+              value={this.state.transcriptionTitle}
+              onChangeText={(transcriptionTitle)=>this.setState({transcriptionTitle})}
+              />
+          </View>
+          <View style={styles.oneInput}>
+            <TextInput
+              style={ textInputStyle }
+              label='Description'
+              placeholder='Description'
+              value={this.state.description}
+              onChangeText={(description)=>this.setState({description})}
             />
-          <TextInput
-            style={ textInputStyle }
-            label='Description'
-            placeholder='Description'
-            value={this.state.description}
-            onChangeText={(description)=>this.setState({description})}
-          />
+          </View>
         </View>
 
         <View style={ attendeeTabStyle }>
           <View style={ attendeeTopStyle }>
-            <Text>
-              Attendees
-            </Text>
-
-            <Button
-              onPress={() => Actions.Attendees({transcriptionTitle: this.state.transcriptionTitle, description: this.state.description})}
-              title='Add Attendees'
-              />
+            <Button style={styles.button}
+              onPress={() => Actions.Attendees()}
+              activeOpacity={.8}>
+              <View style={styles.addAttendees}>
+                <Text style={styles.title}>ADD ATTENDEES</Text>
+                <Icon name="chevron-thin-right" size={15} style={styles.icon}/>
+              </View>
+            </Button>
           </View>
 
-          <View style={ attendeeNamesStyle }>
+          <View style={ styles.allAttendees }>
             <FlatList
               data={usernames}
               keyExtractor={item => item}
@@ -145,6 +152,8 @@ class TranscriptionForm extends React.Component {
 
         <View>
           <Button
+            style={ styles.buttonStyle }
+            activeOpacity={.8}
             onPress={() => {
               let users = this.state.usernames.slice();
               users = users.concat(this.props.attendees);
@@ -153,9 +162,11 @@ class TranscriptionForm extends React.Component {
               });
               console.log('adding', this.state.usernames);
               this.addTranscription();
-            }}
-            title="Create Transcription"
-            />
+            }}>
+            <Text style={ styles.buttonText }>
+            Create Transcription
+            </Text>
+          </Button>
         </View>
       </View>
     );

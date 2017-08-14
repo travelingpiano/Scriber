@@ -2,33 +2,62 @@ import React from 'react';
 import { Text,
          StyleSheet,
          View,
-         Button,
-         Image } from 'react-native';
+         Image,
+         AsyncStorage,
+         TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Button from 'apsl-react-native-button';
 
-const Splash = () => {
-  const { textStyle, viewStyle, buttonStyle, allButtons, imageStyle } = styles;
+class Splash extends React.Component {
 
-  return (
-    <View style={ viewStyle }>
-      <Image style={ imageStyle } resizeMode="contain" source={require('../../assets/Scriber-Logo-full.png')} />
-      <View style={ allButtons }>
-        <View style={ buttonStyle }>
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentUser: this.getUser()
+    };
+  }
+
+  getUser() {
+    // AsyncStorage.getItem('username').then(result => this.setState({currentUser: result}));
+    AsyncStorage.getItem('username').then(result => {
+      this.setState({currentUser: result});
+    });
+  }
+
+  render() {
+    const { textStyle, viewStyle, buttonStyle, allButtons, imageStyle } = styles;
+    return (
+      <View style={ viewStyle }>
+        <Image style={ imageStyle } resizeMode="contain" source={require('../../assets/Scriber-Logo.png')} />
+        <View style={ allButtons }>
           <Button
             onPress={() => Actions.SignupForm()}
-            title="Sign Up"
-          />
-        </View>
-        <View style={ buttonStyle }>
+            style={ buttonStyle }
+            activeOpacity={.8} >
+            <Text style={ styles.buttonText }>
+              SIGN UP
+            </Text>
+          </Button>
           <Button
-            onPress={() => Actions.LoginForm()}
-            title="Login"
-          />
+            onPress={() => {
+              if (this.state.currentUser) {
+                Actions.TranscriptionIndex();
+              } else {
+                Actions.LoginForm();
+              }
+            }}
+            style={ buttonStyle }
+            activeOpacity={.8}>
+            <Text style={ styles.buttonText }>
+              LOGIN
+            </Text>
+          </Button>
         </View>
       </View>
-    </View>
-  );
-};
+    );
+  }
+}
 
 export default Splash;
 
@@ -38,24 +67,30 @@ const styles = StyleSheet.create({
   },
 
   imageStyle: {
-    width: 350,
-    // alignItems: 'center',
+    width: 300,
+    flex: .6,
+    alignItems: 'center',
     justifyContent: 'center',
   },
 
   buttonStyle: {
-    minWidth: 200,
+    minWidth: 250,
     margin: 5,
     backgroundColor: '#F26367',
-    borderRadius: 10,
+    borderColor: '#F26367'
+  },
+
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18
   },
 
   viewStyle: {
     flex: 1,
     backgroundColor: '#5BCAD3',
-    // flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
   },
 
   textStyle: {

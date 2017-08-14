@@ -6,10 +6,12 @@ import { AsyncStorage,
          StyleSheet,
          Text,
          TextInput,
-         TouchableHighlight,
          View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import config from '../../lib/config.js';
+import Button from 'apsl-react-native-button';
+
+// import {receiveCurrentUser} from '../../actions/session_actions';
 
 
 class LoginForm extends React.Component {
@@ -30,6 +32,7 @@ class LoginForm extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     this.loadInitialState().done();
   }
 
@@ -60,6 +63,7 @@ class LoginForm extends React.Component {
     data.append('client_secret', client_key);
     data.append('username', username);
     data.append('password', password);
+    console.log(data);
     let response = await fetch('http://127.0.0.1:8000/o/token/', { // adjust to actual site url
       method: 'POST',
       headers: {
@@ -77,10 +81,11 @@ class LoginForm extends React.Component {
       });
     } else {
       AsyncStorage.setItem('token', responseJson.access_token);
-      AsyncStorage.setItem('username',username)
+      AsyncStorage.setItem('username',username);
+
       this.setState({
         'token': responseJson.access_token
-      });
+      })
       this.getData(this.state.token);
     }
   }
@@ -115,50 +120,54 @@ class LoginForm extends React.Component {
 
     const { errorStyle,
             formStyle,
-            textStyle,
             textInputStyle,
             buttonStyle,
-            listViewStyle,
-            loginViewStyle,
-            welcomeStyle } = styles;
+            buttonText,
+            oneInput,
+            loginViewStyle } = styles;
 
     return (
-      <View style={ loginViewStyle}>
+      <View style={ loginViewStyle }>
         <View style={ formStyle }>
-          <TextInput
-            style={ textInputStyle }
-            autoCapitalize = 'none'
-            onChangeText={ username =>
-              this.setState({
-                'username': username
-              })
-            }
-            value={ this.state.username }
-            placeholder="username"/>
-
-          <TextInput
-            secureTextEntry={ true }
-            style={ textInputStyle }
-            onChangeText={ password =>
-              this.setState({
-                'password': password
-              })
-            }
-            value={ this.state.password }
-            placeholder="password"/>
+          <View style={ oneInput }>
+            <TextInput
+              style={ textInputStyle }
+              autoCapitalize = 'none'
+              onChangeText={ username =>
+                this.setState({
+                  'username': username
+                })
+              }
+              value={ this.state.username }
+              placeholder="username"/>
+          </View>
+          <View style={ oneInput }>
+            <TextInput
+              secureTextEntry={ true }
+              style={ textInputStyle }
+              onChangeText={ password =>
+                this.setState({
+                  'password': password
+                })
+              }
+              value={ this.state.password }
+              placeholder="password"/>
+          </View>
         </View>
 
-        <TouchableHighlight
+        <Button
           onPress={ () =>
           this.getToken(config.client_id,
                          config.client_key,
                          this.state.username,
-                         this.state.password) }
-          style={ buttonStyle } >
-          <Text>
-            LogIn
+                         this.state.password)
+                  }
+          style={ buttonStyle }
+          activeOpacity={.8} >
+          <Text style={ buttonText }>
+            LOGIN
           </Text>
-        </TouchableHighlight>
+        </Button>
 
         <Text style={ errorStyle }>
           { this.state.error }
@@ -170,58 +179,49 @@ class LoginForm extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  // viewStyle: {
-  //   flex: 1,
-  //   backgroundColor: '#C6F1E4',
-  //   flexDirection: 'column',
-  //   alignItems: 'center',
-  //   justifyContent: 'space-around',
-  // },
-
-  textStyle: {
-    fontSize: 40,
-  },
 
   textInputStyle: {
+    flexDirection: 'row',
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    width: 200,
-  },
-
-  buttonStyle: {
-    backgroundColor: '#eeeeee',
-    padding: 10,
-    marginRight: 5,
-    marginLeft: 5,
-    minWidth: 50,
-    flex: 0.2,
+    alignSelf: 'stretch',
+    borderBottomWidth: .5,
+    borderColor: 'lightgray',
   },
 
   formStyle: {
+    paddingTop: 100,
+    paddingLeft: 10,
+    paddingRight: 10,
+    flex: .2,
+    alignItems: 'center',
     flexDirection: 'column',
-    height: 50,
-    width: null,
-    marginTop: 10,
-    marginBottom: 10,
-    flex: 0.5
+    alignSelf: 'stretch',
   },
 
-  listViewStyle: {
-    // fontSize: 25,
-    paddingTop: 20,
-    backgroundColor: '#F5FCFF',
+  oneInput: {
+    paddingTop: 10,
+    alignSelf: 'stretch'
+  },
+
+  buttonStyle: {
+    width: 250,
+    backgroundColor: '#F26367',
+    borderColor: '#F26367',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18
   },
 
   loginViewStyle: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  welcomeStyle: {
-    fontSize: 45,
   },
 
   errorStyle: {

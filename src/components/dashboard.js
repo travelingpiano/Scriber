@@ -7,6 +7,7 @@ import { AsyncStorage,
          ListView,
          View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Button from 'apsl-react-native-button';
 
 class Dashboard extends React.Component {
 
@@ -22,35 +23,23 @@ class Dashboard extends React.Component {
   render() {
 
     const { textStyle,
-            listViewStyle,
             dashboardStyle,
-            buttonStyle } = styles;
+            buttonStyle,
+            buttonText } = styles;
     // if (this.state.token) {
       return (
-
-        <View style={ dashboardStyle }>
-          <TouchableOpacity
-            style={ buttonStyle }
-            onPress={() => {
+        <View style={dashboardStyle}>
+          <Button
+            onPress={ () => {
               this.logoutUser();
               Actions.Splash();
-
             }}
-            >
-            <Text>
-              Log Out
+            style={ buttonStyle }
+            activeOpacity={.8} >
+            <Text style={ buttonText }>
+              LOG OUT
             </Text>
-          </TouchableOpacity>
-
-          <TouchableHighlight
-            onPress={ () =>
-            Actions.RecordAudio()}
-            style={ buttonStyle } >
-            <Text>
-              Record Audio
-            </Text>
-          </TouchableHighlight>
-
+          </Button>
         </View>
       );
     // }
@@ -73,36 +62,30 @@ class Dashboard extends React.Component {
 export default Dashboard;
 
 const styles = StyleSheet.create({
-  listViewStyle: {
 
+  buttonStyle: {
+    width: 250,
+    backgroundColor: '#F26367',
+    borderColor: '#F26367',
+    justifyContent: 'center',
+    alignSelf: 'center',
   },
 
-  // buttonStyle: {
-  //   minWidth: 200,
-  //   margin: 5,
-  //   backgroundColor: '#FF4242',
-  // },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18
+  },
 
   textStyle: {
     fontSize: 50
-  },
-
-  buttonStyle: {
-    alignSelf: 'stretch',
-    backgroundColor: '#F26367',
-    height: 30,
-    borderRadius: 5,
-    opacity: 0.8,
-    marginTop: 10,
-    marginLeft: 5,
-    marginRight: 5,
-
   },
 
   dashboardStyle: {
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
+    marginTop: 30
 
   }
 });
