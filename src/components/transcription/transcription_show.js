@@ -10,19 +10,12 @@ class TranscriptionShow extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       currentUser: this.getUser()
     };
-
   }
 
   componentWillMount() {
-    // console.log(this.props);
-
-    let hi = this.getUser();
-    // console.log(hi);
-
     if (this.props.transcriptionPk) {
       this.props.fetchTranscription(this.props.transcriptionPk);
     } else {
@@ -31,12 +24,9 @@ class TranscriptionShow extends Component {
   }
 
   getUser() {
-    // AsyncStorage.getItem('username').then(result => this.setState({currentUser: result}));
     AsyncStorage.getItem('username').then(result => {
       this.setState({currentUser: result});
     });
-  //   this.setState({currentUser: result});
-  //   console.log(this.state);
   }
 
   parseTime(theTime) {
@@ -111,7 +101,6 @@ class TranscriptionShow extends Component {
   }
 
   render() {
-    // console.log(this.state);
     if (this.props.currentTranscription) {
       let transcription = this.props.currentTranscription;
       let parsedTime = this.parseTime(transcription.created_time);
@@ -122,7 +111,7 @@ class TranscriptionShow extends Component {
             {this.renderDelete()}
           </View>
             <View style={styles.additional}>
-              <View style={styles.eachInfo}>
+              <View style={styles.descriptionView}>
                 <Text style={styles.description}>{transcription.description}</Text>
               </View>
               <View style={styles.eachInfo}>
@@ -194,6 +183,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     height: 40,
+    borderBottomWidth: .5,
+    borderColor: 'lightgray',
+    paddingTop: 10
+  },
+
+  descriptionView: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 80,
     borderBottomWidth: .5,
     borderColor: 'lightgray',
     paddingTop: 10

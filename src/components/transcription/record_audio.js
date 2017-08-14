@@ -214,54 +214,77 @@ class RecordAudio extends Component {
       }
     }
 
-    render() {
+    _renderButton(title, onPress, active) {
+      let style = (active) ? styles.activeButtonTextStyle : styles.buttonTextStyle;
 
       return (
-        <View style={styles.container}>
-          <View style={styles.controls}>
+        <TouchableHighlight style={styles.buttonStyle} onPress={onPress}>
+          <Text style={style}>
+            {title}
+          </Text>
+        </TouchableHighlight>
+      );
+    }
+
+    render() {
+      const { containerStyle,
+              controlsStyle,
+              progressTextStyle } = styles;
+
+      return (
+        <View style={styles.containerStyle}>
+          <View style={styles.controlsStyle}>
             {this._renderButton("RECORD", () => {this._record()}, this.state.recording )}
             {this._renderButton("PLAY", () => {this._play()} )}
             {this._renderButton("STOP", () => {this._stop()} )}
             {this._renderButton("PAUSE", () => {this._pause()} )}
             {this._renderButton("SUBMIT", ()=>{this._submit()})}
             <Text>{this.state.errors}</Text>
-            <Text style={styles.progressText}>{this.state.currentTime}s</Text>
+            <Text style={styles.progressTextStyle}>{this.state.currentTime}s</Text>
           </View>
         </View>
       );
     }
   }
 
-  var styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#2b608a",
-    },
-    controls: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      flex: 1,
-    },
-    progressText: {
-      paddingTop: 50,
-      fontSize: 50,
-      color: "#fff"
-    },
-    button: {
-      padding: 20
-    },
-    disabledButtonText: {
-      color: '#eee'
-    },
-    buttonText: {
-      fontSize: 20,
-      color: "#fff"
-    },
-    activeButtonText: {
-      fontSize: 20,
-      color: "#B81F00"
-    }
+  const styles = StyleSheet.create({
+     containerStyle: {
+       flex: 1,
+     },
+     controlsStyle: {
+       flexDirection: 'column',
+       justifyContent: 'center',
+       alignItems: 'center',
+       flex: 1,
+     },
+     progressTextStyle: {
+       textAlign: 'center',
+       paddingTop: 30,
+       fontSize: 50,
+       color: "#000",
+     },
 
-  });
+     buttonStyle: {
+       width: 250,
+       height: 40,
+       margin: 10,
+       backgroundColor: '#F26367',
+       borderColor: '#F26367',
+       borderRadius: 8,
+       alignItems: 'center'
+     },
+
+     buttonTextStyle: {
+       fontSize: 30,
+       fontWeight: 'bold',
+       color: "#FFF"
+     },
+
+     activeButtonTextStyle: {
+       fontSize: 30,
+       fontWeight: 'bold',
+       color: "#000"
+     }
+   });
 
 export default RecordAudio;

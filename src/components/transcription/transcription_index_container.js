@@ -19,24 +19,10 @@ class TranscriptionIndex extends Component {
   }
 
   componentWillMount() {
-    console.log('will mount');
     this.props.fetchTranscriptions();
   }
 
-  // componentWillReceiveProps(newProps){
-  //   if(newProps.create){
-  //     console.log('create');
-  //     let items = this.state.items;
-  //     this.props.fetchTranscriptions().then(transcriptions=>{
-  //       for(let i = 0; i< transcriptions.length; i++){
-  //
-  //       }
-  //     });
-  //   }
-  // }
-
   render() {
-    // console.log(this.state.items);
     return (
         <Agenda
           style={styles.agenda}
@@ -46,6 +32,12 @@ class TranscriptionIndex extends Component {
           renderItem={this.renderItem.bind(this)}
           rowHasChanged={this.rowHasChanged.bind(this)}
           renderEmptyDate={() => {return (<View />);}}
+          theme={{
+            selectedDayBackgroundColor: '#F26367',
+            agendaTodayColor: '#5BCAD3',
+            todayTextColor: '#5BCAD3',
+            dotColor: '#5BCAD3',
+          }}
         />
     );
   }
@@ -57,11 +49,11 @@ class TranscriptionIndex extends Component {
       const strTime = this.timeToString(time);
       if (!this.state.items[strTime]) {
         this.state.items[strTime] = [];
-        // console.log(this.props.transcriptions);
         for (let j = 0; j < this.props.transcriptions.length; j++) {
           if (strTime === this.props.transcriptions[j].created_date) {
             this.state.items[strTime].push({
               name: this.props.transcriptions[j].title,
+              description: this.props.transcriptions[j].description,
               transcription: this.props.transcriptions[j],
               height: 100
             });
@@ -85,7 +77,8 @@ class TranscriptionIndex extends Component {
     return (
       <TouchableWithoutFeedback transcriptionPk={item.transcription.pk} onPress={() => this.onRowPress(item.transcription.pk)}>
         <View style={[styles.item, {height: item.height}]}>
-          <Text>{item.name}</Text>
+          <Text style={styles.title}>{item.name}</Text>
+          <Text style={{paddingLeft: 10}}>{item.description}</Text>
         </View>
       </TouchableWithoutFeedback>
     );
@@ -115,8 +108,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginRight: 10,
-    marginTop: 17
+    marginTop: 10
   },
+
+  title: {
+    paddingBottom: 10,
+    color: '#5BCAD3',
+    fontSize: 18,
+  },
+
   emptyDate: {
     height: 15,
     flex:1,
