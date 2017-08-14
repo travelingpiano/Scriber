@@ -12,17 +12,31 @@ class TranscriptionIndex extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
       items: {}
     };
   }
 
   componentWillMount() {
+    console.log('will mount');
     this.props.fetchTranscriptions();
   }
 
+  // componentWillReceiveProps(newProps){
+  //   if(newProps.create){
+  //     console.log('create');
+  //     let items = this.state.items;
+  //     this.props.fetchTranscriptions().then(transcriptions=>{
+  //       for(let i = 0; i< transcriptions.length; i++){
+  //
+  //       }
+  //     });
+  //   }
+  // }
+
   render() {
+    // console.log(this.state.items);
     return (
         <Agenda
           style={styles.agenda}
@@ -43,6 +57,7 @@ class TranscriptionIndex extends Component {
       const strTime = this.timeToString(time);
       if (!this.state.items[strTime]) {
         this.state.items[strTime] = [];
+        // console.log(this.props.transcriptions);
         for (let j = 0; j < this.props.transcriptions.length; j++) {
           if (strTime === this.props.transcriptions[j].created_date) {
             this.state.items[strTime].push({

@@ -2,7 +2,7 @@ import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import {StyleSheet, Text} from 'react-native';
 
-import LoginForm from './components/session_form/login_form';
+import LoginForm from './components/session_form/login_form_container';
 import SignupForm from './components/session_form/signup_form';
 import Dashboard from './components/dashboard';
 import TranscriptionForm from './components/transcription/transcription_form';
@@ -11,7 +11,10 @@ import Attendees from './components/transcription/attendees';
 import RecordAudio from './components/transcription/record_audio';
 import TranscriptionIndex from './components/transcription/transcription_index_container';
 import TranscriptionShow from './components/transcription/transcription_show_container';
+import TranscriptionEdit from './components/transcription/transcription_edit_container';
 import TabIcon from './lib/tabIcon';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 const Routes = () => (
   <Router>
@@ -24,6 +27,13 @@ const Routes = () => (
         back
         component={LoginForm}
         title="Login"
+      />
+
+      <Scene
+        key="TranscriptionEdit"
+        back
+        component={TranscriptionEdit}
+        title="Edit Transcription"
       />
 
       <Scene
@@ -50,6 +60,9 @@ const Routes = () => (
         back
         component={TranscriptionShow}
         title="Transcription"
+        rightTitle="Edit"
+        onRight={() => Actions.TranscriptionEdit()}
+        onBack={() => Actions.TranscriptionIndex()}
       />
 
       <Scene
@@ -71,9 +84,10 @@ const Routes = () => (
         <Scene
           key="TranscriptionIndex"
           component={TranscriptionIndex}
-          title="Your Transcriptions"
-          icon={TabIcon}
-        />
+          title="Transcriptions"
+          icon={TabIcon}>
+
+        </Scene>
       <Scene key="TranscriptionForm"
         title="New Transcription"
         back
@@ -83,7 +97,7 @@ const Routes = () => (
         key="Dashboard"
         back
         component={Dashboard}
-        title="User Settings"
+        title="Settings"
         icon={TabIcon}
       />
       </Scene>

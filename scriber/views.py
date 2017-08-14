@@ -54,11 +54,16 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         transcription_result['usernames'] = user_array
         transcription_result['description'] = request.data.get('description')
         serializer = TranscriptionSerializer(data=transcription_result)
+        # print(transcription_result['usernames'])
+        # print(serializer.is_valid())
+        # print(serializer.errors)
         if serializer.is_valid():
             serializer.save()
             transcription = Transcription.objects.get(pk=serializer.data['pk'])
             transcription.users.add(*users)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print(serializer.errors)
 
     #can keep on updating users
     def update(self,request,pk=None):
@@ -80,8 +85,8 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
                 transcript_block = json.loads(string_block)
                 #add check if speaker was not updated
                 if (str(transcript_block['speaker']) in users):
-                    if (int(users[str(transcript_block['speaker'])]) != 0):
-                        transcript_block['speaker'] = users[str(transcript_block['speaker'])]
+                    # if (int(users[str(transcript_block['speaker'])]) != 0):
+                    transcript_block['speaker'] = users[str(transcript_block['speaker'])]
                 new_transcriptions.append(json.dumps(transcript_block))
             old_transcription.transcription = new_transcriptions
         old_transcription.save()

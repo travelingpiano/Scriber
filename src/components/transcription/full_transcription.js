@@ -55,7 +55,7 @@ class FullTranscription extends Component {
 
   playAudio(transcription,snippet) {
     snippet = JSON.parse(snippet);
-    let track = new Sound(`https://s3-us-west-2.amazonaws.com/scriberflexproject/food34.mp3/${snippet.filename}`, null, (e) => {
+    let track = new Sound(`https://s3-us-west-2.amazonaws.com/scriberflexproject/${snippet.filename}`, null, (e) => {
       if (e) {
         console.log('error loading track:', e);
       } else {

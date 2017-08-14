@@ -7,6 +7,7 @@ export const DESTROY_TRANSCRIPTION = 'DESTROY_TRANSCRIPTION';
 
 // synchronous action creators
 export const receiveTranscription = transcription => {
+  console.log(transcription);
   return {
   type: RECEIVE_TRANSCRIPTION,
   transcription
@@ -27,10 +28,10 @@ export const createTranscription = transcription => dispatch => {
   return TranscriptionAPIUtil.createTranscription(transcription)
     .then(resp => resp.json())
     .then(json => {
+      console.log(json);
       dispatch(receiveTranscription(json));
       console.log('CREATE-T', json);
-      console.log('LAST', json.last);
-      return json.last;
+      return json;
     });
 };
 
@@ -53,5 +54,12 @@ export const deleteTranscription = (transcription) => dispatch => {
   return TranscriptionAPIUtil.deleteTranscription(transcription)
   .then(resp => resp.json())
   .then(json => dispatch(destroyTranscription(json))
+  );
+};
+
+export const updateTranscription = (transcription) => dispatch => {
+  return TranscriptionAPIUtil.updateTranscription(transcription)
+  .then(resp => resp.json())
+  .then(json => dispatch(receiveTranscription(json))
   );
 };

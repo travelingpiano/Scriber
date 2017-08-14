@@ -25,7 +25,7 @@ def transcribe(url, title):
     #Armstrong
     # url = 'http://www.freeinfosociety.com/media/sounds/13.mp3'
     # url = '2518.mp3'
-    url = 'sample.aac'
+    # url = 'sample.aac'
     conn = boto.s3.connect_to_region('us-west-2',
        aws_access_key_id=AWS_ACCESS_KEY_ID,
        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
@@ -40,6 +40,7 @@ def transcribe(url, title):
     with open('./scriber/test.aac','w+') as f:
         for l in bucket_list:
             if l.key == url:
+                print(url)
                 l.get_contents_to_filename('./scriber/test.aac')
     sound_aac = AudioSegment.from_file('./scriber/test.aac')
     sound_aac.export('./scriber/test.mp3', format='mp3')

@@ -1,14 +1,17 @@
-export const createTranscription = data => (
-  fetch('http://127.0.0.1:8000/transcriptions', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Origin': '',
-      'Host': '127.0.0.1:8000',
-    },
-    body: data
-  })
-);
+export const createTranscription = data => {
+  console.log(data);
+  return (
+    fetch('http://127.0.0.1:8000/transcriptions/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Host': '127.0.0.1'
+      },
+      body: JSON.stringify(data)
+    })
+  );
+};
 
 export const fetchTranscriptions = () => (
   fetch('http://127.0.0.1:8000/transcriptions', {
@@ -38,4 +41,21 @@ export const deleteTranscription = (transcription) => (
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-    }));
+    }
+  )
+);
+
+export const updateTranscription = (transcription) => {
+  let pk = transcription._parts[5][1];
+  console.log(transcription);
+  return fetch(`http://127.0.0.1:8000/transcriptions/${pk}/`,
+    {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: transcription
+    }
+  );
+};
