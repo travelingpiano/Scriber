@@ -106,7 +106,7 @@ class FullTranscription extends Component {
       this.state.allSnippets = transcription.map((snippet,idx) => {
         return (
           <TouchableHighlight key={`snippet-${idx}`} style={styles.snippet}
-            underlayColor="#E3DAED" activeOpacity={1} onPress={() => this.playAudio(transcription,snippet)}>
+            underlayColor="#CEE4ED" activeOpacity={1} onPress={() => this.playAudio(transcription,snippet)}>
             <View>
               {this.renderSpeaker(snippet)}
               <Text style={styles.timeStamps}>{JSON.parse(snippet).timestamps[0]}</Text>
@@ -122,9 +122,7 @@ class FullTranscription extends Component {
         {this.state.allSnippets}
       </ScrollView>
     );
-
   }
-
 }
 
 export default FullTranscription;
