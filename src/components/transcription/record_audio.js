@@ -16,6 +16,9 @@ import {AudioRecorder, AudioUtils} from 'react-native-audio';
 //uploading to AWS
 import { RNS3 } from 'react-native-aws3';
 
+// NOTE: Credits for the below code go to the example in Joshua Sierles'
+// react-native-audio library (https://github.com/jsierles/react-native-audio)
+
 class RecordAudio extends Component {
 
   constructor(props) {
