@@ -26,3 +26,4 @@ requests==2.18.3
 six==1.10.0
 urllib3==1.22
 watson-developer-cloud==0.26.1
+whitenoise==3.3.0
