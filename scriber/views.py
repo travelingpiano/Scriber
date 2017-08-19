@@ -50,7 +50,6 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         transcription_result['transcription'] = transcribe(request.data.get('audio_url'),request.data.get('title'))
         transcription_result['created_time'] = timezone.now().time()
         transcription_result['created_date'] = timezone.now().date()
-        print(user_array)
         transcription_result['usernames'] = user_array
         transcription_result['description'] = request.data.get('description')
         serializer = TranscriptionSerializer(data=transcription_result)

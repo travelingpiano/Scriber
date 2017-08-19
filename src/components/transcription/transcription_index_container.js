@@ -19,7 +19,6 @@ class TranscriptionIndex extends Component {
   }
 
   componentWillMount() {
-    console.log('fetch transcriptions');
     this.props.fetchTranscriptions();
   }
   render() {

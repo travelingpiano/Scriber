@@ -26,26 +26,14 @@ def transcribe(url, title):
     bucket_list = bucket.list()
 
     stt = SpeechToTextV1(username='88d9cb01-7ecb-4089-9d2c-a13828e3494e', password='1Wxsmr4kdBhp')
-    # with open('./scriber/test.aac','w+') as f:
-    #     for l in bucket_list:
-    #         if l.key == url:
-    #             print(url)
-    #             #error causing statement
-    #             l.get_contents_to_filename('./scriber/test.aac')
-    # sound_aac = AudioSegment.from_file('./scriber/test.aac')
-    print(f"{url}/test.aac")
     sound_aac = AudioSegment.from_file(f"{url}/test.aac")
     #error causing statement
     sound_aac.export(f"{url}/test.mp3", format='mp3')
     # sound = AudioSegment.from_file('./scriber/test.mp3')
     sound = AudioSegment.from_file(f"{url}/test.mp3")
-    print(sound)
-    # output_json = json.loads(json.dumps(stt.recognize(open('./scriber/test.mp3','rb'), content_type="audio/mp3", timestamps=True,speaker_labels=True),indent=2))
     output_json = json.loads(json.dumps(stt.recognize(open(f"{url}/test.mp3",'rb'), content_type="audio/mp3", timestamps=True,speaker_labels=True),indent=2))
     formatted_json = []
     counter = 0
-    print('output json')
-    print(output_json)
     for key in output_json['results']:
         new_json = {}
         new_json['text'] = key['alternatives'][0]['transcript']
@@ -68,5 +56,4 @@ def transcribe(url, title):
         new_json['filename'] = AWSkey.key
         counter += word_length
         formatted_json.append(json.dumps(new_json))
-    print(formatted_json)
     return formatted_json

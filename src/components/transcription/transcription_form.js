@@ -57,8 +57,6 @@ class TranscriptionForm extends React.Component {
       fromUrl: `https://s3-us-west-2.amazonaws.com/scriberflexproject/${this.state.transcriptionTitle}.aac`,
       toFile: `${RNFS.DocumentDirectoryPath}/test.mp3`
     }).promise.then((response)=>{
-      console.log(response);
-      console.log('file downloaded!');
       fetch('http://127.0.0.1:8000/transcriptions/', {
         method: 'POST',
         headers: {
@@ -71,7 +69,6 @@ class TranscriptionForm extends React.Component {
         body: JSON.stringify(data)
       }).then(resp => resp.json()).then(
         (newResponse)=>{
-          console.log(newResponse);
           Actions.TranscriptionShow({transcriptionPk: newResponse.pk});
         }
       );
