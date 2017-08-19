@@ -1,7 +1,7 @@
 export const createTranscription = data => {
   return (
     // fetch('http://www.scriber.us/transcriptions/', {
-    fetch('http://127.0.0.1:8000/transcriptions/', {
+    fetch('http://127.0.0.1:8000/api/transcriptions/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -16,7 +16,7 @@ export const createTranscription = data => {
 
 export const fetchTranscriptions = () => (
   // fetch('http://www.scriber.us/transcriptions', {
-  fetch('http://127.0.0.1:8000/transcriptions/', {
+  fetch('http://127.0.0.1:8000/api/transcriptions/', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -25,19 +25,23 @@ export const fetchTranscriptions = () => (
   })
 );
 
-export const fetchTranscription = (id) => (
-  // fetch(`http://www.scriber.us/transcriptions/${id}/`, {
-  fetch(`http://127.0.0.1:8000/transcriptions/${id}/`, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-  })
-);
+export const fetchTranscription = (id) => {
+  let url = `http://127.0.0.1:8000/api/transcriptions/${id}/`;
+  return (
+    // fetch(`http://www.scriber.us/transcriptions/${id}/`, {
+
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+  );
+};
 
 export const deleteTranscription = (transcription) => (
-  fetch(`http://127.0.0.1:8000/transcriptions/${transcription.pk}/`,
+  fetch(`http://127.0.0.1:8000/api/transcriptions/${transcription.pk}/`,
     {
       method: 'DELETE',
       headers: {
@@ -50,7 +54,7 @@ export const deleteTranscription = (transcription) => (
 
 export const updateTranscription = (transcription) => {
   let pk = JSON.parse(transcription).pk;
-  return fetch(`http://127.0.0.1:8000/transcriptions/${pk}/`,
+  return fetch(`http://127.0.0.1:8000/api/transcriptions/${pk}/`,
     {
       method: 'PUT',
       headers: {

@@ -45,7 +45,7 @@ class SignupForm extends React.Component {
     //   },
     //   body: data
     // });
-    let response = await fetch('http://127.0.0.1:8000/users/', { // adjust to actual site url
+    let response = await fetch('http://127.0.0.1:8000/api/users/', { // adjust to actual site url
       method: 'POST',
       headers: {
         'Accept': 'application/json',
