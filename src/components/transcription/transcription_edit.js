@@ -34,7 +34,6 @@ class TranscriptionEdit extends React.Component {
   }
 
   updateTranscription() {
-
     let data = {};
     data['title'] = this.state.title;
     data['description'] = this.state.description;
@@ -48,6 +47,14 @@ class TranscriptionEdit extends React.Component {
 
   getSpeakerUpdates(data) {
     this.setState({allSpeakers: data});
+  }
+
+  passUsers(){
+    if (this.props.newUsernames) {
+      return this.props.newUsernames;
+    } else {
+      return this.state.usernames;
+    }
   }
 
   renderAttendees(attendees) {
@@ -118,7 +125,7 @@ class TranscriptionEdit extends React.Component {
 
         <MapSpeakers 
           style={{flex:.5}} 
-          attendees={this.props.newUsernames}
+          attendees={this.passUsers()}
           transcription={this.state} 
           sendSpeakerUpdates={this.getSpeakerUpdates}/>
 
