@@ -25,7 +25,6 @@ class TranscriptionEdit extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     if (this.props.newUsernames && this.props.newUsernames !== this.state.usernames) {
       this.setState({
         usernames: this.props.newUsernames
@@ -34,7 +33,6 @@ class TranscriptionEdit extends React.Component {
   }
 
   updateTranscription() {
-
     let data = {};
     data['title'] = this.state.title;
     data['description'] = this.state.description;
@@ -48,6 +46,14 @@ class TranscriptionEdit extends React.Component {
 
   getSpeakerUpdates(data) {
     this.setState({allSpeakers: data});
+  }
+
+  passUsers(){
+    if (this.props.newUsernames) {
+      return this.props.newUsernames;
+    } else {
+      return this.state.usernames;
+    }
   }
 
   renderAttendees(attendees) {
@@ -73,7 +79,7 @@ class TranscriptionEdit extends React.Component {
             formStyle,
             recordAudioStyle,
             transcriptionEditStyle } = styles;
-
+            
     return (
       <View style={ transcriptionEditStyle } >
 
@@ -112,12 +118,14 @@ class TranscriptionEdit extends React.Component {
           </Button>
           <View style={styles.allAttendees}>
             {this.renderAttendees(this.state.usernames)}
-
           </View>
         </View>
 
-        <MapSpeakers style={{flex:.5}} attendees={this.state.usernames}
-          transcription={this.state} sendSpeakerUpdates={this.getSpeakerUpdates}/>
+        <MapSpeakers 
+          style={{flex:.5}} 
+          attendees={this.passUsers()}
+          transcription={this.state} 
+          sendSpeakerUpdates={this.getSpeakerUpdates}/>
 
           <Button
             onPress={() => this.updateTranscription()}

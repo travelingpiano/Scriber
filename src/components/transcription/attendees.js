@@ -98,7 +98,7 @@ class Attendees extends React.Component {
       }
     }
     if(this.props.users){
-      // console.log(icons[0]);
+      
       return (
         <View style={styles.containerStyle}>
           <FlatList
