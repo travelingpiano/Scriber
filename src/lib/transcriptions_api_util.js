@@ -1,10 +1,12 @@
 export const createTranscription = data => {
   return (
+    // fetch('http://www.scriber.us/transcriptions/', {
     fetch('http://127.0.0.1:8000/transcriptions/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
+        // 'Host': 'scriber.us'
         'Host': '127.0.0.1'
       },
       body: JSON.stringify(data)
@@ -13,7 +15,8 @@ export const createTranscription = data => {
 };
 
 export const fetchTranscriptions = () => (
-  fetch('http://127.0.0.1:8000/transcriptions', {
+  // fetch('http://www.scriber.us/transcriptions', {
+  fetch('http://127.0.0.1:8000/transcriptions/', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -23,6 +26,7 @@ export const fetchTranscriptions = () => (
 );
 
 export const fetchTranscription = (id) => (
+  // fetch(`http://www.scriber.us/transcriptions/${id}/`, {
   fetch(`http://127.0.0.1:8000/transcriptions/${id}/`, {
     method: 'GET',
     headers: {

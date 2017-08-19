@@ -50,12 +50,14 @@ class TranscriptionForm extends React.Component {
     data['description'] = this.state.description;
     data['audio_url'] = `${this.state.transcriptionTitle}.aac`;
     data['usernames'] = this.state.usernames;
+    // fetch('http://www.scriber.us/transcriptions/', {
     fetch('http://127.0.0.1:8000/transcriptions/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Origin': '',
+        // 'Host': 'scriber.us',
         'Host': '127.0.0.1:8000',
       },
       body: JSON.stringify(data)
