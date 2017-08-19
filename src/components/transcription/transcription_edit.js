@@ -73,7 +73,8 @@ class TranscriptionEdit extends React.Component {
             formStyle,
             recordAudioStyle,
             transcriptionEditStyle } = styles;
-
+    console.log('PPL-EDIT', this.state.usernames);
+    console.log('new-USERS', this.props.newUsernames);
     return (
       <View style={ transcriptionEditStyle } >
 
@@ -112,12 +113,14 @@ class TranscriptionEdit extends React.Component {
           </Button>
           <View style={styles.allAttendees}>
             {this.renderAttendees(this.state.usernames)}
-
           </View>
         </View>
 
-        <MapSpeakers style={{flex:.5}} attendees={this.state.usernames}
-          transcription={this.state} sendSpeakerUpdates={this.getSpeakerUpdates}/>
+        <MapSpeakers 
+          style={{flex:.5}} 
+          attendees={this.props.newUsernames}
+          transcription={this.state} 
+          sendSpeakerUpdates={this.getSpeakerUpdates}/>
 
           <Button
             onPress={() => this.updateTranscription()}
