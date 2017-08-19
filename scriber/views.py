@@ -9,6 +9,7 @@ from scriber.serializers import TranscriptionSerializer, TranscriptionIndexSeria
 from rest_framework.response import Response
 from scriber.transcribe import transcribe
 from django.utils import timezone
+from django.shortcuts import render_to_response
 import json
 # Create your views here.
 
