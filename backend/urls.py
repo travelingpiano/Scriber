@@ -24,9 +24,9 @@ router.register(r'users', views.UserViewSet)
 router.register(r'transcriptions', views.TranscriptionViewSet)
 
 urlpatterns = [
-    url(r"^", TemplateView.as_view(template_name='index.html')),
     url(r'^api/', include(router.urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^mobil_auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    url(r"^", TemplateView.as_view(template_name='index.html')),
 ]
