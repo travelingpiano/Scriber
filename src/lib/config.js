@@ -8,7 +8,7 @@ module.exports = {
   // client_id: 'KtDnxIqm4QISxCqtwCMY163npq6maSzBqsjd5ecy',
 
   // ade
-  client_key: 't7S1lmFdm4sHp6jRnIFocN8pFi0MfhPO8ZkRgfxIt5jrrXoYRzxlHKz7jmHZXp5YVP43agkeusSEl3dMFViHkRDVPkSFORPDDFUtDhYAO3SB8EieIC9n4gaqBNfykmO',
-  client_id: 'Ktw6ka1X0kP4bYSq4eIQ1WcTErm9N3vV4XWyVcEU',
+  // client_key: 't7S1lmFdm4sHp6jRnIFocN8pFi0MfhPO8ZkRgfxIt5jrrXoYRzxlHKz7jmHZXp5YVP43agkeusSEl3dMFViHkRDVPkSFORPDDFUtDhYAO3SB8EieIC9n4gaqBNfykmO',
+  // client_id: 'Ktw6ka1X0kP4bYSq4eIQ1WcTErm9N3vV4XWyVcEU',
 
 };
