@@ -19,10 +19,14 @@ class TranscriptionIndex extends Component {
   }
 
   componentWillMount() {
+    console.log('fetch transcriptions');
     this.props.fetchTranscriptions();
   }
-
   render() {
+    // console.log(this.props);
+    // if(this.props.create===true){
+    //   this.props.fetchTranscriptions();
+    // }
     return (
         <Agenda
           style={styles.agenda}
