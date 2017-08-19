@@ -45,12 +45,12 @@ class SignupForm extends React.Component {
     //   },
     //   body: data
     // });
-    let response = await fetch('http://127.0.0.1:8000/api/users/', { // adjust to actual site url
+    let response = await fetch('https://scibr.herokuapp.com/api/users/', { // adjust to actual site url
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Origin': '',
-        'Host': '127.0.0.1:8000',
+        'Host': 'scribr.herokuapp.com',
       },
       body: data
     });
@@ -81,12 +81,12 @@ class SignupForm extends React.Component {
     //   },
     //   body: data
     // });
-    let response = await fetch('http://127.0.0.1:8000/o/token/', { // adjust to actual site url
+    let response = await fetch('https://scribr.herokuapp.com/o/token/', { // adjust to actual site url
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Origin': '',
-        'Host': '127.0.0.1:8000',
+        'Host': 'scribr.herokuapp.com',
       },
       body: data
     });

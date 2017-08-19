@@ -53,6 +53,8 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         transcription_result['created_date'] = timezone.now().date()
         transcription_result['usernames'] = user_array
         transcription_result['description'] = request.data.get('description')
+        print('result sent to serializer')
+        print(transcription_result)
         serializer = TranscriptionSerializer(data=transcription_result)
         if serializer.is_valid():
             serializer.save()

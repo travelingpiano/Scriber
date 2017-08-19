@@ -1,32 +1,36 @@
 export const createTranscription = data => {
   return (
     // fetch('http://www.scriber.us/transcriptions/', {
-    fetch('http://127.0.0.1:8000/api/transcriptions/', {
+    fetch('https://scribr.herokuapp.com/api/transcriptions/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         // 'Host': 'scriber.us'
-        'Host': '127.0.0.1'
+        'Host': 'scribr.herokuapp.com'
       },
       body: JSON.stringify(data)
     })
   );
 };
 
-export const fetchTranscriptions = () => (
-  // fetch('http://www.scriber.us/transcriptions', {
-  fetch('http://127.0.0.1:8000/api/transcriptions/', {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-  })
-);
+export const fetchTranscriptions = () => {
+  console.log('fetching transcriptions');
+  return (
+    // fetch('http://www.scriber.us/transcriptions', {
+    fetch('https://scribr.herokuapp.com/api/transcriptions/', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+  );
+};
 
 export const fetchTranscription = (id) => {
-  let url = `http://127.0.0.1:8000/api/transcriptions/${id}/`;
+  let url = `https://scribr.herokuapp.com/api/transcriptions/${id}/`;
+  console.log('fetch transcription');
   return (
     // fetch(`http://www.scriber.us/transcriptions/${id}/`, {
 
@@ -41,7 +45,7 @@ export const fetchTranscription = (id) => {
 };
 
 export const deleteTranscription = (transcription) => (
-  fetch(`http://127.0.0.1:8000/api/transcriptions/${transcription.pk}/`,
+  fetch(`https://scribr.herokuapp.com/api/transcriptions/${transcription.pk}/`,
     {
       method: 'DELETE',
       headers: {
@@ -54,7 +58,7 @@ export const deleteTranscription = (transcription) => (
 
 export const updateTranscription = (transcription) => {
   let pk = JSON.parse(transcription).pk;
-  return fetch(`http://127.0.0.1:8000/api/transcriptions/${pk}/`,
+  return fetch(`https://scribr.herokuapp.com/api/transcriptions/${pk}/`,
     {
       method: 'PUT',
       headers: {
