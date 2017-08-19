@@ -36,6 +36,15 @@ class SignupForm extends React.Component {
     data.append('client_secret', client_key);
     data.append('username', username);
     data.append('password', password);
+    // let response = await fetch('http://www.scriber.us/users/', { // adjust to actual site url
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Origin': '',
+    //     'Host': 'scriber.us',
+    //   },
+    //   body: data
+    // });
     let response = await fetch('http://127.0.0.1:8000/users/', { // adjust to actual site url
       method: 'POST',
       headers: {
@@ -63,7 +72,16 @@ class SignupForm extends React.Component {
     data.append('client_secret', client_key);
     data.append('username', username);
     data.append('password', password);
-    let response = await fetch('http://127.0.0.1:8000/o/token/', {
+    // let response = await fetch('http://www.scriber.us/o/token/', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Origin': '',
+    //     'Host': 'scriber.us',
+    //   },
+    //   body: data
+    // });
+    let response = await fetch('http://127.0.0.1:8000/o/token/', { // adjust to actual site url
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -89,6 +107,14 @@ class SignupForm extends React.Component {
   }
 
   async getData(token) {
+    // let response = await fetch ('http://www.scriber.us/users', {
+    //     method: 'GET',
+    //     headers:{
+    //       'Accept': 'application/json',
+    //       'Authorization': 'Token '+token,
+    //       'Host': 'scriber.us',
+    //     },
+    //   }
     let response = await fetch ('http://127.0.0.1:8000/users', {
         method: 'GET',
         headers:{

@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import Button from 'apsl-react-native-button';
 import Icon from 'react-native-vector-icons/Entypo';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import RNFS from 'react-native-fs';
 
 import {createTranscription} from '../../actions/transcription_actions';
 
@@ -48,22 +49,30 @@ class TranscriptionForm extends React.Component {
     let data = {};
     data['title'] = this.state.transcriptionTitle;
     data['description'] = this.state.description;
-    data['audio_url'] = `${this.state.transcriptionTitle}.aac`;
+    // data['audio_url'] = `${this.state.transcriptionTitle}.aac`;
+    data['audio_url'] = `${RNFS.DocumentDirectoryPath}`;
     data['usernames'] = this.state.usernames;
-    fetch('http://127.0.0.1:8000/transcriptions/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Origin': '',
-        'Host': '127.0.0.1:8000',
-      },
-      body: JSON.stringify(data)
-    }).then(
-      ()=>{
-        Actions.TranscriptionIndex({create: true});
-      }
-    );
+    // fetch('http://www.scriber.us/transcriptions/', {
+    RNFS.downloadFile({
+      fromUrl: `https://s3-us-west-2.amazonaws.com/scriberflexproject/${this.state.transcriptionTitle}.aac`,
+      toFile: `${RNFS.DocumentDirectoryPath}/test.mp3`
+    }).promise.then((response)=>{
+      fetch('http://127.0.0.1:8000/transcriptions/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Origin': '',
+          // 'Host': 'scriber.us',
+          'Host': '127.0.0.1:8000',
+        },
+        body: JSON.stringify(data)
+      }).then(resp => resp.json()).then(
+        (newResponse)=>{
+          Actions.TranscriptionShow({transcriptionPk: newResponse.pk});
+        }
+      );
+    });
   }
 
   render() {

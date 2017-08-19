@@ -23,7 +23,6 @@ class RecordAudio extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       currentTime: 0.0,
       recording: false,
@@ -111,7 +110,7 @@ class RecordAudio extends Component {
           this._finishRecording(true, filePath);
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     }
 
@@ -122,7 +121,6 @@ class RecordAudio extends Component {
       }
 
       this.setState({stoppedRecording: true, recording: false});
-      console.log(this.state.audioPath);
 
       try {
         const filePath = await AudioRecorder.stopRecording();

@@ -40,7 +40,10 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         if isinstance(request.data.get('usernames'),str):
             user_array = request.data.get('usernames')[1:-1].split(',')
         else:
-            user_array = request.data.get('usernames')
+            user_array_raw = request.data.get('usernames')
+            for user in user_array_raw:
+                if user != None:
+                    user_array.append(user)
         users = User.objects.filter(username__in=user_array)
         transcription_result = {}
         transcription_result['audio_url'] = request.data.get('audio_url')
@@ -52,11 +55,12 @@ class TranscriptionViewSet(viewsets.ModelViewSet):
         transcription_result['description'] = request.data.get('description')
         serializer = TranscriptionSerializer(data=transcription_result)
         if serializer.is_valid():
-            print('print')
             serializer.save()
             transcription = Transcription.objects.get(pk=serializer.data['pk'])
             transcription.users.add(*users)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print(serializer.errors)
 
     #can keep on updating users
     def update(self,request,pk=None):

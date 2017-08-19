@@ -57,6 +57,15 @@ class LoginForm extends React.Component {
     data.append('username', username);
     data.append('password', password);
     console.log(data);
+    // let response = await fetch('http://www.scriber.us/o/token/', { // adjust to actual site url
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Origin': '',
+    //     'Host': 'scriber.us',
+    //   },
+    //   body: data
+    // });
     let response = await fetch('http://127.0.0.1:8000/o/token/', { // adjust to actual site url
       method: 'POST',
       headers: {
@@ -84,7 +93,17 @@ class LoginForm extends React.Component {
   }
 
   async getData(token) {
-    let response = await fetch ('http://127.0.0.1:8000/users', {
+    // let response = await fetch ('http://www.scriber.us/users', {
+    //     method: 'GET',
+    //     headers:{
+    //       'Accept': 'application/json',
+    //       'Authorization': 'Token '+token,
+    //       'Host': 'scriber.us',
+    //     },
+    //   }
+    // );
+
+    let response = await fetch ('http://127.0.0.1:8000/users', { // adjust to actual site url
         method: 'GET',
         headers:{
           'Accept': 'application/json',
