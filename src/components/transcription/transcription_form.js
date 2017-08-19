@@ -57,7 +57,7 @@ class TranscriptionForm extends React.Component {
       fromUrl: `https://s3-us-west-2.amazonaws.com/scriberflexproject/${this.state.transcriptionTitle}.aac`,
       toFile: `${RNFS.DocumentDirectoryPath}/test.mp3`
     }).promise.then((response)=>{
-      fetch('http://127.0.0.1:8000/transcriptions/', {
+      fetch('http://127.0.0.1:8000/api/transcriptions/', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

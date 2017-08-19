@@ -1,6 +1,6 @@
 export const fetchUsers= () => (
   // fetch('http://www.scriber.us/users', {
-  fetch('http://127.0.0.1:8000/users', {
+  fetch('http://127.0.0.1:8000/api/users', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -13,7 +13,7 @@ export const fetchUsers= () => (
 
 export const fetchUser= (id) => (
   // fetch(`http://www.scriber.us/users/${id}`, {
-  fetch(`http://127.0.0.1:8000/users/${id}`, {
+  fetch(`http://127.0.0.1:8000/api/users/${id}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

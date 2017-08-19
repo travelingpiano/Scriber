@@ -51,7 +51,7 @@ class TranscriptionShow extends Component {
   }
 
   submitDelete(){
-    fetch(`http://127.0.0.1:8000/transcriptions/${this.props.currentTranscription.pk}`, { // adjust to actual site url
+    fetch(`http://127.0.0.1:8000/api/transcriptions/${this.props.currentTranscription.pk}`, { // adjust to actual site url
         method: 'DELETE',
         headers: {
           'Accept': 'application/json',
