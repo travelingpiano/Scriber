@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.views.generic import TemplateView
 from django.contrib import admin
 from rest_framework import routers
 from scriber import views
@@ -23,7 +24,8 @@ router.register(r'users', views.UserViewSet)
 router.register(r'transcriptions', views.TranscriptionViewSet)
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url(r"^", TemplateView.as_view(template_name='index.html')),
+    url(r'^api/', include(router.urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^mobil_auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),

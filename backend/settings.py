@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_jwt',
     'corsheaders',
     'django_showurls',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
 ]
 
 OAUTH2_PROVIDER = {
@@ -114,9 +114,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'scriber',
         # 'USER': 'lihsuan',
-        'USER': 'virginiachen',
+        # 'USER': 'virginiachen',
         # 'USER': 'adefarquhar',
-        'PASSWORD': '',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '',
     }
