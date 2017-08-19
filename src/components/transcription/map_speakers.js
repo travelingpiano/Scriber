@@ -43,7 +43,6 @@ class MapSpeakers extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('UP', this.state.attendees);
     if (JSON.stringify(prevState.allSpeakers) !== JSON.stringify(this.state.allSpeakers)) {
       this.renderTranscriptionSnippets();
       this.props.sendSpeakerUpdates(this.state.allSpeakers);

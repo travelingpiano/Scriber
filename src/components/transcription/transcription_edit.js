@@ -25,7 +25,6 @@ class TranscriptionEdit extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     if (this.props.newUsernames && this.props.newUsernames !== this.state.usernames) {
       this.setState({
         usernames: this.props.newUsernames
@@ -80,8 +79,7 @@ class TranscriptionEdit extends React.Component {
             formStyle,
             recordAudioStyle,
             transcriptionEditStyle } = styles;
-    console.log('PPL-EDIT', this.state.usernames);
-    console.log('new-USERS', this.props.newUsernames);
+            
     return (
       <View style={ transcriptionEditStyle } >
 
