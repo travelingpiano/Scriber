@@ -47,6 +47,7 @@ const Routes = () => (
         key="Attendees"
         component={Attendees}
         title="Add Attendees"
+        back
       />
 
       <Scene
