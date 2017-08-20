@@ -4,7 +4,7 @@ Keeping tracks of meeting notes is often a meticulous task. There is the option 
 
 [Scriber][scriber_page]'s contributing members include [Virginia Chen][virginia_git], [Spencer Chan][spencer_git], [Li Hsuan Lu][lihsuan_git] and [Ade Farquhar][ade_git].
 
-[scriber_page]:http://wwww.scriber.us
+[scriber_page]:http://www.scriber.us
 [virginia_git]:https://github.com/virginiac32
 [spencer_git]:https://github.com/schan1031
 [lihsuan_git]:https://github.com/travelingpiano
@@ -38,13 +38,9 @@ async loadInitialState() {
         token: token, error: null, username: username
       });
       this.getData(this.state.token);
-    } else {
-      this.setState({
-        'error': 'Login Error'
-      })
     }
   } catch (error) {
-
+    console.error(error);
   }
 }
 ```
