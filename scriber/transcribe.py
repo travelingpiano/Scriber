@@ -56,4 +56,6 @@ def transcribe(url, title):
         new_json['filename'] = AWSkey.key
         counter += word_length
         formatted_json.append(json.dumps(new_json))
+    print('json output after segmenting')
+    print(formatted_json)
     return formatted_json

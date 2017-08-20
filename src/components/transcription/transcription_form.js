@@ -57,18 +57,19 @@ class TranscriptionForm extends React.Component {
       fromUrl: `https://s3-us-west-2.amazonaws.com/scriberflexproject/${this.state.transcriptionTitle}.aac`,
       toFile: `${RNFS.DocumentDirectoryPath}/test.mp3`
     }).promise.then((response)=>{
-      fetch('http://127.0.0.1:8000/api/transcriptions/', {
+      fetch('https://scibr.herokuapp.com/api/transcriptions/', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
           // 'Host': 'scriber.us',
-          'Host': '127.0.0.1:8000',
+          'Host': 'scribr.herokuapp.com',
         },
         body: JSON.stringify(data)
       }).then(resp => resp.json()).then(
         (newResponse)=>{
+          console.log(newResponse);
           Actions.TranscriptionShow({transcriptionPk: newResponse.pk});
         }
       );
