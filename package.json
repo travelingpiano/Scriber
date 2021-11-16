@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "apsl-react-native-button": "^3.1.0",
-    "aws-sdk": "^2.97.0",
+    "aws-sdk": "^2.814.0",
     "babel-plugin-transform-inline-environment-variables": "^0.1.1",
     "react": "^16.0.0-beta.3",
     "react-native": "^0.46.4",
