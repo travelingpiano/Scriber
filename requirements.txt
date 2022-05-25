@@ -18,7 +18,7 @@ oauthlib==2.0.2
 psycopg2==2.7.3
 pycparser==2.18
 pydub==0.20.0
-PyJWT==1.5.2
+PyJWT==2.4.0
 pyOpenSSL==17.2.0
 pysolr==3.6.0
 pytz==2017.2
